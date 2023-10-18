@@ -6,8 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;              //Rigidbody型の変数
     float axisH = 0.0f;         //入力
+    public LayerMask GroundLayer;
 
     public float speed = 3.0f;  //移動速度
+    public float jump = 5.0f; //ジャンプ力
+    bool gojump = false;    //ジャンプ判定
+    bool ongrond = false;   //地面判定
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +39,37 @@ public class PlayerController : MonoBehaviour
             Debug.Log("左移動");
             transform.localScale = new Vector2(-5, 5);
         }
+        //キャラクターのジャンプ
+        if(Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
     {
-        //速度を更新
-        rb.velocity = new Vector2(axisH * speed, rb.velocity.y);
+        //地上判定
+        ongrond = Physics2D.Linecast(transform.position,
+                                     transform.position - (transform.up * 0.1f),
+                                     GroundLayer);
+        if(ongrond || axisH != 0)
+        {
+            //地上or速度が０ではない
+            //速度を更新
+            rb.velocity = new Vector2(axisH * speed, rb.velocity.y);
+        }
+        if(ongrond && gojump)
+        {
+            //地上かつジャンプキーが押されたとき
+            //ジャンプする
+            Debug.Log("ジャンプ");
+            Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
+            rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
+            gojump = false; //ジャンプフラグをおろす
+        }
+    }
+    void Jump()
+    {
+        gojump = true; //ジャンプフラグを立てる
     }
 }
