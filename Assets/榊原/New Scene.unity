@@ -454,4 +454,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74435f02424a0947bf422a7e0b332ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 256
   speed: 3
+  jump: 5
+  rush: 50
+  isCountDown: 1
+  isTimeOver: 0
+  displayTime: 0
