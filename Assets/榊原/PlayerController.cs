@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 3.0f;  //移動速度
     public float jump = 5.0f;   //ジャンプ力
-    public float rush = 30.0f;  //突進の力
+    public float rush = 3.0f;   //突進の力
 
     //フラグ
     bool gojump  = false;       //ジャンプ判定
@@ -18,13 +18,25 @@ public class PlayerController : MonoBehaviour
     bool gorush  = false;       //攻撃判定(突進)
     bool horizon = false;       //向き
 
-    int rush_time = 100;    //攻撃(突進)クールタイム
+    //クールタイム
+    public bool isCountDown = true;//true = 時間をカウントダウン計算する
+    float rush_time = 5.0f;          //攻撃(突進)クールタイム
+    public bool isTimeOver = false;//true = タイマー停止
+    public float displayTime = 0;  //表示時間
+
+    float times = 0;               //現在時間
 
     // Start is called before the first frame update
     void Start()
     {
         //Rigidbody2Dを持ってくる
         rb = GetComponent<Rigidbody2D>();
+
+        if(isCountDown)
+        {
+            //カウントダウン
+            displayTime = rush_time;
+        }
     }
 
     // Update is called once per frame
@@ -61,6 +73,22 @@ public class PlayerController : MonoBehaviour
                 Rush();
             }
         }
+        if(isTimeOver ==false)//時間経過
+        {
+            times += Time.deltaTime;//経過時間を加算
+            if(isCountDown)
+            {
+                //カウントダウン
+                displayTime = rush_time - times;
+                if (displayTime <= 0.0f)
+                {
+                    displayTime = 0.0f;
+                    isTimeOver = true;  //フラグをおろす
+                }
+            }
+            Debug.Log("TIMES:" + displayTime);
+        }
+
     }
 
     private void FixedUpdate()
@@ -85,30 +113,30 @@ public class PlayerController : MonoBehaviour
             gojump = false; //ジャンプフラグをおろす
         }
 
-        if(rush_time < 50)
-        {
-            rush_time++;//クールタイム
-        }
-
         if(gorush && horizon == true)
         {
             //地上かつ左クリックが押されたときかつ右向き
             //突進する
             Debug.Log("突進");
-            Vector2 rushPw = new Vector2(rush, 0);      //ジャンプさせるベクトル
-            rb.AddForce(rushPw,ForceMode2D.Impulse);
+
             gorush = false; //攻撃フラグをおろす
-            rush_time = 0;
+            Vector2 rushPw = new Vector2(rush, 0);
+            rb.AddForce(rushPw, ForceMode2D.Impulse);
+            displayTime = rush_time;
+            isTimeOver = false;
+            times = 0;
         }
         else if (gorush && horizon == false)
         {
             //地上かつ左クリックが押されたときかつ左向き
             //突進する
             Debug.Log("突進");
-            Vector2 rushPw = new Vector2(-rush, 0);      //ジャンプさせるベクトル
+            Vector2 rushPw = new Vector2(-rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
             gorush = false; //攻撃フラグをおろす
-            rush_time = 0;
+            displayTime = rush_time ;
+            isTimeOver = false;
+            times = 0;
         }
     }
     void Jump()
@@ -117,7 +145,7 @@ public class PlayerController : MonoBehaviour
     }
     void Rush()
     {
-        if(rush_time >= 50)
+        if(displayTime == 0)
         gorush = true; //攻撃(突進)フラグを立てる
         
     }

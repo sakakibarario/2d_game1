@@ -460,3 +460,6 @@ MonoBehaviour:
   speed: 3
   jump: 5
   rush: 50
+  isCountDown: 1
+  isTimeOver: 0
+  displayTime: 0
