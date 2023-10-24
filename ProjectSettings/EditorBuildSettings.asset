@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\u68EE\u672C/Stage.unity"
     guid: ebbe7ebe24e56bf49a209d87ce4f3f65
+  - enabled: 1
+    path: "Assets/\u68EE\u672C/Status.unity"
+    guid: d651cea2fe4e2e14da9cc20f635aa552
+  - enabled: 1
+    path: "Assets/\u68EE\u672C/Home.unity"
+    guid: 9e8aa6418ac34084ba7318a2351777f4
   m_configObjects: {}
