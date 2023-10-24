@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - damege_s
+  - rush_wall
   layers:
   - Default
   - TransparentFX

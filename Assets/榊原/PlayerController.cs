@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     string nowAnime = "";
     string oldAnime = "";
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,10 +51,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         //Animator をとってくる
-        animator = GetComponent<Animator>();
-        nowAnime = stopAnime;
-        oldAnime = stopAnime;
-
+        //animator = GetComponent<Animator>();
+        //nowAnime = stopAnime;
+        //oldAnime = stopAnime;
+        
         //ゲームの状態をプレイ中にする
         gameState = "playing";
 
@@ -194,30 +196,30 @@ public class PlayerController : MonoBehaviour
             isTimeOver = false;
             times = 0;
         }
-        if(ongrond)
-        {
-            //地上のうえ
-            if(axisH == 0)
-            {
-                nowAnime = stopAnime; //停止中
-            }
-            else
-            {
-                nowAnime = moveAnime; //移動
-            }
-        }
-        else
-        {
-            //空中
-            nowAnime = jumpAnime;
-        }
-
-        if(nowAnime != oldAnime)
-        {
-            oldAnime = nowAnime;
-            animator.Play(nowAnime);    //アニメーション再生
-        }
-    }
+       if(ongrond)
+       {
+           //地上のうえ
+           if(axisH == 0)
+           {
+               nowAnime = stopAnime; //停止中
+           }
+           else
+           {
+               nowAnime = moveAnime; //移動
+           }
+       }
+       else
+       {
+           //空中
+           nowAnime = jumpAnime;
+       }
+       
+       if(nowAnime != oldAnime)
+       {
+           oldAnime = nowAnime;
+           animator.Play(nowAnime);    //アニメーション再生
+       }
+    }   
     void Jump()//ジャンプ
     {
         gojump = true; //ジャンプフラグを立てる

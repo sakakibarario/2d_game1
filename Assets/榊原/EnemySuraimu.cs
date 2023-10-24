@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class EnemySuraimu : MonoBehaviour
 {
-    public float speed = 0.01f;
-    public float travel = 0.5f;
+    public float speed = 0.5f;
     public int hpMax = 10;
-    public int damage = 5;
+    Rigidbody2D rb;
+    public float reactionDistance = 4.0f;
+    private int rush_damage = 10;
+
+    bool isActive = false;
 
     private int hp;
     // Start is called before the first frame update
     void Start()
     {
+        //Rigidbody2D をとる
+        rb = GetComponent<Rigidbody2D>();
         hp = hpMax;
     }
 
@@ -21,28 +26,60 @@ public class EnemySuraimu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var v = Input.GetAxis("Vertical");
-
-        var velocity = new Vector3(travel, v) * speed;
-        transform.localPosition += velocity;
-    }
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // プレイヤーと衝突した場合
-        if (collision.name.Contains("Player"))
+        //Player　のゲームオブジェクトを得る
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
         {
-            // プレイヤーにダメージを与える
-            //var player = collision.GetComponent<PlayerController>();
-            //player.Damage(damage);
-            return;
+            if(isActive && hp >0)
+            {
+                // PLAYERの位置を取得
+                Vector2 targetPos = player.transform.position;
+                // PLAYERのx座標
+                float x = targetPos.x;
+                // ENEMYは、地面を移動させるので座標は常に0とする
+                float y = 0;
+                // 移動を計算させるための２次元のベクトルを作る
+                Vector2 direction = new Vector2(
+                    x - transform.position.x, y).normalized;
+                // ENEMYのRigidbody2Dに移動速度を指定する
+                rb.velocity = direction * speed;
+                Debug.Log("スライムムーブ");
+
+            }
+            else
+            {
+                //プレイヤーとの距離を求める
+                float dist = Vector2.Distance(transform.position, player.transform.position);
+                if(dist < reactionDistance)
+                {
+                    isActive = true; //アクティブにする
+                }
+            }
         }
-
-
-
-
-
+        else if(isActive)
+        {
+            isActive = false;
+            rb.velocity = Vector2.zero;
+        }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "rush_wall")
+        {
+            //ダメージ
+            hp -= rush_damage;
+            if(hp <= 0)
+            {
+                //あたりを消す
+                GetComponent<CircleCollider2D>().enabled = false;
+                //移動停止
+                rb.velocity = new Vector2(0, 0);
+                //0.5秒後に消す
+                Destroy(gameObject, 0.5f);
+            }
+        }
+    }
+
+
 }
