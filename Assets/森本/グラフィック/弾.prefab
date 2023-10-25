@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4909703235282280278}
   - component: {fileID: 3855141872775645898}
   m_Layer: 9
-  m_Name: "\u30CA\u30A4\u30D5"
+  m_Name: "\u5F3E"
   m_TagString: tama
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
