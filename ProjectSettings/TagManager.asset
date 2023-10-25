@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-
+  - tama
+  - Undefined
+  - Enemy
+  - Ground
+  - rushWall
+  - damege_s
   layers:
   - Default
   - TransparentFX
@@ -14,9 +19,9 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - tama
-  - enemy
+  - Groud
+  - 
+  - 
   - 
   - 
   - 
