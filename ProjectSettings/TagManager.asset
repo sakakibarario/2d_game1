@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - damege_s
+  - Enemy
+  - rushWall
   layers:
   - Default
   - TransparentFX
