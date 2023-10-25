@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class EnemySuraimu : MonoBehaviour
 {
+    Rigidbody2D rb;
+
     public float speed = 0.5f;
     public int hpMax = 10;
-    Rigidbody2D rb;
     public float reactionDistance = 4.0f;
-    private int rush_damage = 10;
+    public int hp;
+
+    private int rushdamage = 10;
     private bool inDamage = false;
 
     bool isActive = false;
-
-    public int hp;
+   
     // Start is called before the first frame update
     void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         hp = hpMax;
-        Debug.Log(rush_damage);
+        Debug.Log(rushdamage);
+        
     }
 
     // Update is called once per frame
@@ -46,9 +49,6 @@ public class EnemySuraimu : MonoBehaviour
                 //  Debug.Log("スライムムーブ");
 
 
-
-
-
             }
             else
             {
@@ -65,33 +65,63 @@ public class EnemySuraimu : MonoBehaviour
             isActive = false;
             rb.velocity = Vector2.zero;
         }
-        if (hp <= 0)
+
+        if(inDamage)
         {
-            //0.5秒後に消す
-            Destroy(gameObject, 0.5f);
-        }
-    }
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "rushWall")
-        {
-            //ダメージ
-            hp -= rush_damage;
-            if (hp <= 0)
-            {             //ゲームオーバー
-                Debug.Log("Enemy HP" + hp);
-                //あたりを消す
-                GetComponent<CircleCollider2D>().enabled = false;
-                //移動停止
-                rb.velocity = new Vector2(0, 0);
+            if (inDamage)
+            {
+                
+                //ダメージ中点滅させる
+                float val = Mathf.Sin(Time.time * 50);
+                // Debug.Log(val);
+                if (val > 0)
+                {
+                    //スプライトを表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    //スプライトを非表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+                return;//ダメージ中は操作による移動はさせない
             }
         }
-
-
-
-
+        else
+        {
+            inDamage = false;
+        }
+       
     }
+
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
+
+        //突進攻撃との接触
+        if (other.gameObject.tag == "rushWall")
+        {
+            //ダメージ
+            hp -= rushdamage;
+            inDamage = true;
+           
+        }
+        EnemyDamage();//倒れているか調べる
+    }
+
+    void EnemyDamage()
+    {
+        if (hp <= 0)
+        {    
+            Debug.Log("敵が倒れている");
+            //移動停止
+            rb.velocity = new Vector2(0, 0);
+            Destroy(gameObject,0.2f);//0.2かけて敵を消す
+        }
+    }
+       
 }
+
+  

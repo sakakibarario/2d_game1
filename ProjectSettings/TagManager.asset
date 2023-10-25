@@ -7,6 +7,9 @@ TagManager:
   - damege_s
   - Enemy
   - rushWall
+  - Wall
+  - ground
+  - Ground
   layers:
   - Default
   - TransparentFX

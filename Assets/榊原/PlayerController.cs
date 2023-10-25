@@ -48,10 +48,7 @@ public class PlayerController : MonoBehaviour
     public bool isTimeOver = false;//true = タイマー停止
     public float displayTime = 0;  //表示時間
 
-
-
     float times = 0;               //現在時間
-
 
 
     //アニメーション対応
@@ -62,37 +59,21 @@ public class PlayerController : MonoBehaviour
     string nowAnime = "";
     string oldAnime = "";
 
-
-
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         //Rigidbody2Dを持ってくる
         rb = GetComponent<Rigidbody2D>();
 
-
-
-
-
         //Animator をとってくる
         //animator = GetComponent<Animator>();
         //nowAnime = stopAnime;
         //oldAnime = stopAnime;
 
-
-
         //ゲームの状態をプレイ中にする
         gameState = "playing";
 
-
-
         D_HP = S_D_HP;
-
-
 
         if (isCountDown)
         {
@@ -100,8 +81,6 @@ public class PlayerController : MonoBehaviour
             displayTime = rush_time;
         }
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -112,13 +91,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
-
-
         //水平方向のチェック
         axisH = Input.GetAxisRaw("Horizontal");
-
-
 
         //向きの調整
         if (axisH > 0.0f)
@@ -174,8 +148,6 @@ public class PlayerController : MonoBehaviour
                                      transform.position - (transform.up * 0.1f),
                                      GroundLayer);
 
-
-
         //ゲーム中以外は何もしない
         if (gameState != "playing")
         {
@@ -199,8 +171,6 @@ public class PlayerController : MonoBehaviour
             return;//ダメージ中は操作による移動はさせない
         }
 
-
-
         if (ongrond || axisH != 0 || gorush == true)
         {
             //地上or速度が０ではないor攻撃中ではない
@@ -217,15 +187,11 @@ public class PlayerController : MonoBehaviour
             gojump = false; //ジャンプフラグをおろす
         }
 
-
-
         if (gorush && horizon == true)
         {
             //地上かつ左クリックが押されたときかつ右向き
             //突進する
             Debug.Log("突進");
-
-
 
             Vector2 rushPw = new Vector2(rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
@@ -303,8 +269,6 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
-
 
     //接触開始
     private void OnTriggerEnter2D(Collider2D collision)
