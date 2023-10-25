@@ -9,28 +9,28 @@ public class EnemySuraimu : MonoBehaviour
     Rigidbody2D rb;
     public float reactionDistance = 4.0f;
     private int rush_damage = 10;
+    private bool inDamage = false;
 
     bool isActive = false;
 
-    private int hp;
+    public int hp;
     // Start is called before the first frame update
     void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         hp = hpMax;
+        Debug.Log(rush_damage);
     }
-
-
 
     // Update is called once per frame
     void Update()
     {
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(player != null)
+        if (player != null)
         {
-            if(isActive && hp >0)
+            if (isActive && hp > 0)
             {
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
@@ -43,43 +43,55 @@ public class EnemySuraimu : MonoBehaviour
                     x - transform.position.x, y).normalized;
                 // ENEMYのRigidbody2Dに移動速度を指定する
                 rb.velocity = direction * speed;
-                Debug.Log("スライムムーブ");
+                //  Debug.Log("スライムムーブ");
+
+
+
+
 
             }
             else
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
-                if(dist < reactionDistance)
+                if (dist < reactionDistance)
                 {
                     isActive = true; //アクティブにする
                 }
             }
         }
-        else if(isActive)
+        else if (isActive)
         {
             isActive = false;
             rb.velocity = Vector2.zero;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "rush_wall")
+        if (hp <= 0)
         {
-            //ダメージ
-            hp -= rush_damage;
-            if(hp <= 0)
-            {
-                //あたりを消す
-                GetComponent<CircleCollider2D>().enabled = false;
-                //移動停止
-                rb.velocity = new Vector2(0, 0);
-                //0.5秒後に消す
-                Destroy(gameObject, 0.5f);
-            }
+            //0.5秒後に消す
+            Destroy(gameObject, 0.5f);
         }
     }
 
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "rushWall")
+        {
+            //ダメージ
+            hp -= rush_damage;
+            if (hp <= 0)
+            {             //ゲームオーバー
+                Debug.Log("Enemy HP" + hp);
+                //あたりを消す
+                GetComponent<CircleCollider2D>().enabled = false;
+                //移動停止
+                rb.velocity = new Vector2(0, 0);
+            }
+        }
+
+
+
+
+    }
 }
