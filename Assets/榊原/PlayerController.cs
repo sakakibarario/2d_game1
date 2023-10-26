@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         //Animator をとってくる
-        //animator = GetComponent<Animator>();
-        //nowAnime = stopAnime;
-        //oldAnime = stopAnime;
+        animator = GetComponent<Animator>();
+        nowAnime = stopAnime;
+        oldAnime = stopAnime;
 
         //ゲームの状態をプレイ中にする
         gameState = "playing";
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
         if (nowAnime != oldAnime)
         {
             oldAnime = nowAnime;
-            //  animator.Play(nowAnime);    //アニメーション再生
+            animator.Play(nowAnime);    //アニメーション再生
         }
     }
     void Jump()//ジャンプ
