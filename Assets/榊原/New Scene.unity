@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 1001952972}
   m_Layer: 0
   m_Name: hanten
-  m_TagString: Untagged
+  m_TagString: damage_g
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -678,7 +678,6 @@ MonoBehaviour:
   speed: 0.5
   hpMax: 20
   reactionDistance: 4
-  hp: 0
 --- !u!212 &1030230252
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1101,6 +1100,7 @@ MonoBehaviour:
   gravity: 1.5
   nonVisibleAct: 0
   checkCollision: {fileID: 1001952972}
+  hp: 20
 --- !u!1 &2032077360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1247,8 @@ MonoBehaviour:
   D_HP: 0
   S_D_HP: 50
   rushRate: 1
+  Suraimu: 5
+  Goburin: 5
   isCountDown: 1
   isTimeOver: 0
   displayTime: 0

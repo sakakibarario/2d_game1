@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - rushWall
   - damege_s
+  - damage_g
   layers:
   - Default
   - TransparentFX

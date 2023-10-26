@@ -10,16 +10,20 @@ public class EnemyGoburin : MonoBehaviour
     [Header("重力")] public float gravity;
     [Header("画面外でも行動する")] public bool nonVisibleAct;
     [Header("接触判定")] public EnemyCollisionCheck checkCollision;
+    [Header("ゴブリンのhp")] public int hp;
     #endregion
 
     #region//プライベート変数
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
     private Animator anim = null;
+    private int hp_g;
+    private int rushdamage = 10;
 
     private BoxCollider2D col = null;
     private bool rightTleftF = false;
     private bool isDead = false;
+    private bool inDamage = false;
 
     int xVector;
     #endregion
@@ -31,6 +35,8 @@ public class EnemyGoburin : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         col = GetComponent<BoxCollider2D>();
+
+        hp_g = hp;
     }
 
     void FixedUpdate()
@@ -63,6 +69,57 @@ public class EnemyGoburin : MonoBehaviour
             {
                 rb.Sleep();
             }
+
+        if (inDamage)
+        {
+            //ダメージ中点滅させる
+            float val = Mathf.Sin(Time.time * 50);
+            // Debug.Log(val);
+            if (val > 0)
+            {
+                //スプライトを表示
+                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                //スプライトを非表示
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            return;//ダメージ中は操作による移動はさせない 
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
+
+        //突進攻撃との接触
+        if (other.gameObject.tag == "rushWall")
+        {
+            //ダメージ
+            hp_g -= rushdamage;
+            Debug.Log(hp_g);
+            inDamage = true;
+        }
+        EnemyDamage();//倒れているか調べる
+    }
+
+    void EnemyDamage()
+    {
+        Invoke("DamageEnd", 0.25f);
+        if (hp_g <= 0)
+        {
+            Debug.Log("敵が倒れている");
+            //移動停止
+            rb.velocity = new Vector2(0, 0);
+            Destroy(gameObject, 0.2f);//0.2かけて敵を消す
+        }
+    }
+    void DamageEnd()
+    {
+        //ダメージフラグOFF
+        inDamage = false;
+        //スプライト元に戻す
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }
 
