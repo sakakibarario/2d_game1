@@ -22,16 +22,11 @@ public class PlayerController : MonoBehaviour
     public float rushRate = 0.5f;
     private float _canrush;
 
-
-
     public static string gameState;//ゲームの状態
 
-
-
     //敵の攻撃
-    private int Suraimu = 5;
-
-
+    public int Suraimu = 5;    //スライムのダメージ
+    public int Goburin = 5;   //ゴブリンのダメージ
 
     //フラグ
     bool gojump = false;       //ジャンプ判定
@@ -39,8 +34,6 @@ public class PlayerController : MonoBehaviour
     public static bool gorush = false;       //攻撃判定(突進)
     bool horizon = false;       //向き
     bool inDamage = false;      //ダメージ中フラグ
-
-
 
     //クールタイム
     public bool isCountDown = true;//true = 時間をカウントダウン計算する
@@ -269,31 +262,39 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
     //接触開始
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "damege_s")
+        if (collision.gameObject.tag == "damege_s")//スライム
         {
             Debug.Log("接触");
             if (gorush == false)
             {
+                D_HP -= Suraimu;    //HPを減らす
+                GetDamage(collision.gameObject);
+            }
+        }
+        if(collision.gameObject.tag == "damage_g")//ゴブリン
+        {
+            Debug.Log("接触");
+            if (gorush == false)
+            {
+                D_HP -= Goburin;    //HPを減らす
                 GetDamage(collision.gameObject);
             }
         }
     }
     //ダメージ
-    public void GetDamage(GameObject スライム)
+    public void GetDamage(GameObject @object)
     {
-        // animator.Play(damageAnime);
-        D_HP -= Suraimu;    //HPを減らす
+       
         Debug.Log("Player HP" + D_HP);
         if (D_HP > 0)
         {
             //移動停止
             rb.velocity = new Vector2(0, 0);
             //敵キャラの反対側にヒットバックさせる
-            Vector3 v = (transform.position - スライム.transform.position).normalized;
+            Vector3 v = (transform.position - @object.transform.position).normalized;
             rb.AddForce(new Vector2(v.x * 5, v.y * 5), ForceMode2D.Impulse);
             //ダメージフラグON
             inDamage = true;
