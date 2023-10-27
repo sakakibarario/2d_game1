@@ -37,18 +37,23 @@ public class PlayerController : MonoBehaviour
 
     //クールタイム
     public bool isCountDown = true;//true = 時間をカウントダウン計算する
+    public bool AnimeCount = true;
     float rush_time = 5.0f;          //攻撃(突進)クールタイム
     public bool isTimeOver = false;//true = タイマー停止
+    public bool animeOver = true;
     public float displayTime = 0;  //表示時間
+    public float Animetime = 0;
+    public float animerushtime = 2.0f;
 
     float times = 0;               //現在時間
-
+    float Anitimes = 0;
 
     //アニメーション対応
     Animator animator; //アニメーター
     public string stopAnime = "PlayerStop";
     public string moveAnime = "PlayerMove";
     public string jumpAnime = "PlayerJump";
+    public string rushAnime = "PlayerRush";
     string nowAnime = "";
     string oldAnime = "";
 
@@ -72,6 +77,10 @@ public class PlayerController : MonoBehaviour
         {
             //カウントダウン
             displayTime = rush_time;
+        }
+        if(AnimeCount)
+        {
+            Animetime = animerushtime;
         }
     }
 
@@ -186,19 +195,32 @@ public class PlayerController : MonoBehaviour
             //突進する
             Debug.Log("突進");
 
+
+
             Vector2 rushPw = new Vector2(rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
 
-            if (Time.time > _canrush)
+            if (animeOver == false)//時間経過
             {
-                _canrush = Time.time + rushRate;
-            }
-            else
-            {
-                gorush = false; //攻撃フラグをおろす
-                displayTime = rush_time;
-                isTimeOver = false;
-                times = 0;
+                Anitimes += Time.deltaTime;//経過時間を加算
+                if (AnimeCount)
+                {
+                    //カウントダウン
+                    Animetime = animerushtime - Anitimes;
+                    if (Animetime <= 0.0f)
+                    {
+                        Animetime = 0.0f;
+                        animeOver = true;  //フラグをおろす
+                        gorush = false; //攻撃フラグをおろす
+                        displayTime = rush_time;
+                        Animetime = animerushtime;
+                        isTimeOver = false;
+                        Anitimes = 0;
+                        times = 0;
+                    }
+                   
+                }
+                Debug.Log("TIMES:" + Animetime);
             }
         }
         else if (gorush && horizon == false)
@@ -212,18 +234,30 @@ public class PlayerController : MonoBehaviour
             Vector2 rushPw = new Vector2(-rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
 
-            if (Time.time > _canrush)
+            if (animeOver == false)//時間経過
             {
-                _canrush = Time.time + rushRate;
-            }
-            else
-            {
-                gorush = false; //攻撃フラグをおろす
-                displayTime = rush_time;
-                isTimeOver = false;
-                times = 0;
+                Anitimes += Time.deltaTime;//経過時間を加算
+                if (AnimeCount)
+                {
+                    //カウントダウン
+                    Animetime = animerushtime - Anitimes;
+                    if (Animetime <= 0.0f)
+                    {
+                        Animetime = 0.0f;
+                        animeOver = true;  //フラグをおろす
+                        gorush = false; //攻撃フラグをおろす
+                        displayTime = rush_time;
+                        Animetime = animerushtime;
+                        isTimeOver = false;
+                        Anitimes = 0;
+                        times = 0;
+                    }
+
+                }
+                Debug.Log("TIMES:" + Animetime);
             }
         }
+    
         if (ongrond)
         {
             //地上のうえ
@@ -234,6 +268,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 nowAnime = moveAnime; //移動
+            }
+            if (gorush)
+            {
+                nowAnime = rushAnime;
+                Debug.Log("アニメーション！");
             }
         }
         else
@@ -257,7 +296,11 @@ public class PlayerController : MonoBehaviour
     void Rush()//突進
     {
         if (displayTime == 0)
+        {
             gorush = true; //攻撃(突進)フラグを立てる
+            animeOver = false;
+
+        }
 
 
 
@@ -274,7 +317,7 @@ public class PlayerController : MonoBehaviour
                 GetDamage(collision.gameObject);
             }
         }
-        if(collision.gameObject.tag == "damage_g")//ゴブリン
+        if (collision.gameObject.tag == "damage_g")//ゴブリン
         {
             Debug.Log("接触");
             if (gorush == false)
@@ -287,7 +330,7 @@ public class PlayerController : MonoBehaviour
     //ダメージ
     public void GetDamage(GameObject @object)
     {
-       
+
         Debug.Log("Player HP" + D_HP);
         if (D_HP > 0)
         {
