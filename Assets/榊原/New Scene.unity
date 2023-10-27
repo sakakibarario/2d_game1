@@ -1111,10 +1111,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2032077364}
   - component: {fileID: 2032077363}
-  - component: {fileID: 2032077362}
   - component: {fileID: 2032077361}
   - component: {fileID: 2032077365}
   - component: {fileID: 2032077366}
+  - component: {fileID: 2032077367}
   m_Layer: 0
   m_Name: "\u4E3B\u4EBA\u516C"
   m_TagString: Player
@@ -1143,22 +1143,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &2032077362
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032077360}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 5594b5c911d702d489460b536b9fc143, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
-  m_Size: {x: 0.5, y: 0.5}
-  m_Direction: 0
 --- !u!212 &2032077363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1281,6 +1265,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!61 &2032077367
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032077360}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 5594b5c911d702d489460b536b9fc143, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0073165745, y: 0.23536687}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.38293484, y: 0.36830166}
+  m_EdgeRadius: 0.2
 --- !u!1 &2087578705
 GameObject:
   m_ObjectHideFlags: 0
