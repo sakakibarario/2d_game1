@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 976364275}
-  tama: {fileID: 4909703235282280273, guid: a94d4b3ca19dbea479f03c49d6fdd4f0, type: 3}
+  tama: {fileID: 7497574690778449021, guid: 694e20fdeb48cab489a89cf73c761482, type: 3}
 --- !u!61 &1971811834
 BoxCollider2D:
   m_ObjectHideFlags: 0
