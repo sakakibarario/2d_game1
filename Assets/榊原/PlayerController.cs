@@ -324,6 +324,10 @@ public class PlayerController : MonoBehaviour
                 GetDamage(collision.gameObject);
             }
         }
+        if (collision.CompareTag("tama"))
+        {
+                Destroy(collision.gameObject);
+        }
     }
     //É_ÉÅÅ[ÉW
     public void GetDamage(GameObject @object)
