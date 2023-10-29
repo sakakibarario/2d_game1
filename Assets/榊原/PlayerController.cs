@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     public float rush = 2.0f;   //“Ëi‚Ì—Í
     public int D_HP;          //ƒhƒ‰ƒSƒ“‚ÌHP
     public int S_D_HP = 50;     //‘Œ´‚Å‚Ìƒhƒ‰ƒSƒ“HP
-    public float rushRate = 0.5f;
-    private float _canrush;
 
     public static string gameState;//ƒQ[ƒ€‚Ìó‘Ô
 
