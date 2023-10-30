@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 
 
@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;              //Rigidbody型の変数
     float axisH = 0.0f;         //入力
     public LayerMask GroundLayer;
-
+    public Slider slider;
 
 
     public float speed = 3.0f;  //移動速度
@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        slider.value = 1;
+
         //Rigidbody2Dを持ってくる
         rb = GetComponent<Rigidbody2D>();
 
@@ -313,6 +315,8 @@ public class PlayerController : MonoBehaviour
             if (gorush == false)
             {
                 D_HP -= Suraimu;    //HPを減らす
+                slider.value = (float)D_HP / (float)S_D_HP; ;
+                Debug.Log("slider.value : " + slider.value);
                 GetDamage(collision.gameObject);
             }
         }
@@ -323,6 +327,9 @@ public class PlayerController : MonoBehaviour
             {
                 D_HP -= Goburin;    //HPを減らす
                 GetDamage(collision.gameObject);
+                slider.value = (float)D_HP / (float)S_D_HP; ;
+                Debug.Log("slider.value : " + slider.value);
+                GetDamage(collision.gameObject);
             }
         }
         if (collision.CompareTag("tama"))
@@ -330,6 +337,9 @@ public class PlayerController : MonoBehaviour
             D_HP -= touzokugan;
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
         }
     }
     //ダメージ
