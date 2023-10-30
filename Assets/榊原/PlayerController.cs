@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     public float rush = 2.0f;   //突進の力
     public int D_HP;          //ドラゴンのHP
     public int S_D_HP = 50;     //草原でのドラゴンHP
-    public float rushRate = 0.5f;
-    private float _canrush;
 
     public static string gameState;//ゲームの状態
 
@@ -325,6 +323,10 @@ public class PlayerController : MonoBehaviour
                 D_HP -= Goburin;    //HPを減らす
                 GetDamage(collision.gameObject);
             }
+        }
+        if (collision.CompareTag("tama"))
+        {
+                Destroy(collision.gameObject);
         }
     }
     //ダメージ
