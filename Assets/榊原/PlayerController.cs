@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 
@@ -367,5 +367,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("ゲームオーバー");
         gameState = "gameover";
+        SceneManager.LoadScene("Gameover");
     }
 }

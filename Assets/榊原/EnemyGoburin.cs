@@ -41,7 +41,11 @@ public class EnemyGoburin : MonoBehaviour
 
     void FixedUpdate()
     {
-            if (sr.isVisible || nonVisibleAct)
+        if (PlayerController.gameState != "playing")
+        {
+            return;
+        }
+        if (sr.isVisible || nonVisibleAct)
             {
                 if (checkCollision.isOn)
                 {

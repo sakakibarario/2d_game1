@@ -35,6 +35,10 @@ public class Throw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerController.gameState != "playing")
+        {
+            return;
+        }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
