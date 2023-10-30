@@ -47,7 +47,7 @@ public class TimeCounter : MonoBehaviour
         countdown -= Time.deltaTime;
 
         //ŽžŠÔ‚ð•\Ž¦‚·‚é
-        timeText.text = countdown.ToString("f1") + "•b";
+        timeText.text = countdown.ToString("f1");
 
         //countdown‚ª0ˆÈ‰º‚É‚È‚Á‚½‚Æ‚«
         if(countdown<=0)
