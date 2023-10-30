@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     //敵の攻撃
     public int Suraimu = 5;    //スライムのダメージ
     public int Goburin = 5;   //ゴブリンのダメージ
+    public int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
 
     //フラグ
     bool gojump = false;       //ジャンプ判定
@@ -218,7 +219,7 @@ public class PlayerController : MonoBehaviour
                     }
                    
                 }
-                Debug.Log("TIMES:" + Animetime);
+             //   Debug.Log("TIMES:" + Animetime);
             }
         }
         else if (gorush && horizon == false)
@@ -326,7 +327,9 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("tama"))
         {
-                Destroy(collision.gameObject);
+            D_HP -= touzokugan;
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
         }
     }
     //ダメージ
