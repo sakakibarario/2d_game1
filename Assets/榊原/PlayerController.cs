@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     //クールタイム
     public bool isCountDown = true;//true = 時間をカウントダウン計算する
     public bool AnimeCount = true;
-    float rush_time = 5.0f;          //攻撃(突進)クールタイム
+    float rush_time = 1.5f;          //攻撃(突進)クールタイム
     public bool isTimeOver = false;//true = タイマー停止
     public bool animeOver = true;
     public float displayTime = 0;  //表示時間
@@ -83,6 +83,14 @@ public class PlayerController : MonoBehaviour
         {
             Animetime = animerushtime;
         }
+        Animetime = 0.0f;
+        animeOver = true;  //フラグをおろす
+        gorush = false; //攻撃フラグをおろす
+        displayTime = rush_time;
+        Animetime = animerushtime;
+        isTimeOver = false;
+        Anitimes = 0;
+        times = 0;
     }
 
     // Update is called once per frame
@@ -289,6 +297,7 @@ public class PlayerController : MonoBehaviour
             oldAnime = nowAnime;
             animator.Play(nowAnime);    //アニメーション再生
         }
+ 
     }
     void Jump()//ジャンプ
     {
@@ -340,6 +349,10 @@ public class PlayerController : MonoBehaviour
             slider.value = (float)D_HP / (float)S_D_HP; ;
             Debug.Log("slider.value : " + slider.value);
             GetDamage(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "dead")
+        {
+            GameOver();
         }
     }
     //ダメージ

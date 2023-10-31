@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DropBall : MonoBehaviour
 {
@@ -133,8 +134,13 @@ void EnemyDamage()
     if (Torent_Hp <= 0)
     {
         Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
-        Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ðÁ‚·
-    }
+            PlayerController.gameState = ("gameclear");
+
+                Debug.Log("ƒQ[ƒ€ƒNƒŠƒA");
+                SceneManager.LoadScene("GameClear");
+            Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ðÁ‚·
+          
+        }
 }
 void DamageEnd()
 {

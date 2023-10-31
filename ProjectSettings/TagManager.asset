@@ -11,6 +11,8 @@ TagManager:
   - rushWall
   - damege_s
   - damage_g
+  - enemy
+  - dead
   layers:
   - Default
   - TransparentFX

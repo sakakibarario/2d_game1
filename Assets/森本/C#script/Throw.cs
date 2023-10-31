@@ -16,6 +16,8 @@ public class Throw : MonoBehaviour
     private float targetTime = 3.0f;
     private float currentTime = 0;
 
+    public float ganspeed = 5.0f; //玉のスピード
+
     public int hp = 30;
     public float reactionDistance = 4.0f;//反応距離
 
@@ -90,7 +92,6 @@ public class Throw : MonoBehaviour
         else if (isActive)
         {
             isActive = false;
-            rb.velocity = Vector2.zero;
         }
 
 
