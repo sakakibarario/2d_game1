@@ -27,6 +27,11 @@ public class Throw : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
+    private bool ganActive = false;
+
+    public Enemygan bullet;
+
+
     private void Start()
     {
         //Rigidbody2D をとる
@@ -42,21 +47,13 @@ public class Throw : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+      //  GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             if (isActive && T_Hp > 0)
             {
                 // PLAYERの位置を取得
-                Vector2 targetPos = player.transform.position;
-                // PLAYERのx座標
-                float x = targetPos.x;
-                // ENEMYは、地面を移動させるので座標は常に0とする
-                float y = 0;
-                // 移動を計算させるための２次元のベクトルを作る
-                Vector2 direction = new Vector2(
-                    x - transform.position.x, y).normalized;
-                //1秒経つごとに弾を発射
+               // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
                 if (targetTime < currentTime)
@@ -64,19 +61,11 @@ public class Throw : MonoBehaviour
                     currentTime = 0;
                     //敵の座標を変数posに保存
                     var pos = this.gameObject.transform.position;
-
                     //弾のプレハブを作成
                     var t = Instantiate(tama) as GameObject;
-
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
-
-                    //敵からプレイヤーに向かうベクトルを作る
-                    //プレイヤーの位置から敵の位置(弾の位置)を引く
-                    Vector2 vec = player.transform.position - pos;
-
-                    //弾のRigidBody2Dコンポネントのvelocityにさっき求めたベクトルを入れて力を加える
-                    t.GetComponent<Rigidbody2D>().velocity = vec;
+                    make_naihu();
                 }
             }
             else
@@ -145,5 +134,9 @@ public class Throw : MonoBehaviour
         inDamage = false;
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    void make_naihu()
+    { 
     }
 }

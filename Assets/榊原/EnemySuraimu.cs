@@ -90,7 +90,7 @@ public class EnemySuraimu : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
+       // Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
 
         //“ËiUŒ‚‚Æ‚ÌÚG
         if (other.gameObject.tag == "rushWall")
