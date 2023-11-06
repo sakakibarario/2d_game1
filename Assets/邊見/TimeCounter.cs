@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimeCounter : MonoBehaviour
 {
-    //カウントダウン
-    public float countdown = 60.0f;
+    //秒カウントダウン
+    private float countdownsecond = 0;
+
+    //分カウントダウン
+    public int countdownminute = 1;
+
 
     //時間を表示するText型の変数
     public Text timeText;
@@ -18,18 +23,20 @@ public class TimeCounter : MonoBehaviour
     void Update()
     {
         //クリックされたとき
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
             //ポーズ中にクリックされたとき
             if(isPose)
             {
                 //ポーズ状態を解除する
                 isPose = false;
+                PlayerController.pose = false;
             }
             //進行中にクリックされたとき
             else{
                 //ポーズ状態にする
                 isPose = true;
+                PlayerController.pose = true;
             }
         }
 
@@ -38,21 +45,32 @@ public class TimeCounter : MonoBehaviour
         {
             //ポーズ中であることを表示
             timeText.text = "ポーズ中";
+          
 
             //カウントダウンしない
             return;
         }
+        
+            //時間をカウントする
+            countdownsecond -= Time.deltaTime;
 
-        //時間をカウントする
-        countdown -= Time.deltaTime;
+            if (countdownsecond <=0 && countdownminute != 0)
+            {
+                countdownminute--;
+                countdownsecond = 60.0f;
+            }
 
-        //時間を表示する
-        timeText.text = countdown.ToString("f1");
+
+            //時間を表示する
+            timeText.text = countdownminute.ToString("00") + ":" + countdownsecond.ToString("f2");
+        
 
         //countdownが0以下になったとき
-        if(countdown<=0)
+        if (countdownsecond<=0 && countdownminute <= 0)
         {
             timeText.text = "GAME OVER";
+            PlayerController.gameState = "gameover";
+            SceneManager.LoadScene("Gameover");
         }
     }
 }

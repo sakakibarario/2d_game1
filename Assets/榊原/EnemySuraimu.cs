@@ -29,6 +29,7 @@ public class EnemySuraimu : MonoBehaviour
     {
         if (PlayerController.gameState != "playing")
         {
+            rb.velocity = new Vector2(0, 0);
             return;
         }
         //Player　のゲームオブジェクトを得る

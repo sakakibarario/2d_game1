@@ -43,6 +43,7 @@ public class EnemyGoburin : MonoBehaviour
     {
         if (PlayerController.gameState != "playing")
         {
+            rb.velocity = new Vector2(0, 0);
             return;
         }
         if (sr.isVisible || nonVisibleAct)

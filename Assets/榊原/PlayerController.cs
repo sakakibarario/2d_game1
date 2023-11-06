@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public int D_HP;          //ドラゴンのHP
     public int S_D_HP = 50;     //草原でのドラゴンHP
 
-    public static string gameState;//ゲームの状態
+    public static string gameState = "playing";//ゲームの状態
 
     //敵の攻撃
     public int Suraimu = 5;    //スライムのダメージ
@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     public string rushAnime = "PlayerRush";
     string nowAnime = "";
     string oldAnime = "";
+
+    //ゲームステータス管理フラグ
+    static public bool pose = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -96,9 +100,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       　//ゲームステータス管理
+        if(pose)
+        {
+            gameState = "posing";
+        }
+        else
+        {
+            gameState = "playing";
+        }
+
         //ゲーム中以外とダメージ中は何もしない
         if (gameState != "playing" || inDamage)
         {
+            rb.velocity = new Vector2(0, 0);
+            
             return;
         }
 
