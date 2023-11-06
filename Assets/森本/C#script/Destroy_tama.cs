@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Destroy_tama : MonoBehaviour
 {
+    float count = 3.0f;
+    private void Update()
+    {
+        count -= Time.deltaTime;
+        if(count <=0 )
+        {
+            count = 3.0f;
+            Destroy(this.gameObject);
+        }
+    }
     //プレイヤーとtamaのタグがあったら消える
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,6 +21,7 @@ public class Destroy_tama : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        
     }
 
     //画面外に出たら消える

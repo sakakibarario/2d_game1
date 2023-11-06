@@ -16,8 +16,6 @@ public class Throw : MonoBehaviour
     private float targetTime = 5.0f;
     private float currentTime = 0;
 
-    public float ganspeed = 6.0f; //玉のスピード
-
     public int hp = 30;
     public float reactionDistance = 4.0f;//反応距離
 
@@ -66,8 +64,6 @@ public class Throw : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
-                    
-
                 }
             }
             else

@@ -6,10 +6,17 @@ using UnityEngine.SceneManagement;
 public class DropBall : MonoBehaviour
 {
     public GameObject ball;
+    //弾のプレハブオブジェクト
+    public GameObject tama;
+
+
     private float count = 1.0f;
     private int vecX;
-    public int hp = 100;
-    public float reactionDistance = 4.0f;//反応距離
+    public int hp = 50;
+    public float reactionDistance = 8.0f;//反応距離
+    private float targetTime = 5.0f;
+    private float currentTime = 0;
+
 
     private int Torent_Hp;
 
@@ -36,37 +43,29 @@ public class DropBall : MonoBehaviour
         {
             if (isActive && Torent_Hp > 0)
             {
-                // PLAYERの位置を取得
-                Vector2 targetPos = player.transform.position;
-                // PLAYERのx座標
-                float x = targetPos.x;
-                // ENEMYは、地面を移動させるので座標は常に0とする
-                float y = 0;
-                // 移動を計算させるための２次元のベクトルを作る
-                Vector2 direction = new Vector2(
-                    x - transform.position.x, y).normalized;
-                ////1秒経つごとに弾を発射
-                //currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
 
-                //if (targetTime < currentTime)
-                //{
-                //    currentTime = 0;
-                //    //敵の座標を変数posに保存
-                //    var pos = this.gameObject.transform.position;
+                if (targetTime < currentTime)
+                {
+                    currentTime = 0;
+                    //敵の座標を変数posに保存
+                    var pos = this.gameObject.transform.position;
+                    //弾のプレハブを作成
+                    var t = Instantiate(tama) as GameObject;
+                    //弾のプレハブの位置を敵の位置にする
+                    t.transform.position = pos;
+                    make_naihu();
+                }
 
-                //    //弾のプレハブを作成
-                //    var t = Instantiate(tama) as GameObject;
+                count -= Time.deltaTime;
+                if (count <= 0)
+                {
+                    vecX = Random.Range(210, 229);
 
-                //    //弾のプレハブの位置を敵の位置にする
-                //    t.transform.position = pos;
+                    Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
 
-                //    //敵からプレイヤーに向かうベクトルを作る
-                //    //プレイヤーの位置から敵の位置(弾の位置)を引く
-                //    Vector2 vec = player.transform.position - pos;
-
-                //    //弾のRigidBody2Dコンポネントのvelocityにさっき求めたベクトルを入れて力を加える
-                //    t.GetComponent<Rigidbody2D>().velocity = vec;
-                //}
+                    count = 2.0f;
+                }
             }
             else
             {
@@ -82,15 +81,7 @@ public class DropBall : MonoBehaviour
         {
             isActive = false;
         }
-        count -= Time.deltaTime;
-        if(count <= 0)
-        {
-            vecX = Random.Range(210, 229);
 
-            Instantiate(ball, new Vector3(vecX, -4.3f, 0), Quaternion.identity);
-
-            count = 1.0f;
-        }
         if (inDamage)
         {
             //ダメージ中点滅させる
@@ -111,44 +102,48 @@ public class DropBall : MonoBehaviour
     }
 
 
-       
-    
+
+
     private void OnTriggerEnter2D(Collider2D other)
-{
-    Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
-
-    //突進攻撃との接触
-    if (other.gameObject.tag == "rushWall")
     {
-        //ダメージ
-        Torent_Hp -= rushdamage;
-        Debug.Log(Torent_Hp);
-        inDamage = true;
+        Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
+
+        //突進攻撃との接触
+        if (other.gameObject.tag == "rushWall")
+        {
+            //ダメージ
+            Torent_Hp -= rushdamage;
+            Debug.Log(Torent_Hp);
+            inDamage = true;
+        }
+        EnemyDamage();//倒れているか調べる
     }
-    EnemyDamage();//倒れているか調べる
-}
 
-void EnemyDamage()
-{
-    Invoke("DamageEnd", 0.25f);
-    if (Torent_Hp <= 0)
+    void EnemyDamage()
     {
-        Debug.Log("敵が倒れている");
+        Invoke("DamageEnd", 0.25f);
+        if (Torent_Hp <= 0)
+        {
+            Debug.Log("敵が倒れている");
             PlayerController.gameState = ("gameclear");
 
-                Debug.Log("ゲームクリア");
-                SceneManager.LoadScene("GameClear");
+            Debug.Log("ゲームクリア");
+            SceneManager.LoadScene("GameClear");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す
-          
+
         }
-}
-void DamageEnd()
-{
-    //ダメージフラグOFF
-    inDamage = false;
-    //スプライト元に戻す
-    gameObject.GetComponent<SpriteRenderer>().enabled = true;
-}
+    }
+    void DamageEnd()
+    {
+        //ダメージフラグOFF
+        inDamage = false;
+        //スプライト元に戻す
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    void make_naihu()
+    {
+        EnemyBossGan.Naihu = true;
+    }
 }
 
 
