@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemygan : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float moveSpeed = 3.0f;
+    [SerializeField] float moveSpeed = 5.0f;
     Vector3 moveVec = new Vector3( 0, 0, 0);
     private SpriteRenderer sr = null;
 
-
+    static public bool Naihu = false;
     
 
     // Start is called before the first frame update
@@ -24,6 +24,12 @@ public class Enemygan : MonoBehaviour
     {
         float add_move = moveSpeed * Time.deltaTime;
         transform.Translate(moveVec * add_move);
+
+        if(Naihu)
+        {
+            Premake();
+            Naihu = false;
+        }
     }
 
 
