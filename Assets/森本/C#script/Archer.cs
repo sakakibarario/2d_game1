@@ -7,6 +7,8 @@ public class Archer : MonoBehaviour
     public float speed, ratio;
     public GameObject tama;
 
+    private int count;
+
     void Start()
     {
         OnStart(GameObject.Find("Player").gameObject);
@@ -66,6 +68,17 @@ public class Archer : MonoBehaviour
         //ìñÇΩÇ¡ÇΩÇÁè¡Ç∑
         //Destroy(this.gameObject);
     }
+    //private void Update()
+    //{
+    //    count += 1;
+    //    if (count % 60 == 0)
+    //    {
+    //        GameObject shell = Instantiate(tama, transform.position, Quaternion.identity);
+    //        Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+
+    //        //StartCoroutine(Throw());
+    //    }
+    //}
 
 
 }

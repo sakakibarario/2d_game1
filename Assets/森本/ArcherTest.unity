@@ -365,9 +365,9 @@ GameObject:
   m_Component:
   - component: {fileID: 712659153}
   - component: {fileID: 712659152}
-  - component: {fileID: 712659151}
   - component: {fileID: 712659155}
   - component: {fileID: 712659154}
+  - component: {fileID: 712659156}
   m_Layer: 0
   m_Name: "\u77E2"
   m_TagString: tama
@@ -375,21 +375,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &712659151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712659150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67389d712de94d449bdb0c58abcfa271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.1
-  ratio: 0.7
-  tama: {fileID: 0}
 --- !u!212 &712659152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -504,6 +489,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &712659156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712659150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67389d712de94d449bdb0c58abcfa271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+  ratio: 0.7
+  tama: {fileID: 712659150}
 --- !u!1 &1164842966
 GameObject:
   m_ObjectHideFlags: 0
