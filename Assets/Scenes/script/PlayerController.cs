@@ -104,10 +104,12 @@ public class PlayerController : MonoBehaviour
         if(pose)
         {
             gameState = "posing";
+            rb.isKinematic = true;
         }
         else
         {
             gameState = "playing";
+            rb.isKinematic = false;
         }
 
         //ゲーム中以外とダメージ中は何もしない
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             animator.Play(stopAnime);
-            
+           
             return;
         }
 
