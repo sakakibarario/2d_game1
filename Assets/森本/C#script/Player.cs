@@ -8,15 +8,18 @@ public class Player : MonoBehaviour
     private float playerSpeed;
     public int hp;
 
-    //Rigidbody2D rigidbody2D;
+    private float jumpForce = 350f;
+    private int jumpCount = 0;
+
+    Rigidbody2D rigidbody2D;
 
     // Start is called before the first frame update
     void Start()
     {
-        //rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
         // ç∂ÉLÅ[ÇâüÇµÇΩÇÁç∂ï˚å¸Ç÷êiÇﬁ
@@ -26,6 +29,19 @@ public class Player : MonoBehaviour
         // âΩÇ‡Ç®Ç≥Ç»Ç©Ç¡ÇΩÇÁé~Ç‹ÇÈ
         else playerSpeed = 0;
 
-       // rigidbody2D.velocity = new Vector2(playerSpeed, rigidbody2D.velocity.y);
+        rigidbody2D.velocity = new Vector2(playerSpeed, rigidbody2D.velocity.y);
+
+        //if (Input.GetMouseButtonDown(0) && this.jumpCount < 1)
+        //{
+        //    this.rbody2D.AddForce(transform.up * jumpForce);
+        //    jumpCount++;
+        //}
     }
+    //private void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.CompareTag("Floor"))
+    //    {
+    //        jumpCount = 0;
+    //    }
+    //}
 }
