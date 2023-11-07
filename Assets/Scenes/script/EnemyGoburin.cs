@@ -16,13 +16,11 @@ public class EnemyGoburin : MonoBehaviour
     #region//プライベート変数
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
-    private Animator anim = null;
     private int hp_g;
     private int rushdamage = 10;
 
     private BoxCollider2D col = null;
     private bool rightTleftF = false;
-    private bool isDead = false;
     private bool inDamage = false;
 
     int xVector;

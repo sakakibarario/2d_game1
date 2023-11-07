@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
         if (gameState != "playing" || inDamage)
         {
             rb.velocity = new Vector2(0, 0);
+            animator.Play(stopAnime);
             
             return;
         }

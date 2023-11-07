@@ -25,7 +25,6 @@ public class Throw : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
-    private bool ganActive = false;
 
     public Enemygan bullet;
 

@@ -13,6 +13,7 @@ TagManager:
   - damage_g
   - enemy
   - dead
+  - wallObject
   layers:
   - Default
   - TransparentFX
