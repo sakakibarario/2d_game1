@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class Archer : MonoBehaviour
+public class Arrow : MonoBehaviour
 {
     GameObject target;
     public float speed, ratio;
+
+    //弾のプレハブオブジェクト
     public GameObject tama;
 
     private int count;
@@ -66,19 +68,6 @@ public class Archer : MonoBehaviour
             yield return null;
         }
         //当たったら消す
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
-    //private void Update()
-    //{
-    //    count += 1;
-    //    if (count % 60 == 0)
-    //    {
-    //        GameObject shell = Instantiate(tama, transform.position, Quaternion.identity);
-    //        Rigidbody shellRb = shell.GetComponent<Rigidbody>();
-
-    //        //StartCoroutine(Throw());
-    //    }
-    //}
-
-
 }
