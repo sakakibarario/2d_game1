@@ -28,12 +28,17 @@ public class ArcherTest : MonoBehaviour
 
     public Enemygan bullet;
 
+    //アニメーションに使う
+    private Animator anim = null;
 
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         T_Hp = hp;
+
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
