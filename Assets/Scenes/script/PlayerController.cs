@@ -68,8 +68,8 @@ public class PlayerController : MonoBehaviour
     static public bool pose = false;
 
     //技のフラグ
-    static public bool SougenBoss = false;
-    static public bool VillageBoss = false;
+    static public bool SougenBoss = true;
+    static public bool VillageBoss = true;
 
     // Start is called before the first frame update
     void Start()
@@ -260,8 +260,8 @@ public class PlayerController : MonoBehaviour
         if(VillageBoss && gojump)
         {
             Debug.Log("ジャンプ");
-            Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
-            rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
+            Vector2 jumpPw2 = new Vector2(0, jump);      //ジャンプさせるベクトル
+            rb.AddForce(jumpPw2, ForceMode2D.Impulse);   //瞬間的な力を加える
             gojump = false; //ジャンプフラグをおろす
         }
 
@@ -465,7 +465,7 @@ public class PlayerController : MonoBehaviour
             //移動停止
             rb.velocity = new Vector2(0, 0);
             //敵キャラの反対側にヒットバックさせる
-            Vector3 v = (transform.position - @object.transform.position).normalized;
+            Vector3 v = (this.transform.position - @object.transform.position).normalized;
             rb.AddForce(new Vector2(v.x * 5, v.y * 5), ForceMode2D.Impulse);
             //ダメージフラグON
             inDamage = true;
