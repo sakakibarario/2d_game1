@@ -27,7 +27,7 @@ public class PlayerHPBar : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //enemyタグのオブジェクトに触れると発動
-        if (collision.CompareTag("enemy"))
+        if (collision.CompareTag("Enemy"))
         {
             //ダメージは10
             int damage = 10;
