@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4279897409470246562}
   - component: {fileID: 2173260945136696913}
   - component: {fileID: 4534613371821388823}
+  - component: {fileID: -4674743390934639426}
   m_Layer: 0
   m_Name: "\u706B\u7403"
   m_TagString: Fireball
@@ -139,3 +140,15 @@ MonoBehaviour:
   moveSpeed: 5
   vec_x_pra: 1
   vec_x_mai: -1
+--- !u!114 &-4674743390934639426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733789932348006754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f15931799cc8ea40b55e3a5d0a85b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

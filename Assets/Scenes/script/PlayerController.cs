@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 3.0f;  //移動速度
     public float jump = 5.0f;   //ジャンプ力
     public float rush = 2.0f;   //突進の力
-    public int D_HP;          //ドラゴンのHP
+    public int D_HP;          　//ドラゴンのHP
     public int S_D_HP = 50;     //草原でのドラゴンHP
 
     public static string gameState = "playing";//ゲームの状態

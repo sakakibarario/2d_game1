@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Playerboll2 : MonoBehaviour
 {
-
-    Rigidbody2D rb1;
     Rigidbody2D rb2;
     [SerializeField] float moveSpeed = 5.0f;
 
-    public float deleteTime = 3.0f;
 
     public int vec_x_pra = 1;
     public int vec_x_mai = -1;
@@ -17,7 +14,6 @@ public class Playerboll2 : MonoBehaviour
     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, deleteTime);
     }
 
     // Update is called once per frame

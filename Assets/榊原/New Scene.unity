@@ -985,7 +985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030230250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.39, y: -2.98, z: 0}
+  m_LocalPosition: {x: 7.89, y: -1.26, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1608,6 +1608,8 @@ MonoBehaviour:
   displayTime: 0
   Animetime: 0
   animerushtime: 0.1
+  K_isCountDown: 1
+  buresutime: 0
   stopAnime: PlayerStop
   moveAnime: PlayerMove
   jumpAnime: PlayerJump

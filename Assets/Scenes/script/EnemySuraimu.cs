@@ -12,6 +12,8 @@ public class EnemySuraimu : MonoBehaviour
     private int hp;                  
 
     private int rushdamage = 10;    //突進の攻撃力
+    private int buresball = 30;     //火球の攻撃力
+
     private bool inDamage = false;  //ダメージ判定
 
     bool isActive = false;
@@ -99,7 +101,15 @@ public class EnemySuraimu : MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
-           
+        }
+
+        //火球との接触
+        if(other.CompareTag("Fireball"))
+        {
+            //ダメージ
+            hp -= buresball;
+            inDamage = true;
+            Destroy(other.gameObject);  //接触したらけす
         }
         EnemyDamage();//倒れているか調べる
     }
