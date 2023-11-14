@@ -44,14 +44,19 @@ public class ArcherTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (PlayerController.gameState != "playing")
-        {
+        {        
+
             return;
         }
         //Player　のゲームオブジェクトを得る
         //  GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+            //アニメーション
+            anim.SetBool("Attack", false);
+
             if (isActive && T_Hp > 0)
             {
                 // PLAYERの位置を取得
@@ -68,6 +73,10 @@ public class ArcherTest : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
+
+                    //アニメーション
+                    anim.SetBool("Attack",true);
+
                 }
             }
             else
