@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     float axisH = 0.0f;         //入力
     public LayerMask GroundLayer;
     public Slider slider;
-
+    public GameObject tama;
 
     public float speed = 3.0f;  //移動速度
     public float jump = 5.0f;   //ジャンプ力
@@ -27,11 +27,12 @@ public class PlayerController : MonoBehaviour
     public int Goburin = 5;   //ゴブリンのダメージ
     public int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
 
-    //フラグ
+    //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
     bool ongrond = false;       //地面判定
     public static bool gorush = false;       //攻撃判定(突進)
-    bool horizon = false;       //向き
+    bool Fireball_F = false;    // 火球攻撃判定
+    static public bool horizon = true;       //向き
     bool inDamage = false;      //ダメージ中フラグ
 
     //クールタイム
@@ -59,6 +60,9 @@ public class PlayerController : MonoBehaviour
     //ゲームステータス管理フラグ
     static public bool pose = false;
 
+    //技のフラグ
+    static public bool SougenBoss = true;
+    static public bool VillageBoss = false;
 
     // Start is called before the first frame update
     void Start()
@@ -152,7 +156,15 @@ public class PlayerController : MonoBehaviour
                 Rush();
             }
         }
-        if (isTimeOver == false)//時間経過
+        //キャラクターの火球
+        if(Input.GetMouseButtonDown(1) && SougenBoss)
+        {
+            Fireball();
+            Debug.Log("火球");
+        }
+
+        //時間経過
+        if (isTimeOver == false)
         {
             times += Time.deltaTime;//経過時間を加算
             if (isCountDown)
@@ -285,7 +297,32 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("TIMES:" + Animetime);
             }
         }
-    
+        if(Fireball_F)
+        {
+            //主人公の座標を変数posに保存
+            var posR = this.gameObject.transform.position + (transform.up * 1.5f) + transform.right * 1.2f;
+            var posL = this.gameObject.transform.position + (transform.up * 1.5f) - transform.right * 1.2f;
+            //弾のプレハブを作成
+            var t = Instantiate(tama) as GameObject;
+            //弾のプレハブの位置を位置にする
+           
+
+            if (horizon)
+            {
+                t.transform.position = posR;
+                t.AddComponent<Playerboll>();
+            }
+            else
+            {
+                t.transform.position = posL;
+                t.AddComponent<Playerboll2>();
+            }
+            
+
+            Fireball_F = false;
+        }
+
+        //アニメーション
         if (ongrond)
         {
             //地上のうえ
@@ -318,6 +355,8 @@ public class PlayerController : MonoBehaviour
         }
  
     }
+
+    //主人公に動き
     void Jump()//ジャンプ
     {
         gojump = true; //ジャンプフラグを立てる
@@ -330,10 +369,13 @@ public class PlayerController : MonoBehaviour
             animeOver = false;
 
         }
-
-
-
     }
+    void Fireball()//火球
+    {
+        Fireball_F = true;
+    }
+
+
     //接触開始
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -353,7 +395,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("接触");
             if (gorush == false)
             {
-                D_HP -= Goburin;    //HPを減らす
+                D_HP -= Goburin;    //HPを減らす（ゴブリンの攻撃）
                 GetDamage(collision.gameObject);
                 slider.value = (float)D_HP / (float)S_D_HP; ;
                 Debug.Log("slider.value : " + slider.value);
@@ -362,7 +404,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("tama"))
         {
-            D_HP -= touzokugan;
+            D_HP -= touzokugan;     //HPを減らす（盗賊の攻撃）
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;
@@ -374,7 +416,8 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
     }
-    //ダメージ
+
+    //ダメージを受けた時の動き
     public void GetDamage(GameObject @object)
     {
 

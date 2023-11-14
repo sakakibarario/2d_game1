@@ -8,7 +8,6 @@ public class Enemygan : MonoBehaviour
     [SerializeField] float moveSpeed = 5.0f;
     Vector3 moveVec = new Vector3( 0, 0, 0);
     private SpriteRenderer sr = null;
-
     static public bool Naihu = false;
     
 
