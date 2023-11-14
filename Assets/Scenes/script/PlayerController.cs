@@ -12,12 +12,12 @@ public class PlayerController : MonoBehaviour
     float axisH = 0.0f;         //入力
     public LayerMask GroundLayer;
     public Slider slider;
-
+    public GameObject tama;
 
     public float speed = 3.0f;  //移動速度
     public float jump = 5.0f;   //ジャンプ力
     public float rush = 2.0f;   //突進の力
-    public int D_HP;          //ドラゴンのHP
+    public int D_HP;          　//ドラゴンのHP
     public int S_D_HP = 50;     //草原でのドラゴンHP
 
     public static string gameState = "playing";//ゲームの状態
@@ -27,11 +27,12 @@ public class PlayerController : MonoBehaviour
     public int Goburin = 5;   //ゴブリンのダメージ
     public int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
 
-    //フラグ
+    //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
     bool ongrond = false;       //地面判定
     public static bool gorush = false;       //攻撃判定(突進)
-    bool horizon = false;       //向き
+    bool Fireball_F = false;    // 火球攻撃判定
+    static public bool horizon = true;       //向き
     bool inDamage = false;      //ダメージ中フラグ
 
     //クールタイム
@@ -43,6 +44,13 @@ public class PlayerController : MonoBehaviour
     public float displayTime = 0;  //表示時間
     public float Animetime = 0;
     public float animerushtime = 2.0f;
+
+    //クールタイム火球
+    public bool K_isCountDown = true; //true = 時間をカウントダウン計算する
+    private float Onbures = 2.0f;     //攻撃（火球）クールタイム
+    private bool K_isTimeOver = false;//true = タイマー停止
+    public float buresutime = 0;      //表示時間
+    float K_timesnow = 0;             //現在時間
 
     float times = 0;               //現在時間
     float Anitimes = 0;
@@ -59,6 +67,9 @@ public class PlayerController : MonoBehaviour
     //ゲームステータス管理フラグ
     static public bool pose = false;
 
+    //技のフラグ
+    static public bool SougenBoss = false;
+    static public bool VillageBoss = false;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             Animetime = animerushtime;
         }
+        //突進
         Animetime = 0.0f;
         animeOver = true;  //フラグをおろす
         gorush = false; //攻撃フラグをおろす
@@ -95,6 +107,13 @@ public class PlayerController : MonoBehaviour
         isTimeOver = false;
         Anitimes = 0;
         times = 0;
+
+        //火球
+        buresutime = Onbures;
+        K_timesnow = 0;
+        K_isTimeOver = false;
+        Fireball_F = false;
+
     }
 
     // Update is called once per frame
@@ -104,10 +123,12 @@ public class PlayerController : MonoBehaviour
         if(pose)
         {
             gameState = "posing";
+            rb.isKinematic = true;
         }
         else
         {
             gameState = "playing";
+            rb.isKinematic = false;
         }
 
         //ゲーム中以外とダメージ中は何もしない
@@ -115,7 +136,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             animator.Play(stopAnime);
-            
+           
             return;
         }
 
@@ -150,7 +171,14 @@ public class PlayerController : MonoBehaviour
                 Rush();
             }
         }
-        if (isTimeOver == false)//時間経過
+        //キャラクターの火球
+        if(Input.GetMouseButtonDown(1) && SougenBoss)
+        {
+            Fireball();
+        }
+
+        //時間経過タックル
+        if (isTimeOver == false)
         {
             times += Time.deltaTime;//経過時間を加算
             if (isCountDown)
@@ -163,7 +191,22 @@ public class PlayerController : MonoBehaviour
                     isTimeOver = true;  //フラグをおろす
                 }
             }
-            //  Debug.Log("TIMES:" + displayTime);
+        }
+        //時間経過火球
+        if(K_isTimeOver == false)
+        {
+            K_timesnow += Time.deltaTime;//経過時間を加算
+            if(K_isCountDown)
+            {
+                //カウントダウン
+                buresutime = Onbures - K_timesnow;
+                if(buresutime <= 0.0f)
+                {
+                    buresutime = 0.0f;
+                    K_isTimeOver = true;//フラグを下す
+                }
+            }
+
         }
     }
 
@@ -214,6 +257,13 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
             gojump = false; //ジャンプフラグをおろす
         }
+        if(VillageBoss && gojump)
+        {
+            Debug.Log("ジャンプ");
+            Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
+            rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
+            gojump = false; //ジャンプフラグをおろす
+        }
 
         if (gorush && horizon == true)
         {
@@ -255,8 +305,6 @@ public class PlayerController : MonoBehaviour
             //突進する
             Debug.Log("突進");
 
-
-
             Vector2 rushPw = new Vector2(-rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
 
@@ -283,7 +331,33 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("TIMES:" + Animetime);
             }
         }
-    
+        if(Fireball_F)
+        {
+            //主人公の座標を変数posに保存
+            var posR = this.gameObject.transform.position + (transform.up * 1.5f) + transform.right * 1.2f;
+            var posL = this.gameObject.transform.position + (transform.up * 1.5f) - transform.right * 1.2f;
+            //弾のプレハブを作成
+            var t = Instantiate(tama) as GameObject;
+            //弾のプレハブの位置を位置にする
+           
+             if (horizon)
+             {
+                 t.transform.position = posR;
+                 t.AddComponent<Playerboll>();
+             }
+             else
+             {
+                 t.transform.position = posL;
+                 t.AddComponent<Playerboll2>();
+             }
+            Debug.Log("火球");
+            buresutime = Onbures;   //カウントダウン時間のリセット
+            K_timesnow = 0;         //表示時間のリセット
+            K_isTimeOver = false;   //フラグをあげる
+            Fireball_F = false;     //フラグをおろす
+        }
+
+        //アニメーション
         if (ongrond)
         {
             //地上のうえ
@@ -316,6 +390,8 @@ public class PlayerController : MonoBehaviour
         }
  
     }
+
+    //主人公に動き
     void Jump()//ジャンプ
     {
         gojump = true; //ジャンプフラグを立てる
@@ -328,10 +404,16 @@ public class PlayerController : MonoBehaviour
             animeOver = false;
 
         }
-
-
-
     }
+    void Fireball()//火球
+    {
+        if (buresutime == 0)
+        {
+            Fireball_F = true;
+        }
+    }
+
+
     //接触開始
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -351,7 +433,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("接触");
             if (gorush == false)
             {
-                D_HP -= Goburin;    //HPを減らす
+                D_HP -= Goburin;    //HPを減らす（ゴブリンの攻撃）
                 GetDamage(collision.gameObject);
                 slider.value = (float)D_HP / (float)S_D_HP; ;
                 Debug.Log("slider.value : " + slider.value);
@@ -360,7 +442,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("tama"))
         {
-            D_HP -= touzokugan;
+            D_HP -= touzokugan;     //HPを減らす（盗賊の攻撃）
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;
@@ -372,7 +454,8 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
     }
-    //ダメージ
+
+    //ダメージを受けた時の動き
     public void GetDamage(GameObject @object)
     {
 
