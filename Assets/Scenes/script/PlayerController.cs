@@ -257,6 +257,13 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
             gojump = false; //ジャンプフラグをおろす
         }
+        if(VillageBoss && gojump)
+        {
+            Debug.Log("ジャンプ");
+            Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
+            rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
+            gojump = false; //ジャンプフラグをおろす
+        }
 
         if (gorush && horizon == true)
         {
