@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class Delete : MonoBehaviour
 {
+    public float timer;
+
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(this.gameObject, timer);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody2D>();
-    }
-
-    //プレイヤーとtamaのタグがあったら消える
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("tama"))
-        {
-            Destroy(this.gameObject);
-        }
 
     }
+
 }
 

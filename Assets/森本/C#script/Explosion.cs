@@ -16,6 +16,8 @@ public class Explosion : MonoBehaviour
 
     bool isActive = false;
 
+    public GameObject explode;  //爆発用
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,5 +125,17 @@ public class Explosion : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    //爆発エフェクト
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")//Playerに当たったら
+        {
+            rb.isKinematic = true;//位置を固定
+            this.transform.localScale = Vector3.zero;//見えない大きさにする
+            Instantiate(explode, this.transform.position, Quaternion.identity);
+            //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
+
+        }
+    }
 }
 
