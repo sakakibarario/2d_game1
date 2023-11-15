@@ -18,6 +18,8 @@ public class farmer : MonoBehaviour
 
     public GameObject explode;  //エフェクト用
 
+    public Transform Point;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,7 @@ public class farmer : MonoBehaviour
         }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         if (player != null)
         {
             if (isActive && hp > 0)
@@ -53,7 +56,24 @@ public class farmer : MonoBehaviour
                 rb.velocity = direction * speed;
                 //  Debug.Log("農民ムーブ");
 
+                //反転
+                if(transform.position.x < player.transform.position.x)
+                {
+                    transform.localScale = new Vector3(-5, 5, 1);
+                    explode.transform.localScale = new Vector3(-3, 3, 1);
+                }
+                else if(transform.position.x == player.transform.position.x)
+                {
+                    transform.localScale = transform.localScale;
+                    explode.transform.localScale = new Vector3(3, 3, 1);
 
+                }
+                else if(transform.position .x > player.transform.position.x)
+                {
+                    transform.localScale = new Vector3(5, 5, 1);
+                    explode.transform.localScale = new Vector3(3, 3, 1);
+
+                }
             }
             else
             {
@@ -88,7 +108,6 @@ public class farmer : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -128,19 +147,16 @@ public class farmer : MonoBehaviour
     //爆発エフェクト
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //エフェクトの位置の調整に使用する
         var pos = transform.position - transform.right * 0.7f;
-        var pos2 = transform.position + transform.right * 0.7f;
 
         if (collision.gameObject.tag == "Player")//Playerに当たったら
         {
             //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
-            Instantiate(explode, pos, Quaternion.identity);
-
-            //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
-            Instantiate(explode, pos2, Quaternion.identity);
-
-
+            Instantiate(explode, Point.transform.position, Quaternion.identity);
+            
         }
+
     }
 }
 
