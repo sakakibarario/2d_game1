@@ -98,18 +98,19 @@ public class PlayerController : MonoBehaviour
         {
             Animetime = animerushtime;
         }
+        if(K_isCountDown)
+        {
+            buresutime = Onbures;
+        }
         //突進
         Animetime = 0.0f;
         animeOver = true;  //フラグをおろす
         gorush = false; //攻撃フラグをおろす
-        displayTime = rush_time;
-        Animetime = animerushtime;
         isTimeOver = false;
         Anitimes = 0;
         times = 0;
 
         //火球
-        buresutime = Onbures;
         K_timesnow = 0;
         K_isTimeOver = false;
         Fireball_F = false;
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //ゲーム中以外とダメージ中は何もしない
-        if (gameState != "playing" || inDamage)
+        if (gameState != "playing")
         {
             rb.velocity = new Vector2(0, 0);
             animator.Play(stopAnime);
