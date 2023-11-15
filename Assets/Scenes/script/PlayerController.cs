@@ -23,9 +23,10 @@ public class PlayerController : MonoBehaviour
     public static string gameState = "playing";//ゲームの状態
 
     //敵の攻撃
-    public int Suraimu = 5;    //スライムのダメージ
-    public int Goburin = 5;   //ゴブリンのダメージ
-    public int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
+    private int Suraimu = 5;    //スライムのダメージ
+    private int Goburin = 5;   //ゴブリンのダメージ
+    private int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
+    private int artillery = 25; //大砲の攻撃
 
     //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
@@ -68,8 +69,8 @@ public class PlayerController : MonoBehaviour
     static public bool pose = false;
 
     //技のフラグ
-    static public bool SougenBoss = true;
-    static public bool VillageBoss = true;
+    static public bool SougenBoss = false;
+    static public bool VillageBoss = false;
 
     // Start is called before the first frame update
     void Start()
@@ -450,7 +451,16 @@ public class PlayerController : MonoBehaviour
             Debug.Log("slider.value : " + slider.value);
             GetDamage(collision.gameObject);
         }
-        if(collision.gameObject.tag == "dead")
+        if (collision.CompareTag("artillery"))
+        {
+            D_HP -= artillery;     //HPを減らす（大砲の攻撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+            if (collision.gameObject.tag == "dead")
         {
             GameOver();
         }

@@ -15,11 +15,7 @@ public class DeleteBall : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
    
-
-    }
 
     //‰æ–ÊŠO‚Éo‚½‚çÁ‚¦‚é
     private void OnBecameInvisible()

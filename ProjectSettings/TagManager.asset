@@ -15,6 +15,7 @@ TagManager:
   - dead
   - wallObject
   - Fireball
+  - artillery
   layers:
   - Default
   - TransparentFX
