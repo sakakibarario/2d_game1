@@ -131,7 +131,10 @@ public class Explosion : MonoBehaviour
         if(collision.gameObject.tag == "Player")//Playerに当たったら
         {
             rb.isKinematic = true;//位置を固定
-            this.transform.localScale = Vector3.zero;//見えない大きさにする
+            //this.transform.localScale = Vector3.zero;//見えない大きさにする
+
+            //消す
+            Destroy(this.gameObject);
             Instantiate(explode, this.transform.position, Quaternion.identity);
             //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
 
