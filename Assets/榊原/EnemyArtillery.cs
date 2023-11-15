@@ -11,8 +11,6 @@ public class EnemyArtillery : MonoBehaviour
     private float Count_artillery = 0;
     private float artillery = 3.0f;
 
-    private int rushdamage = 10;
-
     private bool inDamage = false;
     private bool isActive = false;
     private bool move = true;
