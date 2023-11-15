@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   hpMax: 10
-  reactionDistance: 4
+  reactionDistance: 8
   explode: {fileID: 1117186044434382280, guid: 27c04743fbd0a6c458161b8084090746, type: 3}
 --- !u!1 &1500874161
 GameObject:

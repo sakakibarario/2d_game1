@@ -128,13 +128,17 @@ public class farmer : MonoBehaviour
     //爆発エフェクト
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var pos = transform.position - transform.right * 2.0f;
+        var pos = transform.position - transform.right * 0.7f;
+        var pos2 = transform.position + transform.right * 0.7f;
 
         if (collision.gameObject.tag == "Player")//Playerに当たったら
         {
-            rb.isKinematic = true;//位置を固定
-            Instantiate(explode, pos, Quaternion.identity);
             //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
+            Instantiate(explode, pos, Quaternion.identity);
+
+            //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
+            Instantiate(explode, pos2, Quaternion.identity);
+
 
         }
     }
