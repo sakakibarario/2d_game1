@@ -53,6 +53,22 @@ public class Explosion : MonoBehaviour
                 rb.velocity = direction * speed;
                 //  Debug.Log("ì¡çUï∫ÉÄÅ[Éu");
 
+                //îΩì]
+                if (transform.position.x < player.transform.position.x)
+                {
+                    transform.localScale = new Vector3(-4, 4, 1);
+                }
+                else if (transform.position.x == player.transform.position.x)
+                {
+                    transform.localScale = transform.localScale;
+
+                }
+                else if (transform.position.x > player.transform.position.x)
+                {
+                    transform.localScale = new Vector3(4, 4, 1);
+
+                }
+
 
             }
             else
