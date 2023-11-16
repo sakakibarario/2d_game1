@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class farmer : MonoBehaviour
+public class mercenary : MonoBehaviour
 {
     Rigidbody2D rb;
 
     public float speed = 0.5f;      //速度
-    public int hpMax = 10;          //農民のHP
+    public int hpMax = 10;          //傭兵のHP
     public float reactionDistance = 4.0f;//反応距離
     private int hp;
 
@@ -54,24 +54,24 @@ public class farmer : MonoBehaviour
                     x - transform.position.x, y).normalized;
                 // ENEMYのRigidbody2Dに移動速度を指定する
                 rb.velocity = direction * speed;
-                //  Debug.Log("農民ムーブ");
+                //  Debug.Log("傭兵ムーブ");
 
                 //反転
-                if(transform.position.x < player.transform.position.x)
+                if (transform.position.x < player.transform.position.x)
                 {
-                    transform.localScale = new Vector3(-5, 5, 1);
-                    explode.transform.localScale = new Vector3(-3, 3, 1);
+                    transform.localScale = new Vector3(-4, 4, 1);
+                    explode.transform.localScale = new Vector3(-1.5f, 1.5f, 1);
                 }
-                else if(transform.position.x == player.transform.position.x)
+                else if (transform.position.x == player.transform.position.x)
                 {
                     transform.localScale = transform.localScale;
-                    explode.transform.localScale = new Vector3(3, 3, 1);
+                    explode.transform.localScale = new Vector3(1.5f, 1.5f, 1);
 
                 }
-                else if(transform.position .x > player.transform.position.x)
+                else if (transform.position.x > player.transform.position.x)
                 {
-                    transform.localScale = new Vector3(5, 5, 1);
-                    explode.transform.localScale = new Vector3(3, 3, 1);
+                    transform.localScale = new Vector3(4, 4, 1);
+                    explode.transform.localScale = new Vector3(1.5f, 1.5f, 1);
 
                 }
             }
@@ -151,7 +151,7 @@ public class farmer : MonoBehaviour
         {
             //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
             Instantiate(explode, Point.transform.position, Quaternion.identity);
-            
+
         }
 
     }
