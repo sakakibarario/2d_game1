@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnButton : MonoBehaviour
+public class SpawnButtonvillage : MonoBehaviour
 {
+    public GameObject SpawnButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,14 @@ public class SpawnButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         this.gameObject.SetActive(false);
+
     }
+
+    //ƒ{ƒX‚ª“|‚³‚ê‚½‚ç‚ÌğŒ‚ğ‘‚­
+    public void OnClickStartButton()
+    {
+        SpawnButton.gameObject.SetActive(true);
+
+    }
+
 }

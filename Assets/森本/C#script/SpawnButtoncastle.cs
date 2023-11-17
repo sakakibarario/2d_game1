@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnButtoncastle : MonoBehaviour
 {
+    public GameObject SpawnButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +16,14 @@ public class SpawnButtoncastle : MonoBehaviour
     void Update()
     {
 
-        this.gameObject.SetActive(false);
-
-        //ボスが倒されたらの条件を書く
-        //if()
-        //{
-        //    this.gameObject.SetActive(true);
-
-        //}
     }
+
+    //ボスが倒されたらの条件を書く
+    public void OnClickStartButton()
+    {
+        SpawnButton.gameObject.SetActive(true);
+
+    }
+    
+
 }
