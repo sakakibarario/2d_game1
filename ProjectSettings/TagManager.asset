@@ -16,6 +16,7 @@ TagManager:
   - wallObject
   - Fireball
   - artillery
+  - bird
   layers:
   - Default
   - TransparentFX

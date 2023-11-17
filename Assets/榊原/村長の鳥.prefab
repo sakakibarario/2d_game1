@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8461960358509641361}
   m_Layer: 0
   m_Name: "\u6751\u9577\u306E\u9CE5"
-  m_TagString: Untagged
+  m_TagString: bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

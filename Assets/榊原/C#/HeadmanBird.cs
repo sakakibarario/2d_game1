@@ -19,6 +19,10 @@ public class HeadmanBird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+    }
+    private void FixedUpdate()
+    {
         Vector3 moveVec1 = new Vector3(vec_x_mai, vec_y_mai, 0).normalized;
         rb.velocity = moveVec1 * moveSpeed;
     }
