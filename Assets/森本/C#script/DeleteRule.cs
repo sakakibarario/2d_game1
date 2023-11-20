@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnRule : MonoBehaviour
+public class DeleteRule : MonoBehaviour
 {
     public GameObject rule;
 
@@ -15,14 +15,15 @@ public class SpawnRule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")//Player‚É“–‚½‚Á‚½‚ç
         {
-            rule.gameObject.SetActive(true);
+            rule.gameObject.SetActive(false);
         }
- 
-    }    
+
+    }
+
 }
