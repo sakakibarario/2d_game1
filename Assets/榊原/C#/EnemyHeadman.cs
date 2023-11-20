@@ -149,14 +149,8 @@ public class EnemyHeadman : MonoBehaviour
         //アニメーション
         animator.Play(Caneanime);
         yield return new WaitForSeconds(0.2f);
-
-       var t = Instantiate(cane) as GameObject;//オブジェクトを作成
-                                               //敵の座標を変数posに保存
-        var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f;
-        //弾のプレハブの位置を敵の位置にする
-        t.transform.position =pos;
-
-        t.AddComponent<HeadmanCane>();//birdの動きを決める
+        var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f; 
+        Instantiate(cane, pos, Quaternion.identity);
 
         yield break;
 
