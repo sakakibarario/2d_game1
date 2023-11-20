@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Farmermove : MonoBehaviour
+public class SpawnButtonvillage : MonoBehaviour
 {
+    public GameObject SpawnButton;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -15,4 +17,12 @@ public class Farmermove : MonoBehaviour
     {
 
     }
+
+    //ƒ{ƒX‚ª“|‚³‚ê‚½‚ç‚ÌğŒ‚ğ‘‚­
+    public void OnClickStartButton()
+    {
+        SpawnButton.gameObject.SetActive(true);
+
+    }
+
 }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class mercenary : MonoBehaviour
 {
     Rigidbody2D rb;
 
     public float speed = 0.5f;      //速度
-    public int hpMax = 10;          //特攻兵のHP
+    public int hpMax = 10;          //傭兵のHP
     public float reactionDistance = 4.0f;//反応距離
     private int hp;
 
@@ -16,7 +16,9 @@ public class Explosion : MonoBehaviour
 
     bool isActive = false;
 
-    public GameObject explode;  //爆発用
+    public GameObject explode;  //エフェクト用
+
+    public Transform Point;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class Explosion : MonoBehaviour
         }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         if (player != null)
         {
             if (isActive && hp > 0)
@@ -51,25 +54,26 @@ public class Explosion : MonoBehaviour
                     x - transform.position.x, y).normalized;
                 // ENEMYのRigidbody2Dに移動速度を指定する
                 rb.velocity = direction * speed;
-                //  Debug.Log("特攻兵ムーブ");
+                //  Debug.Log("傭兵ムーブ");
 
                 //反転
                 if (transform.position.x < player.transform.position.x)
                 {
                     transform.localScale = new Vector3(-4, 4, 1);
+                    explode.transform.localScale = new Vector3(-1.5f, 1.5f, 1);
                 }
                 else if (transform.position.x == player.transform.position.x)
                 {
                     transform.localScale = transform.localScale;
+                    explode.transform.localScale = new Vector3(1.5f, 1.5f, 1);
 
                 }
                 else if (transform.position.x > player.transform.position.x)
                 {
                     transform.localScale = new Vector3(4, 4, 1);
+                    explode.transform.localScale = new Vector3(1.5f, 1.5f, 1);
 
                 }
-
-
             }
             else
             {
@@ -104,7 +108,6 @@ public class Explosion : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -144,17 +147,13 @@ public class Explosion : MonoBehaviour
     //爆発エフェクト
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")//Playerに当たったら
+        if (collision.gameObject.tag == "Player")//Playerに当たったら
         {
-            rb.isKinematic = true;//位置を固定
-            //this.transform.localScale = Vector3.zero;//見えない大きさにする
-
-            //消す
-            Destroy(this.gameObject);
-            Instantiate(explode, this.transform.position, Quaternion.identity);
-            //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
+            //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
+            Instantiate(explode, Point.transform.position, Quaternion.identity);
 
         }
+
     }
 }
 
