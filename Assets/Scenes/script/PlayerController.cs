@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private int Goburin = 5;   //ゴブリンのダメージ
     private int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
     private int artillery = 25; //大砲の攻撃
+    private int bird = 5;       // 鳥の攻撃
 
     //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
@@ -454,6 +455,15 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("artillery"))
         {
             D_HP -= artillery;     //HPを減らす（大砲の攻撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if(collision.CompareTag("bird"))
+        {
+            D_HP -= bird;       //HPを減らす（村長の鳥）
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;

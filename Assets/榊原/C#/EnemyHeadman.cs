@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHeadman : MonoBehaviour
 {
     public GameObject bird;//birdを取得
+    public GameObject cane;//caneを取得
     public GameObject player;
 
     private int Headman_HP;
@@ -14,15 +15,20 @@ public class EnemyHeadman : MonoBehaviour
     private int rushdamage = 10;    //突進の攻撃力
     private int buresball = 30;     //火球の攻撃力
 
-    private bool inDamage = false;  //ダメージ判定
 
+    private bool inDamage = false;  //ダメージ判定
     private float reactionDistance = 10.0f;//反応距離
 
     bool isActive = false;//動き出しフラグ
     private bool OnAttack = false;
 
+    //bird攻撃time関係
     private float create_bird_count = 0.0f;
-    private float create_time = 5.0f;
+    private float create_bird_time = 5.0f;
+
+    //cane攻撃time関係
+    private float create_cane_count = 0.0f;
+    private float create_came_time = 4.0f;
 
     //アニメション
     Animator animator; //アニメーター
@@ -48,19 +54,24 @@ public class EnemyHeadman : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             if (isActive && Headman_HP > 0)
             {
-               
-                create_bird_count += Time.deltaTime;
+
+                create_bird_count += Time.deltaTime;//カウント
                 Debug.Log(create_bird_count);
-                if (create_bird_count > create_time)
+                if (create_bird_count > create_bird_time)
                 {
-                   // animator.Play(attackanime);
-                    StartCoroutine(bird_attack());
+                    // animator.Play(attackanime);
+                    StartCoroutine(Bird_attack());
                 }
+                else
+                {
+                    StartCoroutine(Cane_attack());
+                }
+
             }
             else
             {
@@ -74,7 +85,7 @@ public class EnemyHeadman : MonoBehaviour
         }
         else if (isActive)
         {
-            isActive = false;
+            isActive = false;//非アクティブ
         }
 
         if (inDamage)
@@ -101,21 +112,19 @@ public class EnemyHeadman : MonoBehaviour
         {
             animator.Play(Stopanime);
             Debug.Log("鳥生成");
-            float vecX = Random.Range(-5.0f, 7.0f);
-           // Check("bird");
-            var t = Instantiate(bird) as GameObject;
+            float vecX = Random.Range(-5.0f, 7.0f);//ランダムを（）範囲で設定
+            var t = Instantiate(bird) as GameObject;//オブジェクトを作成
 
             //弾のプレハブの位置を敵の位置にする
             t.transform.position = new Vector3(vecX, 5.0f, 0);
 
-            t.AddComponent<HeadmanBird>();
-            tagObjects = GameObject.FindGameObjectsWithTag("bird");
+            t.AddComponent<HeadmanBird>();//birdの動きを決める
+            tagObjects = GameObject.FindGameObjectsWithTag("bird");//数を数える
             if (tagObjects.Length >= 1)
             {
                 OnAttack = false;
-                create_bird_count = 0.0f;
+                create_bird_count = 0.0f;//リセット
             }
-
         }
         else
         {
@@ -123,30 +132,37 @@ public class EnemyHeadman : MonoBehaviour
         }
     }
     //コルーチン
-    private IEnumerator bird_attack()
+    private IEnumerator Bird_attack()
     {
         //アニメション
         animator.Play(attackanime);
         yield return new WaitForSeconds(0.2f);
 
-        OnAttack = true;
+        OnAttack = true;//攻撃（bird）のフラグを上げる
 
         Debug.Log("終了");
-        yield break;
+        yield break;//コルーチン終了
         
     }
-    void Check(string tagname)
+    private IEnumerator Cane_attack()
     {
-        tagObjects = GameObject.FindGameObjectsWithTag(tagname);
-        if (tagObjects.Length >= 1)
-        {
-            OnAttack = false;
-            create_bird_count = 0.0f;
-        }
-    }
+        //アニメーション
+        animator.Play(Caneanime);
+        yield return new WaitForSeconds(0.2f);
 
+       var t = Instantiate(cane) as GameObject;//オブジェクトを作成
+                                               //敵の座標を変数posに保存
+        var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position =pos;
+
+        t.AddComponent<HeadmanCane>();//birdの動きを決める
+
+        yield break;
+
+    }
         private void OnTriggerEnter2D(Collider2D collider)
-    {
+        {
         Debug.Log("OntriggerEnter2D:" + collider.gameObject.name);
 
         //突進攻撃との接触
@@ -164,7 +180,6 @@ public class EnemyHeadman : MonoBehaviour
             Debug.Log(Headman_HP);
             inDamage = true;
         }
-
         EnemyDamage();//倒れているか調べる
     }
 
