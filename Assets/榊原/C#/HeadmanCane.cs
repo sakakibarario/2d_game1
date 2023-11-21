@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class HeadmanCane : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
+    float count = 0.3f;
+    private void Update()
     {
-        
+        count -= Time.deltaTime;
+        if (count <= 0)
+        {
+            count = 0.3f;
+            Destroy(this.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    //‰æ–ÊŠO‚Éo‚½‚çÁ‚¦‚é
+    private void OnBecameInvisible()
     {
-        
+        Destroy(this.gameObject);
     }
 }
