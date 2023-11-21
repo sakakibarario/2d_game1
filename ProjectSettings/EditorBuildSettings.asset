@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\u68EE\u672C/Status.unity"
     guid: d651cea2fe4e2e14da9cc20f635aa552
+  - enabled: 1
+    path: "Assets/\u68EE\u672C/Tutorial.unity"
+    guid: e612d29614bb7e24db319b169702b0cd
   m_configObjects: {}
