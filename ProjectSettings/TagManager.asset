@@ -17,6 +17,7 @@ TagManager:
   - Fireball
   - artillery
   - bird
+  - cane
   layers:
   - Default
   - TransparentFX

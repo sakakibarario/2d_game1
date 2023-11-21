@@ -27,7 +27,9 @@ public class EnemyHeadman : MonoBehaviour
     private float create_bird_time = 5.0f;
 
     //cane攻撃time関係
-    private bool Oncane = false;
+    private float create_cane_count = 0.0f;
+    private float create_cane_time = 3.0f;
+
 
     //アニメション
     Animator animator; //アニメーター
@@ -60,13 +62,14 @@ public class EnemyHeadman : MonoBehaviour
             {
 
                 create_bird_count += Time.deltaTime;//カウント
+                create_cane_count += Time.deltaTime;
                 Debug.Log(create_bird_count);
                 if (create_bird_count > create_bird_time)
                 {
                     
                     StartCoroutine(Bird_attack());
                 }
-                else if(Oncane)
+                else if(create_cane_count > create_cane_time)
                 {
                     StartCoroutine(Cane_attack());
                 }
@@ -123,6 +126,7 @@ public class EnemyHeadman : MonoBehaviour
             {
                 OnAttack = false;
                 create_bird_count = 0.0f;//リセット
+                create_cane_count = 2.0f;
             }
         }
     }
@@ -135,9 +139,7 @@ public class EnemyHeadman : MonoBehaviour
 
         OnAttack = true;//攻撃（bird）のフラグを上げる
 
-        yield return new WaitForSeconds(1.0f);
-
-        Oncane = true;
+        yield return new WaitForSeconds(0.5f);
 
         Debug.Log("終了");
         yield break;//コルーチン終了
@@ -151,9 +153,9 @@ public class EnemyHeadman : MonoBehaviour
         var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f; 
         Instantiate(cane, pos, Quaternion.identity);
 
-        Oncane = false;
+        create_cane_count =0.0f;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         animator.Play(Stopanime);
 
         yield break;
