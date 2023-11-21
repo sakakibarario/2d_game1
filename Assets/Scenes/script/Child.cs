@@ -47,7 +47,7 @@ public class Child : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-        //  GameObject player = GameObject.FindGameObjectWithTag("Player");
+          GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             if (isActive && C_Hp > 0)
@@ -74,6 +74,7 @@ public class Child : MonoBehaviour
                 float dist = Vector2.Distance(transform.position, player.transform.position);
                 if (dist < reactionDistance)
                 {
+                    Debug.Log("アクティブ");
                     isActive = true; //アクティブにする
                 }
             }

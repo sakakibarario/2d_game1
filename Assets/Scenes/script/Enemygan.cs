@@ -39,8 +39,8 @@ public class Enemygan : MonoBehaviour
 
     public float target(GameObject target)
     {
-        float x = target.transform.position.x - this.transform.position.x;
-        float y = target.transform.position.y - this.transform.position.y;
+        float x = target.transform.position.x - this.transform.position.x*1.2f;
+        float y = target.transform.position.y - this.transform.position.y*1.6f;
         float rad = Mathf.Atan2(y, x);
         return rad * Mathf.Rad2Deg;
     }
