@@ -7,11 +7,15 @@ public class mercenary : MonoBehaviour
     Rigidbody2D rb;
 
     public float speed = 0.5f;      //速度
-    public int hpMax = 10;          //傭兵のHP
+    public int hpMax = 40;          //傭兵のHP
     public float reactionDistance = 4.0f;//反応距離
     private int hp;
 
+
+    //主人公の攻撃
     private int rushdamage = 10;    //突進の攻撃力
+    private int buresball = 30;     //火球の攻撃力
+
     private bool inDamage = false;  //ダメージ判定
 
     bool isActive = false;
@@ -122,6 +126,14 @@ public class mercenary : MonoBehaviour
             inDamage = true;
 
         }
+        if (other.gameObject.tag == "Fireball")
+        {
+            //ダメージ
+            hp -= buresball;
+            Debug.Log(hp);
+            inDamage = true;
+        }
+
         EnemyDamage();//倒れているか調べる
     }
 

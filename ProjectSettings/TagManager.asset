@@ -18,6 +18,13 @@ TagManager:
   - artillery
   - bird
   - cane
+  - stone
+  - famer
+  - mercenary
+  - knight
+  - caliver
+  - Explosion
+  - witch
   layers:
   - Default
   - TransparentFX

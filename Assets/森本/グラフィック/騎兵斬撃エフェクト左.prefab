@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7788687942679632261}
   m_Layer: 0
   m_Name: "\u9A0E\u5175\u65AC\u6483\u30A8\u30D5\u30A7\u30AF\u30C8\u5DE6"
-  m_TagString: Untagged
+  m_TagString: caliver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.010918796, y: -0.08289552}

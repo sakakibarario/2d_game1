@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherTest : MonoBehaviour
+public class Child : MonoBehaviour
 {
     //プレイヤーオブジェクト
     public GameObject player;
@@ -16,48 +16,41 @@ public class ArcherTest : MonoBehaviour
     private float targetTime = 5.0f;
     private float currentTime = 0;
 
-    public int hp = 30;
+    public int hp = 20;
     public float reactionDistance = 4.0f;//反応距離
 
-    private int T_Hp;
+    private int C_Hp;
 
-    private int rushdamage = 10;
+    //主人公の攻撃
+    private int rushdamage = 10;    //突進の攻撃力
+    private int buresball = 30;     //火球の攻撃力
+
     private bool inDamage = false;
     private bool isActive = false;
 
 
     public Enemygan bullet;
 
-    //アニメーションに使う
-    private Animator anim = null;
 
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
-        T_Hp = hp;
-
-        anim = GetComponent<Animator>();
-
+        C_Hp = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (PlayerController.gameState != "playing")
-        {        
-
+        {
             return;
         }
         //Player　のゲームオブジェクトを得る
         //  GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            //アニメーション
-            anim.SetBool("Attack", false);
-
-            if (isActive && T_Hp > 0)
+            if (isActive && C_Hp > 0)
             {
                 // PLAYERの位置を取得
                 // Vector3 targetPos = player.transform.position;
@@ -73,10 +66,6 @@ public class ArcherTest : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
-
-                    //アニメーション
-                    anim.SetBool("Attack",true);
-
                 }
             }
             else
@@ -93,7 +82,6 @@ public class ArcherTest : MonoBehaviour
         {
             isActive = false;
         }
-
 
 
         if (inDamage)
@@ -123,8 +111,15 @@ public class ArcherTest : MonoBehaviour
         if (other.gameObject.tag == "rushWall")
         {
             //ダメージ
-            T_Hp -= rushdamage;
-            Debug.Log(T_Hp);
+            C_Hp -= rushdamage;
+            Debug.Log(C_Hp);
+            inDamage = true;
+        }
+        if (other.gameObject.tag == "Fireball")
+        {
+            //ダメージ
+            C_Hp -= buresball;
+            Debug.Log(C_Hp);
             inDamage = true;
         }
         EnemyDamage();//倒れているか調べる
@@ -133,7 +128,7 @@ public class ArcherTest : MonoBehaviour
     void EnemyDamage()
     {
         Invoke("DamageEnd", 0.25f);
-        if (T_Hp <= 0)
+        if (C_Hp <= 0)
         {
             Debug.Log("敵が倒れている");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す

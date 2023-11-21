@@ -7,11 +7,14 @@ public class knight: MonoBehaviour
     Rigidbody2D rb;
 
     public float speed = 0.5f;      //‘¬“x
-    public int hpMax = 10;          //‹Rm‚ÌHP
+    public int hpMax = 50;          //‹Rm‚ÌHP
     public float reactionDistance = 4.0f;//”½‰‹——£
     private int hp;
 
+    //ålŒö‚ÌUŒ‚
     private int rushdamage = 10;    //“Ëi‚ÌUŒ‚—Í
+    private int buresball = 30;     //‰Î‹…‚ÌUŒ‚—Í
+
     private bool inDamage = false;  //ƒ_ƒ[ƒW”»’è
 
     bool isActive = false;
@@ -121,6 +124,13 @@ public class knight: MonoBehaviour
             hp -= rushdamage;
             inDamage = true;
 
+        }
+        if (other.gameObject.tag == "Fireball")
+        {
+            //ƒ_ƒ[ƒW
+            hp -= buresball;
+            Debug.Log(hp);
+            inDamage = true;
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }
