@@ -6,10 +6,10 @@ public class EnemyHeadman : MonoBehaviour
 {
     public GameObject bird;//birdを取得
     public GameObject cane;//caneを取得
-    public GameObject player;
+    public GameObject player;//playerを取得
 
-    private int Headman_HP;
-    public int HP = 100;
+    private int Headman_HP;//村長のHP
+    public int HP = 100;    //最大HP
 
     //主人公の攻撃
     private int rushdamage = 10;    //突進の攻撃力
@@ -33,11 +33,11 @@ public class EnemyHeadman : MonoBehaviour
 
     //アニメション
     Animator animator; //アニメーター
-    public string attackanime = "EnemyHeadmanAttack";
-    public string Caneanime = "EnemyHeadmanCane";
-    public string Stopanime = "EnemyHeadmanStop";
+    public string attackanime = "EnemyHeadmanAttack";//鳥攻撃のモーション
+    public string Caneanime = "EnemyHeadmanCane";    //杖攻撃のモーション
+    public string Stopanime = "EnemyHeadmanStop";    //静止モーション
 
-    GameObject[] tagObjects;
+    GameObject[] tagObjects;//オブジェクトカウント用
 
     // Start is called before the first frame update
     void Start()
@@ -62,16 +62,15 @@ public class EnemyHeadman : MonoBehaviour
             {
 
                 create_bird_count += Time.deltaTime;//カウント
-                create_cane_count += Time.deltaTime;
-                Debug.Log(create_bird_count);
+                create_cane_count += Time.deltaTime;//カウント
+                //Debug.Log(create_bird_count);
                 if (create_bird_count > create_bird_time)
-                {
-                    
-                    StartCoroutine(Bird_attack());
+                {   
+                    StartCoroutine(Bird_attack());//コルーチン開始
                 }
                 else if(create_cane_count > create_cane_time)
                 {
-                    StartCoroutine(Cane_attack());
+                    StartCoroutine(Cane_attack());//コルーチン開始
                 }
 
             }
@@ -113,7 +112,7 @@ public class EnemyHeadman : MonoBehaviour
         if (OnAttack)
         {
             animator.Play(Stopanime);
-            Debug.Log("鳥生成");
+            //Debug.Log("鳥生成");
             float vecX = Random.Range(-5.0f, 7.0f);//ランダムを（）範囲で設定
             var t = Instantiate(bird) as GameObject;//オブジェクトを作成
 
@@ -126,7 +125,7 @@ public class EnemyHeadman : MonoBehaviour
             {
                 OnAttack = false;
                 create_bird_count = 0.0f;//リセット
-                create_cane_count = 2.0f;
+                create_cane_count = 2.0f;//リセット
             }
         }
     }
@@ -135,13 +134,13 @@ public class EnemyHeadman : MonoBehaviour
     {
         //アニメション
         animator.Play(attackanime);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f);//0.2静止
 
         OnAttack = true;//攻撃（bird）のフラグを上げる
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);//0.5静止
 
-        Debug.Log("終了");
+        //Debug.Log("終了");
         yield break;//コルーチン終了
         
     }
@@ -149,18 +148,19 @@ public class EnemyHeadman : MonoBehaviour
     {
         //アニメーション
         animator.Play(Caneanime);
-        yield return new WaitForEndOfFrame();
-        var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f; 
-        Instantiate(cane, pos, Quaternion.identity);
+        yield return new WaitForEndOfFrame();//１フレーム静止
+        var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f; //位置設定
+        Instantiate(cane, pos, Quaternion.identity);//作成
 
-        create_cane_count =0.0f;
+        create_cane_count =0.0f;//リセット
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);//０．５静止
         animator.Play(Stopanime);
 
-        yield break;
+        yield break;//コルーチン終了
 
     }
+    //接触管理
         private void OnTriggerEnter2D(Collider2D collider)
         {
         Debug.Log("OntriggerEnter2D:" + collider.gameObject.name);
