@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5582336354636871017}
   m_Layer: 0
   m_Name: "\u7206\u767A\u30A8\u30D5\u30A7\u30AF\u30C81"
-  m_TagString: Untagged
+  m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2561538569224260052}
   m_Layer: 0
   m_Name: "\u6295\u3052\u308B\u77F3"
-  m_TagString: tama
+  m_TagString: stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

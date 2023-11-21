@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Child : MonoBehaviour
+public class ArcherTest : MonoBehaviour
 {
     //プレイヤーオブジェクト
     public GameObject player;
@@ -10,44 +10,57 @@ public class Child : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
-    Rigidbody2D rb;
+    Rigidbody2D rb ;
 
-    //1秒ごとに弾を発射するためのもの
+    //5秒ごとに弾を発射するためのもの
     private float targetTime = 5.0f;
     private float currentTime = 0;
 
     public int hp = 30;
     public float reactionDistance = 4.0f;//反応距離
 
-    private int T_Hp;
+    private int A_Hp;
 
-    private int rushdamage = 10;
+    //主人公の攻撃
+    private int rushdamage = 10;    //突進の攻撃力
+    private int buresball = 30;     //火球の攻撃力
+
     private bool inDamage = false;
     private bool isActive = false;
 
 
     public Enemygan bullet;
 
+    //アニメーションに使う
+    private Animator anim = null;
 
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
-        T_Hp = hp;
+        A_Hp = hp;
+
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (PlayerController.gameState != "playing")
-        {
+        {        
+
             return;
         }
         //Player　のゲームオブジェクトを得る
         //  GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && T_Hp > 0)
+            //アニメーション
+            anim.SetBool("Attack", false);
+
+            if (isActive && A_Hp > 0)
             {
                 // PLAYERの位置を取得
                 // Vector3 targetPos = player.transform.position;
@@ -63,6 +76,10 @@ public class Child : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
+
+                    //アニメーション
+                    anim.SetBool("Attack",true);
+
                 }
             }
             else
@@ -79,6 +96,7 @@ public class Child : MonoBehaviour
         {
             isActive = false;
         }
+
 
 
         if (inDamage)
@@ -108,8 +126,15 @@ public class Child : MonoBehaviour
         if (other.gameObject.tag == "rushWall")
         {
             //ダメージ
-            T_Hp -= rushdamage;
-            Debug.Log(T_Hp);
+            A_Hp -= rushdamage;
+            Debug.Log(A_Hp);
+            inDamage = true;
+        }
+        if (other.gameObject.tag == "Fireball")
+        {
+            //ダメージ
+            A_Hp -= buresball;
+            Debug.Log(A_Hp);
             inDamage = true;
         }
         EnemyDamage();//倒れているか調べる
@@ -118,7 +143,7 @@ public class Child : MonoBehaviour
     void EnemyDamage()
     {
         Invoke("DamageEnd", 0.25f);
-        if (T_Hp <= 0)
+        if (A_Hp <= 0)
         {
             Debug.Log("敵が倒れている");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す
