@@ -10,6 +10,7 @@ public class Hero : MonoBehaviour
     public GameObject thunder;
     public GameObject Player;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,31 +20,44 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int rnd;
-
-        for(int i = 0;i<5;i++)
-        {
-            if (Player.transform.position.x >0)
-            {
-                 rnd= Random.Range(1, 4);
-
-                if(rnd == 1)
-                {
-                    Point1.transform.position = thunder.transform.position;
-                }
-                if (rnd == 2)
-                {
-                    Point2.transform.position = thunder.transform.position;
-                }
-                if (rnd == 3)
-                {
-                    Point3.transform.position = thunder.transform.position;
-                }
-            }
-
-        }
-
-
-
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        int rnd = 1;
+
+        if (collision.gameObject.tag == "Player")//Playerに当たったら
+        {
+            rnd = Random.Range(1, 4);
+
+            if (rnd == 1)
+            {
+                //敵の座標を変数posに保存
+                var pos = Point1.gameObject.transform.position;
+                //弾のプレハブを作成
+                var t = Instantiate(thunder) as GameObject;
+                //弾のプレハブの位置を敵の位置にする
+                t.transform.position = pos;
+
+            }
+            if (rnd == 2)
+            {
+                //敵の座標を変数posに保存
+                var pos = Point2.gameObject.transform.position;
+                //弾のプレハブを作成
+                var t = Instantiate(thunder) as GameObject;
+                //弾のプレハブの位置を敵の位置にする
+                t.transform.position = pos;
+            }
+            if (rnd == 3)
+            {
+                //敵の座標を変数posに保存
+                var pos = Point3.gameObject.transform.position;
+                //弾のプレハブを作成
+                var t = Instantiate(thunder) as GameObject;
+                //弾のプレハブの位置を敵の位置にする
+                t.transform.position = pos;
+            }
+        }
+    } 
 }
