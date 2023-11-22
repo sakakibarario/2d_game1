@@ -13,7 +13,7 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
-        OnStart(GameObject.Find("Player").gameObject);
+        OnStart(GameObject.FindGameObjectWithTag("Player"));
     }
 
     public void OnStart(GameObject target)

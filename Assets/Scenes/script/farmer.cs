@@ -47,7 +47,7 @@ public class farmer : MonoBehaviour
         {
             if (isActive && hp > 0 && stop)
             {
-                rb.isKinematic = false;
+                rb.isKinematic = false;//重力復活
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
                 // PLAYERのx座標
@@ -82,8 +82,8 @@ public class farmer : MonoBehaviour
             }
             else if(!stop)
             {
-                rb.isKinematic = true;
-                rb.velocity = Vector2.zero;
+                rb.isKinematic = true;//重力静止
+                rb.velocity = Vector2.zero;//動きを静止
                 Debug.Log("stop");
             }
             else

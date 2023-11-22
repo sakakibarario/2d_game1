@@ -29,7 +29,7 @@ public class ArcherTest : MonoBehaviour
     private bool isActive = false;
 
 
-    public Enemygan bullet;
+    public EnemyArrow bullet;
 
     //アニメーションに使う
     private Animator anim = null;
@@ -50,11 +50,10 @@ public class ArcherTest : MonoBehaviour
 
         if (PlayerController.gameState != "playing")
         {        
-
             return;
         }
         //Player　のゲームオブジェクトを得る
-        //  GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             //アニメーション
@@ -159,7 +158,7 @@ public class ArcherTest : MonoBehaviour
 
     void make_naihu()
     {
-        Enemygan.Naihu = true;
+        EnemyArrow.Naihu = true;
 
     }
 }

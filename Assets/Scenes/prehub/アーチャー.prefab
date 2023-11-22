@@ -103,7 +103,7 @@ MonoBehaviour:
   tama: {fileID: 671101079730510214, guid: afecdc1de0f7fe8478bc51a10294b348, type: 3}
   hp: 30
   reactionDistance: 50
-  bullet: {fileID: 4419555986812735218, guid: afecdc1de0f7fe8478bc51a10294b348, type: 3}
+  bullet: {fileID: -8777855846301558508, guid: afecdc1de0f7fe8478bc51a10294b348, type: 3}
 --- !u!61 &4097157365741155626
 BoxCollider2D:
   m_ObjectHideFlags: 0

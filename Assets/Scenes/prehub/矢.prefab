@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4830360210511658197}
   - component: {fileID: 3934998346975483372}
   - component: {fileID: 7146608756976406184}
-  - component: {fileID: 4419555986812735218}
+  - component: {fileID: -8777855846301558508}
   m_Layer: 0
   m_Name: "\u77E2"
   m_TagString: arrow
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 671101079730510214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.64, y: -1.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,10 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67389d712de94d449bdb0c58abcfa271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0.2
   ratio: 0.7
   tama: {fileID: 671101079730510214}
---- !u!114 &4419555986812735218
+--- !u!114 &-8777855846301558508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 671101079730510214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c626dc3ca1e2cb4e9e39ec200a0b44b, type: 3}
+  m_Script: {fileID: 11500000, guid: 19c92830ca80de240beeb1c8ad86a74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5

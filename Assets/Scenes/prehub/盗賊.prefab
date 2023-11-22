@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  tama: {fileID: 0}
-  ganspeed: 5
+  tama: {fileID: 6373566106748545130, guid: d5df670d40de6844393e51c89bfe5b66, type: 3}
   hp: 30
   reactionDistance: 10
-  bullet: {fileID: 0}
+  bullet: {fileID: 6373566106748545131, guid: d5df670d40de6844393e51c89bfe5b66, type: 3}
