@@ -620,7 +620,7 @@ MonoBehaviour:
   Point1: {fileID: 1473025595}
   Point2: {fileID: 411865524}
   Point3: {fileID: 2086659652}
-  thunder: {fileID: 64071709125441334, guid: c69a80a451c9b5b42935c8c67ce0e6e1, type: 3}
+  thunder: {fileID: 8315196077521644194, guid: 68c8d2c59f83d254f91113199e0a83e9, type: 3}
   Player: {fileID: 170198050}
   DangerArea1: {fileID: 572532051}
   DangerArea2: {fileID: 401301665}

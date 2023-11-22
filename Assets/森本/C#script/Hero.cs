@@ -35,17 +35,22 @@ public class Hero : MonoBehaviour
 
             if (rnd == 1)
             {
+                //危険エリア表示
                 DangerArea1.gameObject.SetActive(true);
+                //コルーチン呼び出し
                 StartCoroutine(Thunder1());
             }
             if (rnd == 2)
             {
+                //危険エリア表示
                 DangerArea2.gameObject.SetActive(true);
+                //コルーチン呼び出し
                 StartCoroutine(Thunder2());
             }
             if (rnd == 3)
-            {
+            {   //危険エリア表示
                 DangerArea3.gameObject.SetActive(true);
+                //コルーチン呼び出し
                 StartCoroutine(Thunder3());
             }
         }
@@ -53,12 +58,14 @@ public class Hero : MonoBehaviour
     private IEnumerator Thunder1()
     {
         yield return new WaitForSeconds(3.0f);
+
         //Point1の座標を変数posに保存
         var pos = Point1.gameObject.transform.position;
         //弾のプレハブを作成
         var t = Instantiate(thunder) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t.transform.position = pos;
+        //危険エリア非表示
         DangerArea1.gameObject.SetActive(false);
 
     }
@@ -71,6 +78,7 @@ public class Hero : MonoBehaviour
         var t = Instantiate(thunder) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t.transform.position = pos;
+        //危険エリア非表示
         DangerArea2.gameObject.SetActive(false);
     }
     private IEnumerator Thunder3()
@@ -82,6 +90,7 @@ public class Hero : MonoBehaviour
         var t = Instantiate(thunder) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t.transform.position = pos;
+        //危険エリア非表示
         DangerArea3.gameObject.SetActive(false);
     }
 
