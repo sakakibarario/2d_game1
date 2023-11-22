@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     private int famer = 15;     //”_–¯‚ÌUŒ‚
     private int mercenary =20;  //—b•º‚ÌUŒ‚
     private int arrow = 15;     //‹|g‚¢‚ÌUŒ‚
+    private int knight = 30;     //‹Rm‚ÌUŒ‚
+    private int Explosion = 40;  //“ÁU•º
+    private int witch = 20;      //–‚—‚ÌUŒ‚
+    private int caliver = 30;    //‹R•º‚ÌUŒ‚
 
     //ålŒö‚Ì“®‚«ŠÖŒWƒtƒ‰ƒO
     bool gojump = false;       //ƒWƒƒƒ“ƒv”»’è
@@ -523,6 +527,42 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("mercenary"))
         {
             D_HP -= mercenary;       //HP‚ğŒ¸‚ç‚·i—b•º‚ÌUŒ‚j
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("knight"))
+        {
+            D_HP -= knight;       //HP‚ğŒ¸‚ç‚·i‹Rm‚ÌUŒ‚j
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("Explosion"))
+        {
+            D_HP -= Explosion;       //HP‚ğŒ¸‚ç‚·i“ÁU•º‚ÌUŒ‚j
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("caliver"))
+        {
+            D_HP -= caliver;       //HP‚ğŒ¸‚ç‚·i‹R•º‚ÌUŒ‚j
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("witch"))
+        {
+            D_HP -= witch;       //HP‚ğŒ¸‚ç‚·i–‚—‚ÌUŒ‚j
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;

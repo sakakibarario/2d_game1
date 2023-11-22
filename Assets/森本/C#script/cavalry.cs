@@ -18,6 +18,7 @@ public class cavalry : MonoBehaviour
     private bool inDamage = false;  //ダメージ判定
 
     bool isActive = false;
+    private bool stop = true;//falseなら静止
 
     public GameObject explode1;  //エフェクト用
     public GameObject explode2; 
@@ -46,8 +47,9 @@ public class cavalry : MonoBehaviour
 
         if (player != null)
         {
-            if (isActive && hp > 0)
+            if (isActive && hp > 0 && stop)
             {
+                rb.isKinematic = false;//重力復活
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
                 // PLAYERのx座標
@@ -81,6 +83,12 @@ public class cavalry : MonoBehaviour
                     explode1.transform.localScale = new Vector3(2.5f, 1.5f, 1);
                     explode2.transform.localScale = new Vector3(2.5f, 1.5f, 1);
                 }
+            }
+            else if(!stop)
+            {
+                rb.isKinematic = true;//重力静止
+                rb.velocity = Vector2.zero;//動きを静止
+                Debug.Log("stop");
             }
             else
             {
@@ -163,12 +171,24 @@ public class cavalry : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")//Playerに当たったら
         {
-            //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
-            Instantiate(explode1, Point1.transform.position, Quaternion.identity);
-
-            Instantiate(explode2, Point2.transform.position, Quaternion.identity);
+            stop = false;
+            StartCoroutine(Cavalry());
         }
 
+    }
+    private IEnumerator Cavalry()
+    {
+        yield return new WaitForSeconds(1.0f);//1.0静止
+
+        //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
+        Instantiate(explode1, Point1.transform.position, Quaternion.identity);
+
+        Instantiate(explode2, Point2.transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(1.5f);//0.1静止
+        stop = true;
+
+        yield break;//コルーチン終了
     }
 }
 

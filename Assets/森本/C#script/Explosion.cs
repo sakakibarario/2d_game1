@@ -16,6 +16,7 @@ public class Explosion : MonoBehaviour
     private int buresball = 30;     //火球の攻撃力
 
     private bool inDamage = false;  //ダメージ判定
+    private bool stop = true;//falseなら静止
 
     bool isActive = false;
 
@@ -41,8 +42,9 @@ public class Explosion : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && hp > 0)
+            if (isActive && hp > 0 && stop)
             {
+                rb.isKinematic = false;//重力復活
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
                 // PLAYERのx座標
@@ -73,6 +75,12 @@ public class Explosion : MonoBehaviour
                 }
 
 
+            }
+            else if(!stop)
+            {
+                rb.isKinematic = true;//重力静止
+                rb.velocity = Vector2.zero;//動きを静止
+                Debug.Log("stop");
             }
             else
             {
@@ -156,15 +164,22 @@ public class Explosion : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")//Playerに当たったら
         {
-            rb.isKinematic = true;//位置を固定
-            //this.transform.localScale = Vector3.zero;//見えない大きさにする
-
-            //消す
-            Destroy(this.gameObject);
-            Instantiate(explode, this.transform.position, Quaternion.identity);
-            //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
-
+            stop = false;
+            StartCoroutine(Explo());
         }
+    }
+    private IEnumerator Explo()
+    {
+        yield return new WaitForSeconds(0.5f);//0.5静止
+                                              
+        Destroy(this.gameObject);//消す
+        Instantiate(explode, this.transform.position, Quaternion.identity);
+        //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
+
+        yield return new WaitForSeconds(1.5f);//0.1静止
+        stop = true;
+
+        yield break;//コルーチン終了
     }
 }
 
