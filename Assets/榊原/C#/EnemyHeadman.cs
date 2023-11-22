@@ -55,7 +55,7 @@ public class EnemyHeadman : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             if (isActive && Headman_HP > 0)
