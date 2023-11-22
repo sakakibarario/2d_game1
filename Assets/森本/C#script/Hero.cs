@@ -13,15 +13,17 @@ public class Hero : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        for(; Player.transform.position.x >0;)
+        int rnd;
+
+        if (Player.transform.position.x >0)
         {
-            int rnd = Random.Range(1, 4);
+             rnd= Random.Range(1, 4);
 
             if(rnd == 1)
             {
