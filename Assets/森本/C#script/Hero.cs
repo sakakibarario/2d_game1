@@ -9,6 +9,9 @@ public class Hero : MonoBehaviour
     public GameObject Point3;
     public GameObject thunder;
     public GameObject Player;
+    public GameObject DangerArea1;
+    public GameObject DangerArea2;
+    public GameObject DangerArea3;
 
 
     // Start is called before the first frame update
@@ -32,32 +35,54 @@ public class Hero : MonoBehaviour
 
             if (rnd == 1)
             {
-                //敵の座標を変数posに保存
-                var pos = Point1.gameObject.transform.position;
-                //弾のプレハブを作成
-                var t = Instantiate(thunder) as GameObject;
-                //弾のプレハブの位置を敵の位置にする
-                t.transform.position = pos;
-
+                DangerArea1.gameObject.SetActive(true);
+                StartCoroutine(Thunder1());
             }
             if (rnd == 2)
             {
-                //敵の座標を変数posに保存
-                var pos = Point2.gameObject.transform.position;
-                //弾のプレハブを作成
-                var t = Instantiate(thunder) as GameObject;
-                //弾のプレハブの位置を敵の位置にする
-                t.transform.position = pos;
+                DangerArea2.gameObject.SetActive(true);
+                StartCoroutine(Thunder2());
             }
             if (rnd == 3)
             {
-                //敵の座標を変数posに保存
-                var pos = Point3.gameObject.transform.position;
-                //弾のプレハブを作成
-                var t = Instantiate(thunder) as GameObject;
-                //弾のプレハブの位置を敵の位置にする
-                t.transform.position = pos;
+                DangerArea3.gameObject.SetActive(true);
+                StartCoroutine(Thunder3());
             }
         }
     } 
+    private IEnumerator Thunder1()
+    {
+        yield return new WaitForSeconds(3.0f);
+        //Point1の座標を変数posに保存
+        var pos = Point1.gameObject.transform.position;
+        //弾のプレハブを作成
+        var t = Instantiate(thunder) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position = pos;
+        DangerArea1.gameObject.SetActive(false);
+
+    }
+    private IEnumerator Thunder2()
+    {
+        yield return new WaitForSeconds(3.0f);
+        //Point1の座標を変数posに保存
+        var pos = Point2.gameObject.transform.position;
+        //弾のプレハブを作成
+        var t = Instantiate(thunder) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position = pos;
+        DangerArea2.gameObject.SetActive(false);
+    }
+    private IEnumerator Thunder3()
+    {
+        yield return new WaitForSeconds(3.0f);
+        //Point1の座標を変数posに保存
+        var pos = Point3.gameObject.transform.position;
+        //弾のプレハブを作成
+        var t = Instantiate(thunder) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position = pos;
+        DangerArea3.gameObject.SetActive(false);
+    }
+
 }
