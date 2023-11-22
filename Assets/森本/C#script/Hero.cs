@@ -21,22 +21,26 @@ public class Hero : MonoBehaviour
     {
         int rnd;
 
-        if (Player.transform.position.x >0)
+        for(int i = 0;i<5;i++)
         {
-             rnd= Random.Range(1, 4);
+            if (Player.transform.position.x >0)
+            {
+                 rnd= Random.Range(1, 4);
 
-            if(rnd == 1)
-            {
-                Point1.transform.position = thunder.transform.position;
+                if(rnd == 1)
+                {
+                    Point1.transform.position = thunder.transform.position;
+                }
+                if (rnd == 2)
+                {
+                    Point2.transform.position = thunder.transform.position;
+                }
+                if (rnd == 3)
+                {
+                    Point3.transform.position = thunder.transform.position;
+                }
             }
-            if (rnd == 2)
-            {
-                Point2.transform.position = thunder.transform.position;
-            }
-            if (rnd == 3)
-            {
-                Point3.transform.position = thunder.transform.position;
-            }
+
         }
 
 
