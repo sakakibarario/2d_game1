@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     static public bool pose = false;
 
     //‹Z‚Ìƒtƒ‰ƒO
-    static public bool SougenBoss = false;
+    static public bool SougenBoss = true;
     static public bool VillageBoss = false;
 
     // Start is called before the first frame update

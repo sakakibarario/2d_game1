@@ -169,20 +169,20 @@ public class farmer : MonoBehaviour
         {
             stop = false;
             
-            StartCoroutine(Farmer());         
+            StartCoroutine(Farmer());   //コルーチン開始      
         }
     }
     private IEnumerator Farmer()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.4f);//0.4静止
         //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
         Instantiate(explode, Point.transform.position, Quaternion.identity);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.0f);//0.1静止
         stop = true;
        
 
-        yield break;
+        yield break;//コルーチン終了
     }
 }
 

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  hpMax: 10
+  hpMax: 40
   reactionDistance: 10
   explode: {fileID: 8207771093403354925, guid: acfae1a1b76846340aa9849829d74dbf, type: 3}
   Point: {fileID: 6438254017414268566}
