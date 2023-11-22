@@ -101,15 +101,19 @@ public class EnemySuraimu : MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
 
         //火球との接触
-        if(other.CompareTag("Fireball"))
+        if (other.CompareTag("Fireball"))
         {
             //ダメージ
             hp -= buresball;
             inDamage = true;
             Destroy(other.gameObject);  //接触したらけす
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//倒れているか調べる
     }

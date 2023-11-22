@@ -102,6 +102,9 @@ public class EnemyGoburin : MonoBehaviour
             hp_g -= rushdamage;
             Debug.Log(hp_g);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
+
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }

@@ -115,6 +115,8 @@ public class DropBall : MonoBehaviour
             Torent_Hp -= rushdamage;
             Debug.Log(Torent_Hp);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }

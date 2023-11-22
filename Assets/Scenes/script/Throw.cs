@@ -114,6 +114,8 @@ public class Throw : MonoBehaviour
             T_Hp -= rushdamage;
             Debug.Log(T_Hp);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }
