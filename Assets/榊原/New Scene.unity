@@ -2055,6 +2055,7 @@ GameObject:
   - component: {fileID: 2058669582}
   - component: {fileID: 2058669584}
   - component: {fileID: 2058669583}
+  - component: {fileID: 2058669585}
   m_Layer: 0
   m_Name: "\u52C7\u8005\u30CE\u30FC\u30DE\u30EB"
   m_TagString: Enemy
@@ -2151,7 +2152,7 @@ MonoBehaviour:
   DangerArea3: {fileID: 1775866428}
   player: {fileID: 2032077360}
   tama: {fileID: 7630295310857446435, guid: 0cf70074fb85e8f4ca9ae3f322c26cfb, type: 3}
-  hp: 30
+  hp: 300
   reactionDistance: 30
   bullet: {fileID: 0}
 --- !u!61 &2058669583
@@ -2201,3 +2202,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!95 &2058669585
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058669579}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d536297f5d05a8f41b7e0024cd829b2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

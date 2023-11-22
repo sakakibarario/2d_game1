@@ -13,12 +13,13 @@ public class Hero : MonoBehaviour
     public GameObject DangerArea2;
     public GameObject DangerArea3;
 
-
     //プレイヤーオブジェクト
     public GameObject player;
-
     //弾のプレハブオブジェクト
     public GameObject tama;
+
+
+
 
     Rigidbody2D rb;
 
@@ -43,6 +44,10 @@ public class Hero : MonoBehaviour
 
     //アニメーションに使う
     private Animator anim = null;
+    Animator animator; //アニメーター
+    public string stopAnime = "StopMove";
+    public string attack    = "attack";
+    public string attackT   = "attackT";
 
     private void Start()
     {
@@ -68,8 +73,6 @@ public class Hero : MonoBehaviour
         {
             if (isActive && A_Hp > 0)
             {
-                // PLAYERの位置を取得
-                // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
                 if (targetTime < currentTime)
