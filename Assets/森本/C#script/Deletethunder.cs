@@ -30,15 +30,10 @@ public class Deletethunder : MonoBehaviour
         transform.position += _velocity * Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+   
+    //âÊñ äOÇ…èoÇΩÇÁè¡Ç¶ÇÈ
+    private void OnBecameInvisible()
     {
-        if (collision.gameObject.tag == "Player")//PlayerÇ…ìñÇΩÇ¡ÇΩÇÁ
-        {
-            Destroy(this.gameObject);
-        }
-        else if (collision.gameObject.tag == "Ground")//groundÇ…ìñÇΩÇ¡ÇΩÇÁ
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 }

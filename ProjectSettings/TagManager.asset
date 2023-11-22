@@ -27,6 +27,7 @@ TagManager:
   - witch
   - arrow
   - upper
+  - heroattack
   layers:
   - Default
   - TransparentFX
