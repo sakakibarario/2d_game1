@@ -24,11 +24,15 @@ public class PlayerController : MonoBehaviour
 
     //敵の攻撃
     private int Suraimu = 5;    //スライムのダメージ
-    private int Goburin = 5;   //ゴブリンのダメージ
+    private int Goburin = 5;    //ゴブリンのダメージ
     private int touzokugan = 15;//盗賊の遠距離攻撃のダメージ
     private int artillery = 25; //大砲の攻撃
     private int bird = 5;       // 鳥の攻撃
     private int cane = 20;      // 杖の攻撃
+    private int stone = 10;     //子供の石攻撃
+    private int famer = 15;     //農民の攻撃
+    private int mercenary =20;  //傭兵の攻撃
+    private int arrow = 15;     //弓使いの攻撃
 
     //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
@@ -480,7 +484,52 @@ public class PlayerController : MonoBehaviour
             Debug.Log("slider.value : " + slider.value);
             GetDamage(collision.gameObject);
         }
-            if (collision.gameObject.tag == "dead")
+        if(collision.CompareTag("stone"))
+        {
+            D_HP -= stone;       //HPを減らす（村長の杖）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("stone"))
+        {
+            D_HP -= stone;       //HPを減らす（石の攻撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("arrow"))
+        {
+            D_HP -= arrow;       //HPを減らす（弓使いの攻撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("famer"))
+        {
+            D_HP -= famer;       //HPを減らす（村長の杖）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("mercenary"))
+        {
+            D_HP -= mercenary;       //HPを減らす（傭兵の攻撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "dead")
         {
             GameOver();
         }

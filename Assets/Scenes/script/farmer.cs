@@ -16,6 +16,7 @@ public class farmer : MonoBehaviour
     private int buresball = 30;     //火球の攻撃力
 
     private bool inDamage = false;  //ダメージ判定
+    private bool stop = true;//falseなら静止
 
     bool isActive = false;
 
@@ -44,8 +45,9 @@ public class farmer : MonoBehaviour
 
         if (player != null)
         {
-            if (isActive && hp > 0)
+            if (isActive && hp > 0 && stop)
             {
+                rb.isKinematic = false;
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
                 // PLAYERのx座標
@@ -77,6 +79,12 @@ public class farmer : MonoBehaviour
                     explode.transform.localScale = new Vector3(3, 3, 1);
 
                 }
+            }
+            else if(!stop)
+            {
+                rb.isKinematic = true;
+                rb.velocity = Vector2.zero;
+                Debug.Log("stop");
             }
             else
             {
@@ -159,11 +167,22 @@ public class farmer : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")//Playerに当たったら
         {
-            //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
-            Instantiate(explode, Point.transform.position, Quaternion.identity);
+            stop = false;
             
+            StartCoroutine(Farmer());         
         }
+    }
+    private IEnumerator Farmer()
+    {
+        yield return new WaitForSeconds(0.4f);
+        //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
+        Instantiate(explode, Point.transform.position, Quaternion.identity);
 
+        yield return new WaitForSeconds(1.0f);
+        stop = true;
+       
+
+        yield break;
     }
 }
 

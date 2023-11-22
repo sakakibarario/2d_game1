@@ -25,6 +25,7 @@ TagManager:
   - caliver
   - Explosion
   - witch
+  - arrow
   layers:
   - Default
   - TransparentFX
