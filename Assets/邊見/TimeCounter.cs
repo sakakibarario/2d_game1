@@ -17,7 +17,7 @@ public class TimeCounter : MonoBehaviour
     public Text timeText;
 
     //ポーズしてるかどうか
-    private bool isPose = false;
+    public static bool isPose = false;
 
     //Uodate is called once per frame
     void Update()
@@ -44,7 +44,7 @@ public class TimeCounter : MonoBehaviour
         if(isPose)
         {
             //ポーズ中であることを表示
-            timeText.text = "ポーズ中";
+            //timeText.text = "ポーズ中";
           
 
             //カウントダウンしない
