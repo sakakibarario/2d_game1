@@ -121,6 +121,7 @@ public class Child : MonoBehaviour
             //ƒ_ƒ[ƒW
             C_Hp -= buresball;
             Debug.Log(C_Hp);
+            Destroy(other.gameObject);
             inDamage = true;
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é

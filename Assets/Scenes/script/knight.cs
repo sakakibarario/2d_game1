@@ -139,6 +139,7 @@ public class knight: MonoBehaviour
             //ƒ_ƒ[ƒW
             hp -= buresball;
             Debug.Log(hp);
+            Destroy(other.gameObject);
             inDamage = true;
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é

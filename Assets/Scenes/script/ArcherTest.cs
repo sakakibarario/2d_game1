@@ -134,6 +134,7 @@ public class ArcherTest : MonoBehaviour
             //ƒ_ƒ[ƒW
             A_Hp -= buresball;
             Debug.Log(A_Hp);
+            Destroy(other.gameObject);
             inDamage = true;
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é

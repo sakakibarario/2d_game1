@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DeleteBall : MonoBehaviour
 {
-    float count = 5.0f;
+    float count = 2.0f;
     private void Update()
     {
         count -= Time.deltaTime;
         if (count <= 0)
         {
-            count = 5.0f;
+            count = 2.0f;
             Destroy(this.gameObject);
         }
     }

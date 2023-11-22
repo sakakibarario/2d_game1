@@ -113,11 +113,11 @@ public class EnemyHeadman : MonoBehaviour
         {
             animator.Play(Stopanime);
             //Debug.Log("鳥生成");
-            float vecX = Random.Range(-5.0f, 7.0f);//ランダムを（）範囲で設定
+            float vecX = Random.Range(135f, 150f);//ランダムを（）範囲で設定
             var t = Instantiate(bird) as GameObject;//オブジェクトを作成
 
             //弾のプレハブの位置を敵の位置にする
-            t.transform.position = new Vector3(vecX, 5.0f, 0);
+            t.transform.position = new Vector3(vecX, 10.0f, 0);
 
             t.AddComponent<HeadmanBird>();//birdの動きを決める
             tagObjects = GameObject.FindGameObjectsWithTag("bird");//数を数える
@@ -178,6 +178,7 @@ public class EnemyHeadman : MonoBehaviour
             //ダメージ
             Headman_HP -= buresball;
             Debug.Log(Headman_HP);
+            Destroy(collider.gameObject);
             inDamage = true;
         }
         EnemyDamage();//倒れているか調べる

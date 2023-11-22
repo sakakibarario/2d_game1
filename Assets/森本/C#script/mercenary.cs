@@ -139,6 +139,7 @@ public class mercenary : MonoBehaviour
             //É_ÉÅÅ[ÉW
             hp -= buresball;
             Debug.Log(hp);
+            Destroy(other.gameObject);
             inDamage = true;
         }
 

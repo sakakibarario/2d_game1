@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private int Explosion = 40;  //特攻兵
     private int witch = 20;      //魔女の攻撃
     private int caliver = 30;    //騎兵の攻撃
+    private int toge = 10;　　　　//針の攻撃
 
     //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
@@ -565,6 +566,14 @@ public class PlayerController : MonoBehaviour
             D_HP -= witch;       //HPを減らす（魔女の攻撃）
             GetDamage(collision.gameObject);
             Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.gameObject.tag ==("upper"))
+        {
+            D_HP -= toge;       //HPを減らす（魔女の攻撃）
+            GetDamage(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;
             Debug.Log("slider.value : " + slider.value);
             GetDamage(collision.gameObject);
