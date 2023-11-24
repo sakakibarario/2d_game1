@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnButtonvillage : MonoBehaviour
 {
-    public GameObject SpawnButton;
+    public GameObject SpawnButtonv;
+    public GameObject SpawnButtonc;
 
     // Start is called before the first frame update
     void Start()
@@ -15,13 +16,18 @@ public class SpawnButtonvillage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PlayerController.SougenBoss)
+        {
+            //村ボタン
+            SpawnButtonv.gameObject.SetActive(true);
 
-    }
+            if(PlayerController.VillageBoss)
+            {
+                //城ボタン
+                SpawnButtonc.gameObject.SetActive(true);
+            }
 
-    //ボスが倒されたらの条件を書く
-    public void OnClickStartButton()
-    {
-        SpawnButton.gameObject.SetActive(true);
+        }
 
     }
 
