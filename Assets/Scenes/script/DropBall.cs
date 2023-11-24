@@ -140,6 +140,8 @@ public class DropBall : MonoBehaviour
         if (Torent_Hp <= 0)
         {
             Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
+            PlayerController.SougenBoss = true;
+
             PlayerController.gameState = ("gameclear");
 
             Debug.Log("ƒQ[ƒ€ƒNƒŠƒA");
