@@ -26,6 +26,7 @@ public class Hero : MonoBehaviour
     //5秒ごとに弾を発射するためのもの
     private float targetTime = 5.0f;
     private float currentTime = 0;
+    private bool count = true;
 
     public int hp = 300;
     public float reactionDistance = 20.0f;//反応距離
@@ -39,9 +40,18 @@ public class Hero : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
-    private int oldHP;
-    private int rnd;
-    
+    private int oldHP;//HP記憶用
+    private int rnd;//ランダム格納用
+    public int i;//for用
+
+    private bool DamageT = true;//falseの時サンダー攻撃以外しない
+
+    //サンダーランダム用りすと
+    int start = 1;
+    int end = 3;
+    List<int> numbers = new List<int>();
+    bool random = false;
+
     //アニメーションに使う
     Animator animator; //アニメーター
     public string stopAnime = "StopMove";
@@ -56,6 +66,10 @@ public class Hero : MonoBehaviour
         oldHP = hp;
         animator = GetComponent<Animator>();
 
+        for (int i = start; i <= end; i++)
+        {
+            numbers.Add(i);
+        }
     }
 
     // Update is called once per frame
@@ -68,41 +82,23 @@ public class Hero : MonoBehaviour
         }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (player != null && DamageT)
         {
             if (isActive && Hero_Hp > 0)
-            {    
-                currentTime += Time.deltaTime;
-
-                if (targetTime < currentTime)
+            {    if (count)
                 {
-                    StartCoroutine(Slashing()); 
+                    currentTime += Time.deltaTime;
+                    Debug.Log(currentTime);
+                }
+                if (targetTime < currentTime )
+                {
+                    StartCoroutine(Slashing()); //斬撃コルーチン
                 }
 
                 if (Hero_Hp != oldHP)
                 {
-                    rnd = Random.Range(1, 4);
-
-                    if (rnd == 1)
-                    {
-                        //危険エリア表示
-                        DangerArea1.gameObject.SetActive(true);
-                        //コルーチン呼び出し
-                        StartCoroutine(Thunder1());
-                    }
-                    if (rnd == 2)
-                    {
-                        //危険エリア表示
-                        DangerArea2.gameObject.SetActive(true);
-                        //コルーチン呼び出し
-                        StartCoroutine(Thunder2());
-                    }
-                    if (rnd == 3)
-                    {   //危険エリア表示
-                        DangerArea3.gameObject.SetActive(true);
-                        //コルーチン呼び出し
-                        StartCoroutine(Thunder3());
-                    }
+                    DamageT = false;//すべての動作を停止
+                    StartCoroutine(CountT());//カウントサンダーコルーチン
                     oldHP = Hero_Hp;
                 }
 
@@ -138,34 +134,14 @@ public class Hero : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-        
-
-    }
-    IEnumerator Slashing()
-    { 
-        currentTime = 0;//タイムリセット
-        yield return new WaitForSeconds(1.0f);//待機
-        animator.Play(attack);//斬撃モーション
-        //敵の座標を変数posに保存
-        var pos = this.gameObject.transform.position;
-        //弾のプレハブを作成
-        var t = Instantiate(tama) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        t.transform.position = pos;
-        t.AddComponent<HeroGan>();//動きをセット
-        animator.Play(stopAnime);//元に戻す
-        yield return new WaitForSeconds(0.5f);//待機
-        animator.Play(attack);//斬撃モーション
-
-        //弾のプレハブを作成
-        var t2 = Instantiate(tama) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        t2.transform.position = pos;
-        t2.AddComponent<HeroGan>();//動きをセット
-
-        yield return new WaitForSeconds(0.5f);//待機
-        animator.Play(stopAnime);//元に戻す
-        yield break;//終了
+        if (random)//リストの配列作成
+        {
+            for (int i = start; i <= end; i++)
+            {
+                numbers.Add(i);
+            }
+            random = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -173,14 +149,14 @@ public class Hero : MonoBehaviour
         Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
 
         //突進攻撃との接触
-        if (other.gameObject.tag == "rushWall")
+        if (other.gameObject.tag == "rushWall" && DamageT)
         {
             //ダメージ
             Hero_Hp -= rushdamage;
             Debug.Log(Hero_Hp);
             inDamage = true;
         }
-        if (other.gameObject.tag == "Fireball")
+        if (other.gameObject.tag == "Fireball" && DamageT)
         {
             //ダメージ
             Hero_Hp -= buresball;
@@ -191,11 +167,15 @@ public class Hero : MonoBehaviour
         EnemyDamage();//倒れているか調べる
     }
 
+    //コルーチン
     void EnemyDamage()
     {
         Invoke("DamageEnd", 0.25f);
         if (Hero_Hp <= 0)
         {
+            DangerArea1.gameObject.SetActive(false);//倒れている場合は実行しない
+            DangerArea2.gameObject.SetActive(false);//倒れている場合は実行しない
+            DangerArea3.gameObject.SetActive(false);//倒れている場合は実行しない
             Debug.Log("敵が倒れている");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す
         }
@@ -208,9 +188,84 @@ public class Hero : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    IEnumerator Slashing()//斬撃コルーチン
+    {
+        count = false;//斬撃のカウントを停止
+        currentTime = 0;//タイムリセット
+        for (i = 0; i < 3; i++)
+        {
+            //Debug.Log(i);
+            animator.Play(attack);//斬撃モーション
+            yield return new WaitForSeconds(0.2f);//待機
+            //敵の座標を変数posに保存
+            var pos = this.gameObject.transform.position;
+            //弾のプレハブを作成
+            var t = Instantiate(tama) as GameObject;
+            //弾のプレハブの位置を敵の位置にする
+            t.transform.position = pos;
+            t.AddComponent<HeroGan>();//動きをセット
+            yield return new WaitForSeconds(0.1f);//待機
+            animator.Play(stopAnime);//元に戻す
+            yield return new WaitForSeconds(0.5f);//待機
+            if (i == 2)
+            {
+                count = true;//カウント開始
+                yield break;//終了
+            }
+        }
+    }
+
+    IEnumerator CountT()//カウンターサンだーコルーチン
+    {
+
+        for (i = 0; i < 3; i++)
+        {
+            int index = Random.Range(0, numbers.Count);//ランダム取得
+
+            rnd = numbers[index];//使えるように
+            //Debug.Log(rnd);
+
+            numbers.RemoveAt(index);//取得した情報を消す
+
+            if (rnd == 1)
+            {
+                //危険エリア表示
+                DangerArea1.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Thunder1());
+            }
+            if (rnd == 2)
+            {
+                //危険エリア表示
+                DangerArea2.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Thunder2());
+            }
+            if (rnd == 3)
+            {   //危険エリア表示
+                DangerArea3.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Thunder3());
+
+            }
+            yield return new WaitForSeconds(1.0f);//待機
+            if (i == 2)
+            {
+                //Debug.Log("終了サンダー");
+                random = true;  //リスト初期化の開始
+                DamageT = true;//動き開始
+                yield break;
+            }
+        }
+
+
+    }
+
     private IEnumerator Thunder1()
     {
-        yield return new WaitForSeconds(3.0f);
+        animator.Play(attackT);
+       
+        yield return new WaitForSeconds(2.0f);//待機
 
         //Point1の座標を変数posに保存
         var pos = Point1.gameObject.transform.position;
@@ -220,11 +275,14 @@ public class Hero : MonoBehaviour
         t.transform.position = pos;
         //危険エリア非表示
         DangerArea1.gameObject.SetActive(false);
-
+        animator.Play(stopAnime);
+        
     }
     private IEnumerator Thunder2()
     {
-        yield return new WaitForSeconds(3.0f);
+        animator.Play(attackT);
+        
+        yield return new WaitForSeconds(2.0f);//待機
         //Point1の座標を変数posに保存
         var pos = Point2.gameObject.transform.position;
         //弾のプレハブを作成
@@ -233,10 +291,14 @@ public class Hero : MonoBehaviour
         t.transform.position = pos;
         //危険エリア非表示
         DangerArea2.gameObject.SetActive(false);
+        animator.Play(stopAnime);
+        
     }
     private IEnumerator Thunder3()
     {
-        yield return new WaitForSeconds(3.0f);
+        animator.Play(attackT);
+       
+        yield return new WaitForSeconds(2.0f);//待機
         //Point1の座標を変数posに保存
         var pos = Point3.gameObject.transform.position;
         //弾のプレハブを作成
@@ -245,6 +307,8 @@ public class Hero : MonoBehaviour
         t.transform.position = pos;
         //危険エリア非表示
         DangerArea3.gameObject.SetActive(false);
+        animator.Play(stopAnime);
+        
     }
 
 }
