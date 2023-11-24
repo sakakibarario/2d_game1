@@ -55,12 +55,12 @@ public class Hero : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         A_Hp = hp;
 
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
 
         if (PlayerController.gameState != "playing")
@@ -73,18 +73,12 @@ public class Hero : MonoBehaviour
         {
             if (isActive && A_Hp > 0)
             {
+                
                 currentTime += Time.deltaTime;
 
                 if (targetTime < currentTime)
                 {
-                    currentTime = 0;
-                    //敵の座標を変数posに保存
-                    var pos = this.gameObject.transform.position;
-                    //弾のプレハブを作成
-                    var t = Instantiate(tama) as GameObject;
-                    //弾のプレハブの位置を敵の位置にする
-                    t.transform.position = pos;
-                    t.AddComponent<HeroGan>();
+                    StartCoroutine(Slashing()); 
                 }
             }
             else
@@ -120,6 +114,34 @@ public class Hero : MonoBehaviour
         }
 
     }
+    IEnumerator Slashing()
+    {
+        
+        currentTime = 0;
+        yield return new WaitForSeconds(1.0f);
+        animator.Play(attack);
+        //敵の座標を変数posに保存
+        var pos = this.gameObject.transform.position;
+        //弾のプレハブを作成
+        var t = Instantiate(tama) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position = pos;
+        t.AddComponent<HeroGan>();
+        animator.Play(stopAnime);
+        yield return new WaitForSeconds(0.5f);
+        animator.Play(attack);
+
+        //弾のプレハブを作成
+        var t2 = Instantiate(tama) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t2.transform.position = pos;
+        t2.AddComponent<HeroGan>();
+
+        yield return new WaitForSeconds(0.5f);
+        animator.Play(stopAnime);
+        yield break;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
