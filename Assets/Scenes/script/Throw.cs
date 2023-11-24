@@ -30,6 +30,10 @@ public class Throw : MonoBehaviour
 
     public Enemygan bullet;
 
+    //SE用
+    [SerializeField]
+    AudioSource ThrowAudioSource;
+
 
     private void Start()
     {
@@ -46,7 +50,7 @@ public class Throw : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-      //  GameObject player = GameObject.FindGameObjectWithTag("Player");
+      GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             if (isActive && T_Hp > 0)
@@ -65,6 +69,9 @@ public class Throw : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
+
+                    //SE 
+                    GetComponent<AudioSource>().Play();
                 }
             }
             else
@@ -114,6 +121,8 @@ public class Throw : MonoBehaviour
             T_Hp -= rushdamage;
             Debug.Log(T_Hp);
             inDamage = true;
+            //SE
+            ThrowAudioSource.Play();
         }
         EnemyDamage();//倒れているか調べる
     }

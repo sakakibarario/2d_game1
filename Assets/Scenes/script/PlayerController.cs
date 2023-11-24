@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
     static public bool SougenBoss = true;
     static public bool VillageBoss = false;
 
+    //SE用
+    [SerializeField]
+    AudioSource flameAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -284,7 +288,8 @@ public class PlayerController : MonoBehaviour
             //突進する
             Debug.Log("突進");
 
-
+            //SE　突進
+            GetComponent<AudioSource>().Play();
 
             Vector2 rushPw = new Vector2(rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
@@ -317,6 +322,9 @@ public class PlayerController : MonoBehaviour
             //地上かつ左クリックが押されたときかつ左向き
             //突進する
             Debug.Log("突進");
+
+            //SE 突進
+            GetComponent<AudioSource>().Play();
 
             Vector2 rushPw = new Vector2(-rush, 0);
             rb.AddForce(rushPw, ForceMode2D.Impulse);
@@ -363,11 +371,15 @@ public class PlayerController : MonoBehaviour
                  t.transform.position = posL;
                  t.AddComponent<Playerboll2>();
              }
+            flameAudioSource.Play();
             Debug.Log("火球");
             buresutime = Onbures;   //カウントダウン時間のリセット
             K_timesnow = 0;         //表示時間のリセット
             K_isTimeOver = false;   //フラグをあげる
             Fireball_F = false;     //フラグをおろす
+            //SE　火球
+            GetComponent<AudioSource>().Play();
+
         }
 
         //アニメーション
