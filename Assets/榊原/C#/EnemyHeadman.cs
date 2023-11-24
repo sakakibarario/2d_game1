@@ -209,6 +209,7 @@ public class EnemyHeadman : MonoBehaviour
         if (Headman_HP <= 0)
         {
             Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
+            PlayerController.VillageBoss = true;
             Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ðÁ‚·
         }
     }

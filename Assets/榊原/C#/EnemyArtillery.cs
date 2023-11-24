@@ -31,8 +31,11 @@ public class EnemyArtillery : MonoBehaviour
         {
             return;
         }
+        //Player　のゲームオブジェクトを得る
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+
             if (isActive && move)
             {
                 //主人公の座標を変数posに保存

@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour
     public float jump = 5.0f;   //ジャンプ力
     public float rush = 2.0f;   //突進の力
     public int D_HP;          　//ドラゴンのHP
-    public int S_D_HP = 50;     //草原でのドラゴンHP
+
+    private int S_D_HP = 50;     //草原でのドラゴンHP
+    private int V_D_HP = 100;    //村でのHP
+    private int C_D_HP = 150;    //城でのHP
 
     public static string gameState = "playing";//ゲームの状態
 
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private int witch = 20;      //魔女の攻撃
     private int caliver = 30;    //騎兵の攻撃
     private int toge = 10;　　　　//針の攻撃
+    private int thunder = 40;     //雷攻撃
+    private int heroattack = 30;　//斬撃攻撃
 
     //主人公の動き関係フラグ
     bool gojump = false;       //ジャンプ判定
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
     static public bool pose = false;
 
     //技のフラグ
-    static public bool SougenBoss = true;
+    static public bool SougenBoss = false;
     static public bool VillageBoss = false;
 
     //SE用
@@ -103,8 +108,19 @@ public class PlayerController : MonoBehaviour
         //ゲームの状態をプレイ中にする
         gameState = "playing";
 
-        D_HP = S_D_HP;
-
+        if(SougenBoss)
+        {
+            D_HP = V_D_HP;
+            if(VillageBoss)
+            {
+                D_HP = C_D_HP;
+            }
+        }
+        else
+        {
+            D_HP = S_D_HP;
+        }
+ 
         if (isCountDown)
         {
             //カウントダウン
@@ -586,6 +602,24 @@ public class PlayerController : MonoBehaviour
         {
             D_HP -= toge;       //HPを減らす（魔女の攻撃）
             GetDamage(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("heroattack"))
+        {
+            D_HP -= heroattack;       //HPを減らす（勇者の斬撃）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
+            GetDamage(collision.gameObject);
+        }
+        if (collision.CompareTag("thunder"))
+        {
+            D_HP -= thunder;       //HPを減らす（勇者の魔法雷）
+            GetDamage(collision.gameObject);
+            Destroy(collision.gameObject);
             slider.value = (float)D_HP / (float)S_D_HP; ;
             Debug.Log("slider.value : " + slider.value);
             GetDamage(collision.gameObject);

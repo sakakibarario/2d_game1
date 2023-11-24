@@ -28,6 +28,7 @@ TagManager:
   - arrow
   - upper
   - heroattack
+  - thunder
   layers:
   - Default
   - TransparentFX
