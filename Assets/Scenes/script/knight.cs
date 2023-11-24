@@ -25,6 +25,10 @@ public class knight: MonoBehaviour
 
     public Transform Point;     //エフェクトを出現させる用
 
+    //SE用
+    [SerializeField]
+    AudioSource swordAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,18 +71,19 @@ public class knight: MonoBehaviour
                 {
                     transform.localScale = new Vector3(-6, 6, 1);
                     explode.transform.localScale = new Vector3(-3, 3, 1);
+                    //Debug.Log("敵小");
                 }
                 else if (transform.position.x == player.transform.position.x)
                 {
                     transform.localScale = transform.localScale;
-                    explode.transform.localScale = new Vector3(3, 3, 1);
+                    explode.transform.localScale = new Vector3(-3, 3, 1);
 
                 }
                 else if (transform.position.x > player.transform.position.x)
                 {
                     transform.localScale = new Vector3(6, 6, 1);
                     explode.transform.localScale = new Vector3(3, 3, 1);
-
+                    //Debug.Log("敵大");
                 }
             }
             else if(!stop)
@@ -132,7 +137,8 @@ public class knight: MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
-
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "Fireball")
         {
@@ -141,6 +147,8 @@ public class knight: MonoBehaviour
             Debug.Log(hp);
             Destroy(other.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//倒れているか調べる
     }
@@ -178,6 +186,9 @@ public class knight: MonoBehaviour
     private IEnumerator knight_S()
     {
         yield return new WaitForSeconds(0.4f);//0.4静止
+
+        //SE
+        swordAudioSource.Play();
 
         //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
         Instantiate(explode, Point.transform.position, Quaternion.identity);
