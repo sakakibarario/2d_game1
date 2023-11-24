@@ -25,6 +25,11 @@ public class mercenary : MonoBehaviour
 
     public Transform Point;
 
+    //SE用
+    [SerializeField]
+    AudioSource swordAudioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -132,7 +137,8 @@ public class mercenary : MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
-
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "Fireball")
         {
@@ -141,6 +147,8 @@ public class mercenary : MonoBehaviour
             Debug.Log(hp);
             Destroy(other.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
 
         EnemyDamage();//倒れているか調べる
@@ -178,6 +186,9 @@ public class mercenary : MonoBehaviour
     private IEnumerator Mercenary()
     {
         yield return new WaitForSeconds(0.4f);//0.4静止
+
+        //SE
+        swordAudioSource.Play();
 
         //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
         Instantiate(explode, Point.transform.position, Quaternion.identity);

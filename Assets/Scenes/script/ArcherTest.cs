@@ -34,6 +34,10 @@ public class ArcherTest : MonoBehaviour
     //アニメーションに使う
     private Animator anim = null;
 
+    //SE用
+    [SerializeField]
+    AudioSource archerAudioSource;
+
     private void Start()
     {
         //Rigidbody2D をとる
@@ -75,6 +79,9 @@ public class ArcherTest : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
+
+                    //SE
+                    archerAudioSource.Play();
 
                     //アニメーション
                     anim.SetBool("Attack",true);
@@ -128,6 +135,8 @@ public class ArcherTest : MonoBehaviour
             A_Hp -= rushdamage;
             Debug.Log(A_Hp);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "Fireball")
         {
@@ -136,6 +145,8 @@ public class ArcherTest : MonoBehaviour
             Debug.Log(A_Hp);
             Destroy(other.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//倒れているか調べる
     }

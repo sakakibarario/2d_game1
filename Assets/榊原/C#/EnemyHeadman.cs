@@ -37,6 +37,13 @@ public class EnemyHeadman : MonoBehaviour
     public string Caneanime = "EnemyHeadmanCane";    //杖攻撃のモーション
     public string Stopanime = "EnemyHeadmanStop";    //静止モーション
 
+    //SE用斬撃
+    [SerializeField]
+    AudioSource swordAudioSource;
+    //SE用杖たたく
+    [SerializeField]
+    AudioSource tueAudioSource;
+
     GameObject[] tagObjects;//オブジェクトカウント用
 
     // Start is called before the first frame update
@@ -134,6 +141,10 @@ public class EnemyHeadman : MonoBehaviour
     {
         //アニメション
         animator.Play(attackanime);
+
+        //SE
+        tueAudioSource.Play();
+
         yield return new WaitForSeconds(0.2f);//0.2静止
 
         OnAttack = true;//攻撃（bird）のフラグを上げる
@@ -148,6 +159,10 @@ public class EnemyHeadman : MonoBehaviour
     {
         //アニメーション
         animator.Play(Caneanime);
+
+        //SE
+        swordAudioSource.Play();
+
         yield return new WaitForEndOfFrame();//１フレーム静止
         var pos = this.gameObject.transform.position + transform.up *2.0f - transform.right*2.0f; //位置設定
         Instantiate(cane, pos, Quaternion.identity);//作成
@@ -172,14 +187,18 @@ public class EnemyHeadman : MonoBehaviour
             Headman_HP -= rushdamage;
             Debug.Log(Headman_HP);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
-        if(collider.gameObject.tag =="Fireball")
+        if (collider.gameObject.tag =="Fireball")
         {
             //ダメージ
             Headman_HP -= buresball;
             Debug.Log(Headman_HP);
             Destroy(collider.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//倒れているか調べる
     }
