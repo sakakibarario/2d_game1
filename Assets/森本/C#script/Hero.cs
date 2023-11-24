@@ -30,7 +30,7 @@ public class Hero : MonoBehaviour
     public int hp = 300;
     public float reactionDistance = 20.0f;//反応距離
 
-    private int A_Hp;
+    private int Hero_Hp;
 
     //主人公の攻撃
     private int rushdamage = 10;    //突進の攻撃力
@@ -39,11 +39,10 @@ public class Hero : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
-
-    public EnemyArrow bullet;
-
+    private int oldHP;
+    private int rnd;
+    
     //アニメーションに使う
-    private Animator anim = null;
     Animator animator; //アニメーター
     public string stopAnime = "StopMove";
     public string attack    = "attack";
@@ -53,8 +52,8 @@ public class Hero : MonoBehaviour
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
-        A_Hp = hp;
-
+        Hero_Hp = hp;
+        oldHP = hp;
         animator = GetComponent<Animator>();
 
     }
@@ -71,15 +70,42 @@ public class Hero : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && A_Hp > 0)
-            {
-                
+            if (isActive && Hero_Hp > 0)
+            {    
                 currentTime += Time.deltaTime;
 
                 if (targetTime < currentTime)
                 {
                     StartCoroutine(Slashing()); 
                 }
+
+                if (Hero_Hp != oldHP)
+                {
+                    rnd = Random.Range(1, 4);
+
+                    if (rnd == 1)
+                    {
+                        //危険エリア表示
+                        DangerArea1.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Thunder1());
+                    }
+                    if (rnd == 2)
+                    {
+                        //危険エリア表示
+                        DangerArea2.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Thunder2());
+                    }
+                    if (rnd == 3)
+                    {   //危険エリア表示
+                        DangerArea3.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Thunder3());
+                    }
+                    oldHP = Hero_Hp;
+                }
+
             }
             else
             {
@@ -112,34 +138,34 @@ public class Hero : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
+        
 
     }
     IEnumerator Slashing()
-    {
-        
-        currentTime = 0;
-        yield return new WaitForSeconds(1.0f);
-        animator.Play(attack);
+    { 
+        currentTime = 0;//タイムリセット
+        yield return new WaitForSeconds(1.0f);//待機
+        animator.Play(attack);//斬撃モーション
         //敵の座標を変数posに保存
         var pos = this.gameObject.transform.position;
         //弾のプレハブを作成
         var t = Instantiate(tama) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t.transform.position = pos;
-        t.AddComponent<HeroGan>();
-        animator.Play(stopAnime);
-        yield return new WaitForSeconds(0.5f);
-        animator.Play(attack);
+        t.AddComponent<HeroGan>();//動きをセット
+        animator.Play(stopAnime);//元に戻す
+        yield return new WaitForSeconds(0.5f);//待機
+        animator.Play(attack);//斬撃モーション
 
         //弾のプレハブを作成
         var t2 = Instantiate(tama) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t2.transform.position = pos;
-        t2.AddComponent<HeroGan>();
+        t2.AddComponent<HeroGan>();//動きをセット
 
-        yield return new WaitForSeconds(0.5f);
-        animator.Play(stopAnime);
-        yield break;
+        yield return new WaitForSeconds(0.5f);//待機
+        animator.Play(stopAnime);//元に戻す
+        yield break;//終了
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -150,15 +176,15 @@ public class Hero : MonoBehaviour
         if (other.gameObject.tag == "rushWall")
         {
             //ダメージ
-            A_Hp -= rushdamage;
-            Debug.Log(A_Hp);
+            Hero_Hp -= rushdamage;
+            Debug.Log(Hero_Hp);
             inDamage = true;
         }
         if (other.gameObject.tag == "Fireball")
         {
             //ダメージ
-            A_Hp -= buresball;
-            Debug.Log(A_Hp);
+            Hero_Hp -= buresball;
+            Debug.Log(Hero_Hp);
             Destroy(other.gameObject);
             inDamage = true;
         }
@@ -168,7 +194,7 @@ public class Hero : MonoBehaviour
     void EnemyDamage()
     {
         Invoke("DamageEnd", 0.25f);
-        if (A_Hp <= 0)
+        if (Hero_Hp <= 0)
         {
             Debug.Log("敵が倒れている");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す
@@ -182,36 +208,6 @@ public class Hero : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        int rnd = 1;
-
-        if (collision.gameObject.tag == "Player")//Playerに当たったら
-        {
-            rnd = Random.Range(1, 4);
-
-            if (rnd == 1)
-            {
-                //危険エリア表示
-                DangerArea1.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Thunder1());
-            }
-            if (rnd == 2)
-            {
-                //危険エリア表示
-                DangerArea2.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Thunder2());
-            }
-            if (rnd == 3)
-            {   //危険エリア表示
-                DangerArea3.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Thunder3());
-            }
-        }
-    } 
     private IEnumerator Thunder1()
     {
         yield return new WaitForSeconds(3.0f);
