@@ -24,6 +24,14 @@ public class DropBall : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
+    //SE用
+    [SerializeField]
+    AudioSource leafAudioSource;
+
+    [SerializeField]
+    AudioSource rootAudioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +63,8 @@ public class DropBall : MonoBehaviour
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
                     make_naihu();
+                    //SE葉っぱ
+                    leafAudioSource.Play();
                 }
 
                 count -= Time.deltaTime;
@@ -63,6 +73,9 @@ public class DropBall : MonoBehaviour
                     vecX = Random.Range(210, 229);
 
                     Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
+
+                    //SE
+                    rootAudioSource.Play();
 
                     count = 2.0f;
                 }
