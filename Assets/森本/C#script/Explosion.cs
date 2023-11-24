@@ -22,6 +22,10 @@ public class Explosion : MonoBehaviour
 
     public GameObject explode;  //爆発用
 
+    //SE用
+    [SerializeField]
+    AudioSource explosionAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -128,7 +132,8 @@ public class Explosion : MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
-
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "Fireball")
         {
@@ -136,6 +141,8 @@ public class Explosion : MonoBehaviour
             hp -= buresball;
             Debug.Log(hp);
             Destroy(other.gameObject);
+            //SE
+            GetComponent<AudioSource>().Play();
             inDamage = true;
         }
         EnemyDamage();//倒れているか調べる
@@ -167,16 +174,19 @@ public class Explosion : MonoBehaviour
         {
             stop = false;
             StartCoroutine(Explo());
+
         }
     }
     private IEnumerator Explo()
     {
+        //SE
+        explosionAudioSource.Play();
+
         yield return new WaitForSeconds(0.5f);//0.5静止
-                                              
+
         Destroy(this.gameObject);//消す
         Instantiate(explode, this.transform.position, Quaternion.identity);
         //ぶつかった位置にexplodeというprefabを配置する　爆発エフェクト1
-
         yield return new WaitForSeconds(1.5f);//0.1静止
         stop = true;
 

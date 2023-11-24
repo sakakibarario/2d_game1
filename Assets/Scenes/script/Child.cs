@@ -31,6 +31,9 @@ public class Child : MonoBehaviour
 
     public Enemygan bullet;
 
+    //SE—p
+    [SerializeField]
+    AudioSource tamaAudioSource;
 
     private void Start()
     {
@@ -66,6 +69,8 @@ public class Child : MonoBehaviour
                     //’e‚ÌƒvƒŒƒnƒu‚ÌˆÊ’u‚ð“G‚ÌˆÊ’u‚É‚·‚é
                     t.transform.position = pos;
                     make_naihu();
+                    //SE
+                    tamaAudioSource.Play();
                 }
             }
             else
@@ -115,6 +120,8 @@ public class Child : MonoBehaviour
             C_Hp -= rushdamage;
             Debug.Log(C_Hp);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "Fireball")
         {
@@ -123,6 +130,8 @@ public class Child : MonoBehaviour
             Debug.Log(C_Hp);
             Destroy(other.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }

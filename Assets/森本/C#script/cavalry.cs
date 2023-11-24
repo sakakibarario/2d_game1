@@ -26,6 +26,10 @@ public class cavalry : MonoBehaviour
     public Transform Point1;     //エフェクトを出現させる用
     public Transform Point2;
 
+    //SE用
+    [SerializeField]
+    AudioSource swordAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,6 +139,8 @@ public class cavalry : MonoBehaviour
             //ダメージ
             hp -= rushdamage;
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
 
         }
         if (other.gameObject.tag == "Fireball")
@@ -144,6 +150,8 @@ public class cavalry : MonoBehaviour
             Debug.Log(hp);
             Destroy(other.gameObject);
             inDamage = true;
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//倒れているか調べる
     }
@@ -180,6 +188,8 @@ public class cavalry : MonoBehaviour
     private IEnumerator Cavalry()
     {
         yield return new WaitForSeconds(1.0f);//1.0静止
+        //SE用
+        swordAudioSource.Play();
 
         //ぶつかった位置にexplodeというprefabを配置する　斬撃エフェクト
         Instantiate(explode1, Point1.transform.position, Quaternion.identity);
