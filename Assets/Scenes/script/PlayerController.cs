@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slider.value = 1;
+        
 
         //Rigidbody2DÇéùÇ¡ÇƒÇ≠ÇÈ
         rb = GetComponent<Rigidbody2D>();
@@ -111,13 +111,18 @@ public class PlayerController : MonoBehaviour
         if(SougenBoss)
         {
             D_HP = V_D_HP;
-            if(VillageBoss)
+            slider.maxValue = 2;
+            slider.value = 2;
+            if (VillageBoss)
             {
                 D_HP = C_D_HP;
+                slider.maxValue = 3;
+                slider.value = 3;
             }
         }
         else
         {
+            slider.value = 1;
             D_HP = S_D_HP;
         }
  
