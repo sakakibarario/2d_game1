@@ -18,7 +18,7 @@ public class Tocastle : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("map2C");
+        SceneManager.LoadScene("map3C");
     }
 
 }
