@@ -29,6 +29,7 @@ TagManager:
   - upper
   - heroattack
   - thunder
+  - kingStart
   layers:
   - Default
   - TransparentFX

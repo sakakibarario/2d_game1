@@ -20,11 +20,10 @@ public class KillKing : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")//Player‚É“–‚½‚Á‚½‚ç
+        //ålŒöÚG
+        if (collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
         }
     }
-
-
 }
