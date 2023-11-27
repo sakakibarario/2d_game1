@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hero : MonoBehaviour
 {
@@ -177,6 +178,10 @@ public class Hero : MonoBehaviour
             DangerArea2.gameObject.SetActive(false);//“|‚ê‚Ä‚¢‚éê‡‚ÍÀs‚µ‚È‚¢
             DangerArea3.gameObject.SetActive(false);//“|‚ê‚Ä‚¢‚éê‡‚ÍÀs‚µ‚È‚¢
             Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
+
+            //ƒGƒ“ƒfƒBƒ“ƒO‚Ö
+            SceneManager.LoadScene("End");
+
             Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ğÁ‚·
         }
     }
