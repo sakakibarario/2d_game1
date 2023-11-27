@@ -746,7 +746,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3944,7 +3944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729734928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 206.35, y: -4.05, z: 0}
+  m_LocalPosition: {x: -2.1, y: -3.2, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3994,7 +3994,6 @@ MonoBehaviour:
   jump: 6
   rush: 15
   D_HP: 0
-  S_D_HP: 50
   isCountDown: 1
   AnimeCount: 1
   isTimeOver: 0
