@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SpawnButtonvillage : MonoBehaviour
+public class Tocastle : MonoBehaviour
 {
-    public GameObject SpawnButton;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +14,11 @@ public class SpawnButtonvillage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
-    //ƒ{ƒX‚ª“|‚³‚ê‚½‚ç‚ÌğŒ‚ğ‘‚­
     public void OnClickStartButton()
     {
-        SpawnButton.gameObject.SetActive(true);
-
+        SceneManager.LoadScene("map2C");
     }
 
 }

@@ -24,6 +24,14 @@ public class DropBall : MonoBehaviour
     private bool inDamage = false;
     private bool isActive = false;
 
+    //SE—p
+    [SerializeField]
+    AudioSource leafAudioSource;
+
+    [SerializeField]
+    AudioSource rootAudioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +63,8 @@ public class DropBall : MonoBehaviour
                     //’e‚ÌƒvƒŒƒnƒu‚ÌˆÊ’u‚ð“G‚ÌˆÊ’u‚É‚·‚é
                     t.transform.position = pos;
                     make_naihu();
+                    //SE—t‚Á‚Ï
+                    leafAudioSource.Play();
                 }
 
                 count -= Time.deltaTime;
@@ -63,6 +73,9 @@ public class DropBall : MonoBehaviour
                     vecX = Random.Range(210, 229);
 
                     Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
+
+                    //SE
+                    rootAudioSource.Play();
 
                     count = 2.0f;
                 }
@@ -127,6 +140,8 @@ public class DropBall : MonoBehaviour
         if (Torent_Hp <= 0)
         {
             Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
+            PlayerController.SougenBoss = true;
+
             PlayerController.gameState = ("gameclear");
 
             Debug.Log("ƒQ[ƒ€ƒNƒŠƒA");

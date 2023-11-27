@@ -1062,7 +1062,7 @@ GameObject:
   - component: {fileID: 720811013}
   - component: {fileID: 720811012}
   - component: {fileID: 720811011}
-  - component: {fileID: 720811010}
+  - component: {fileID: 720811014}
   m_Layer: 5
   m_Name: "\u57CEStart\u30DC\u30BF\u30F3"
   m_TagString: Untagged
@@ -1091,18 +1091,6 @@ RectTransform:
   m_AnchoredPosition: {x: -80, y: 30}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &720811010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720811008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841002bdb7066a746904321347552461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &720811011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,8 +1135,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 720811010}
-        m_TargetAssemblyTypeName: ToStatus, Assembly-CSharp
+      - m_Target: {fileID: 720811014}
+        m_TargetAssemblyTypeName: Tocastle, Assembly-CSharp
         m_MethodName: OnClickStartButton
         m_Mode: 1
         m_Arguments:
@@ -1197,6 +1185,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720811008}
   m_CullTransparentMesh: 1
+--- !u!114 &720811014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720811008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8d20c046ede3145826c0e3ebeb1431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &845001838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1592,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 0d29301364aebc5419a9c8556420f60b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1767,7 +1767,6 @@ GameObject:
   - component: {fileID: 1129109853}
   - component: {fileID: 1129109852}
   - component: {fileID: 1129109851}
-  - component: {fileID: 1129109855}
   - component: {fileID: 1129109856}
   m_Layer: 5
   m_Name: "\u8349\u539F\u30DC\u30BF\u30F3"
@@ -1903,30 +1902,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1129109855}
-        m_TargetAssemblyTypeName: SpawnButtoncastle, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1129109856}
-        m_TargetAssemblyTypeName: SpawnButtonvillage, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1129109853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1965,19 +1940,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129109849}
   m_CullTransparentMesh: 1
---- !u!114 &1129109855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129109849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feab31576a11c0f4aa881bc2e36e5fb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnButton: {fileID: 2059959805}
 --- !u!114 &1129109856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,7 +1952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d2dd2a3e7d26e42a5a48d48356f2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnButton: {fileID: 1489109635}
+  SpawnButtonv: {fileID: 1489109635}
+  SpawnButtonc: {fileID: 2059959805}
 --- !u!1 &1178601445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,7 +2268,6 @@ GameObject:
   - component: {fileID: 1489109638}
   - component: {fileID: 1489109637}
   - component: {fileID: 1489109640}
-  - component: {fileID: 1489109641}
   m_Layer: 5
   m_Name: "\u6751\u30DC\u30BF\u30F3"
   m_TagString: Untagged
@@ -2478,19 +2440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 365155080}
   Point: {fileID: 300837290}
---- !u!114 &1489109641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489109635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d2dd2a3e7d26e42a5a48d48356f2a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnButton: {fileID: 0}
 --- !u!1 &1582230872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,7 +2526,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1582230877}
-        m_TargetAssemblyTypeName: ToMap, Assembly-CSharp
+        m_TargetAssemblyTypeName: Tomap, Assembly-CSharp
         m_MethodName: OnClickStartButton
         m_Mode: 1
         m_Arguments:
@@ -2635,7 +2584,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582230872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53b9bfa4eac20d45be99ae11927e583, type: 3}
+  m_Script: {fileID: 11500000, guid: 182ff406bb4ee2c4cb8d2be28e2c14e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1650571913
@@ -2849,7 +2798,7 @@ GameObject:
   - component: {fileID: 1910267928}
   - component: {fileID: 1910267927}
   - component: {fileID: 1910267926}
-  - component: {fileID: 1910267925}
+  - component: {fileID: 1910267929}
   m_Layer: 5
   m_Name: "\u6751Start\u30DC\u30BF\u30F3"
   m_TagString: Untagged
@@ -2878,18 +2827,6 @@ RectTransform:
   m_AnchoredPosition: {x: -80, y: 30}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1910267925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910267923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841002bdb7066a746904321347552461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1910267926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2934,8 +2871,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1910267925}
-        m_TargetAssemblyTypeName: ToStatus, Assembly-CSharp
+      - m_Target: {fileID: 1910267929}
+        m_TargetAssemblyTypeName: Tovillage, Assembly-CSharp
         m_MethodName: OnClickStartButton
         m_Mode: 1
         m_Arguments:
@@ -2984,6 +2921,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910267923}
   m_CullTransparentMesh: 1
+--- !u!114 &1910267929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910267923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477ea331eb312f6458f6de4c58a6f06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020903187
 GameObject:
   m_ObjectHideFlags: 0
