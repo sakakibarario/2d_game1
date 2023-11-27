@@ -259,6 +259,10 @@ public class Hero : MonoBehaviour
                 //Debug.Log("終了サンダー");
                 random = true;  //リスト初期化の開始
                 DamageT = true;//動き開始
+                if(currentTime < 4.0f)
+                {
+                    currentTime = 4.0f;
+                }
                 yield break;
             }
         }

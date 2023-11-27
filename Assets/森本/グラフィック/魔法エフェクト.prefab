@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2396298460531588759}
   - component: {fileID: 3967024664944007622}
   - component: {fileID: 774520715089271290}
+  - component: {fileID: 2773989838660271573}
   m_Layer: 0
   m_Name: "\u9B54\u6CD5\u30A8\u30D5\u30A7\u30AF\u30C8"
   m_TagString: witch
@@ -147,3 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+--- !u!114 &2773989838660271573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3904625558763825679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f15931799cc8ea40b55e3a5d0a85b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

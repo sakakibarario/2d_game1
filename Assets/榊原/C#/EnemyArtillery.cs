@@ -9,13 +9,13 @@ public class EnemyArtillery : MonoBehaviour
     public GameObject player;
 
     private float Count_artillery = 0;
-    private float artillery = 3.0f;
+    private float artillery = 2.0f;
 
     private bool inDamage = false;
     private bool isActive = false;
     private bool move = true;
 
-    private float reactionDistance = 10.0f;//”½‰ž‹——£
+    private float reactionDistance = 15.0f;//”½‰ž‹——£
 
     // Start is called before the first frame update
     void Start()
