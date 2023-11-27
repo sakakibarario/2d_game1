@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnButtonvillage : MonoBehaviour
+public class SpawnButton : MonoBehaviour
 {
     public GameObject SpawnButtonv;
     public GameObject SpawnButtonc;

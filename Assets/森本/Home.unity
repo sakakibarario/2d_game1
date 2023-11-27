@@ -1767,7 +1767,6 @@ GameObject:
   - component: {fileID: 1129109853}
   - component: {fileID: 1129109852}
   - component: {fileID: 1129109851}
-  - component: {fileID: 1129109855}
   - component: {fileID: 1129109856}
   m_Layer: 5
   m_Name: "\u8349\u539F\u30DC\u30BF\u30F3"
@@ -1941,19 +1940,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129109849}
   m_CullTransparentMesh: 1
---- !u!114 &1129109855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129109849}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feab31576a11c0f4aa881bc2e36e5fb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnButton: {fileID: 2059959805}
 --- !u!114 &1129109856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2540,7 +2526,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1582230877}
-        m_TargetAssemblyTypeName: ToMap, Assembly-CSharp
+        m_TargetAssemblyTypeName: Tomap, Assembly-CSharp
         m_MethodName: OnClickStartButton
         m_Mode: 1
         m_Arguments:
@@ -2598,7 +2584,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582230872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53b9bfa4eac20d45be99ae11927e583, type: 3}
+  m_Script: {fileID: 11500000, guid: 182ff406bb4ee2c4cb8d2be28e2c14e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1650571913
