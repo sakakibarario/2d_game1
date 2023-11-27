@@ -1575,6 +1575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Endscene: {fileID: 1406648814}
+  explode: {fileID: 2206323032205776159, guid: 639bb8338ac71ef42bca2f55d7813f8d, type: 3}
 --- !u!1001 &1856547883
 PrefabInstance:
   m_ObjectHideFlags: 0
