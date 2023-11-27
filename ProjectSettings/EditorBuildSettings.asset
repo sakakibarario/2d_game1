@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\u68EE\u672C/Tutorial.unity"
     guid: e612d29614bb7e24db319b169702b0cd
+  - enabled: 1
+    path: Assets/Scenes/map2V.unity
+    guid: 77c19e5d52e08344b890c487f7e28092
+  - enabled: 1
+    path: Assets/Scenes/map3C.unity
+    guid: 30a27348427d1ea43a5c6f28b6bfc0a2
   m_configObjects: {}
