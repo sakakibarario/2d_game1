@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHeadman : MonoBehaviour
 {
@@ -210,6 +211,10 @@ public class EnemyHeadman : MonoBehaviour
         {
             Debug.Log("“G‚ª“|‚ê‚Ä‚¢‚é");
             PlayerController.VillageBoss = true;
+
+            Debug.Log("ƒQ[ƒ€ƒNƒŠƒA");
+            SceneManager.LoadScene("GameClear");
+
             Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ğÁ‚·
         }
     }
