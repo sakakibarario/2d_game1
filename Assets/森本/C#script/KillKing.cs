@@ -5,6 +5,7 @@ using UnityEngine;
 public class KillKing : MonoBehaviour
 {
     public GameObject Endscene;
+    public GameObject explode;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class KillKing : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+            Instantiate(explode, this.transform.position, Quaternion.identity);
         }
     }
 }
