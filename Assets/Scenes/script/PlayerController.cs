@@ -85,8 +85,8 @@ public class PlayerController : MonoBehaviour
     static public bool pose = false;
 
     //‹Z‚Ìƒtƒ‰ƒO
-    static public bool SougenBoss = false;
-    static public bool VillageBoss = false;
+    static public bool SougenBoss = true;
+    static public bool VillageBoss = true;
 
     //SE—p
     [SerializeField]
@@ -332,6 +332,7 @@ public class PlayerController : MonoBehaviour
                         isTimeOver = false;
                         Anitimes = 0;
                         times = 0;
+                        rb.velocity = Vector2.zero;//’Ç‰Á
                     }
                    
                 }
@@ -367,6 +368,7 @@ public class PlayerController : MonoBehaviour
                         isTimeOver = false;
                         Anitimes = 0;
                         times = 0;
+                        rb.velocity = Vector2.zero;//’Ç‰Á
                     }
 
                 }
