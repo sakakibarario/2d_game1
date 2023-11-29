@@ -124,11 +124,11 @@ public class farmer : MonoBehaviour
                 if (rightTleftF)
                 {
 
-                    transform.localScale = new Vector3(-3, 3, 1);
+                    transform.localScale = new Vector3(-5, 5, 1);
                 }
                 else
                 {
-                    transform.localScale = new Vector3(3, 3, 1);
+                    transform.localScale = new Vector3(5, 5, 1);
                 }
                 rb.velocity = new Vector2(xVector * speed, rb.position.y);
             }

@@ -21,7 +21,7 @@ public class HeroGan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        transform.localScale = new Vector2(5, 5);
+        //transform.localScale = new Vector2(1, 1);
         Vector3 moveVec1 = new Vector3(x, y, 0).normalized;
         rb1.velocity = moveVec1 * moveSpeed;
     }

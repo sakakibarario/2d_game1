@@ -6,6 +6,7 @@ public class Child : MonoBehaviour
 {
     //プレイヤーオブジェクト
     public GameObject player;
+    private SpriteRenderer sr = null;
 
     //弾のプレハブオブジェクト
     public GameObject tama;
@@ -29,8 +30,6 @@ public class Child : MonoBehaviour
     private bool isActive = false;
 
 
-    public Enemygan bullet;
-
     //SE用
     [SerializeField]
     AudioSource tamaAudioSource;
@@ -39,6 +38,7 @@ public class Child : MonoBehaviour
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         C_Hp = hp;
     }
 
@@ -53,7 +53,7 @@ public class Child : MonoBehaviour
           GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && C_Hp > 0)
+            if (isActive && C_Hp > 0 && sr.isVisible)
             {
                 // PLAYERの位置を取得
                 // Vector3 targetPos = player.transform.position;
@@ -68,12 +68,12 @@ public class Child : MonoBehaviour
                     var t = Instantiate(tama) as GameObject;
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
-                    make_naihu();
+                    t.AddComponent<HeroGan>();
                     //SE
                     tamaAudioSource.Play();
                 }
             }
-            else
+            else if(isActive == false)
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
@@ -82,6 +82,10 @@ public class Child : MonoBehaviour
                     Debug.Log("アクティブ");
                     isActive = true; //アクティブにする
                 }
+            }
+            else
+            {
+                rb.Sleep();//停止
             }
         }
         else if (isActive)
@@ -151,11 +155,5 @@ public class Child : MonoBehaviour
         inDamage = false;
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
-    }
-
-    void make_naihu()
-    {
-        Enemygan.Naihu = true;
-
     }
 }
