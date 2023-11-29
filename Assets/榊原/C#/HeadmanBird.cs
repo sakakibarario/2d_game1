@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeadmanBird : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float moveSpeed = 20.0f;
+    [SerializeField] float moveSpeed = 10.0f;
 
 
     private float vec_x_mai = -1.0f;

@@ -17,12 +17,15 @@ public class EnemySuraimu : MonoBehaviour
     private bool inDamage = false;  //ダメージ判定
 
     bool isActive = false;
-   
+
+    private SpriteRenderer sr = null;
+
     // Start is called before the first frame update
     void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         hp = hpMax;       
     }
 
@@ -31,14 +34,14 @@ public class EnemySuraimu : MonoBehaviour
     {
         if (PlayerController.gameState != "playing")
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = new Vector2(0, 0);//停止
             return;
         }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && hp > 0)
+            if (isActive && hp > 0　&& sr.isVisible)
             {
                 // PLAYERの位置を取得
                 Vector2 targetPos = player.transform.position;
@@ -53,9 +56,9 @@ public class EnemySuraimu : MonoBehaviour
                 rb.velocity = direction * speed;
                 //  Debug.Log("スライムムーブ");
 
-
+                
             }
-            else
+            else if(isActive == false)
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
@@ -63,6 +66,10 @@ public class EnemySuraimu : MonoBehaviour
                 {
                     isActive = true; //アクティブにする
                 }
+            }
+            else
+            {
+                rb.Sleep();//動きを停止
             }
         }
         else if (isActive)
