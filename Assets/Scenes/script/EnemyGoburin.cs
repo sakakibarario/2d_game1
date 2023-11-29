@@ -114,6 +114,8 @@ public class EnemyGoburin : MonoBehaviour
             Debug.Log(hp_g);
             inDamage = true;
             Destroy(other.gameObject);
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }
