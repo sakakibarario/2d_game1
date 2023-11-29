@@ -5,12 +5,16 @@ using UnityEngine;
 public class mercenary : MonoBehaviour
 {
     Rigidbody2D rb;
+    private SpriteRenderer sr = null;
+    public EnemyCollisionCheck checkCollision;
 
     public float speed = 0.5f;      //速度
     public int hpMax = 40;          //傭兵のHP
     public float reactionDistance = 4.0f;//反応距離
     private int hp;
 
+    private bool rightTleftF = false;//反転用フラグ
+    private int xVector;//反転用
 
     //主人公の攻撃
     private int rushdamage = 10;    //突進の攻撃力
@@ -35,6 +39,7 @@ public class mercenary : MonoBehaviour
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         hp = hpMax;
     }
 
@@ -51,7 +56,7 @@ public class mercenary : MonoBehaviour
 
         if (player != null)
         {
-            if (isActive && hp > 0　&& stop)
+            if (isActive && hp > 0　&& stop && sr.isVisible)
             {
                 rb.isKinematic = false;//重力復活
                 // PLAYERの位置を取得
@@ -85,6 +90,12 @@ public class mercenary : MonoBehaviour
                     explode.transform.localScale = new Vector3(1.5f, 1.5f, 1);
 
                 }
+                // プレイヤーとの距離を求める
+                float dist = Vector2.Distance(transform.position, player.transform.position);
+                if (dist > reactionDistance)
+                {
+                    isActive = false; //アクティブにする
+                }
             }
             else if(!stop)
             {
@@ -92,7 +103,7 @@ public class mercenary : MonoBehaviour
                 rb.velocity = Vector2.zero;//動きを静止
                 Debug.Log("stop");
             }
-            else
+            else if(isActive == false)
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
@@ -100,6 +111,32 @@ public class mercenary : MonoBehaviour
                 {
                     isActive = true; //アクティブにする
                 }
+
+                if (checkCollision.isOn)
+                {
+                    rightTleftF = true;
+                    xVector = 1;
+                }
+                else if (checkCollision.isOn == false)
+                {
+                    rightTleftF = false;
+                    xVector = -1;
+                }
+
+                if (rightTleftF)
+                {
+
+                    transform.localScale = new Vector3(-4, 4, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(4, 4, 1);
+                }
+                rb.velocity = new Vector2(xVector * speed, rb.position.y);
+            }
+            else
+            {
+                rb.Sleep();
             }
         }
         else if (isActive)

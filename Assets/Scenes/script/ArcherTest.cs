@@ -10,7 +10,7 @@ public class ArcherTest : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
-    Rigidbody2D rb ;
+    Rigidbody2D rb = null;
 
     //5秒ごとに弾を発射するためのもの
     private float targetTime = 5.0f;
@@ -30,6 +30,7 @@ public class ArcherTest : MonoBehaviour
 
 
     public EnemyArrow bullet;
+    private SpriteRenderer sr = null;
 
     //アニメーションに使う
     private Animator anim = null;
@@ -43,7 +44,7 @@ public class ArcherTest : MonoBehaviour
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         A_Hp = hp;
-
+        sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
     }
@@ -58,12 +59,12 @@ public class ArcherTest : MonoBehaviour
         }
         //Player　のゲームオブジェクトを得る
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (player != null )
         {
             //アニメーション
             anim.SetBool("Attack", false);
 
-            if (isActive && A_Hp > 0)
+            if (isActive && A_Hp > 0 && sr.isVisible)
             {
                 // PLAYERの位置を取得
                 // Vector3 targetPos = player.transform.position;
@@ -88,7 +89,7 @@ public class ArcherTest : MonoBehaviour
 
                 }
             }
-            else
+            else if(isActive == false)
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
@@ -97,6 +98,10 @@ public class ArcherTest : MonoBehaviour
                     isActive = true; //アクティブにする
                 }
             }
+            //else
+            //{
+            //    rb.Sleep();
+            //}
         }
         else if (isActive)
         {

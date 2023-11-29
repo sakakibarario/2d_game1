@@ -52,6 +52,7 @@ public class EnemyHeadman : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Headman_HP = HP;//最大HPを設定
+        OnAttack = true;
     }
 
     // Update is called once per frame
@@ -72,15 +73,17 @@ public class EnemyHeadman : MonoBehaviour
                 create_bird_count += Time.deltaTime;//カウント
                 create_cane_count += Time.deltaTime;//カウント
                 //Debug.Log(create_bird_count);
-                if (create_bird_count > create_bird_time)
-                {   
-                    StartCoroutine(Bird_attack());//コルーチン開始
-                }
-                else if(create_cane_count > create_cane_time)
+                if (OnAttack)
                 {
-                    StartCoroutine(Cane_attack());//コルーチン開始
+                    if (create_bird_count > create_bird_time)
+                    {
+                        StartCoroutine(Bird_attack());//コルーチン開始
+                    }
+                    else if (create_cane_count > create_cane_time)
+                    {
+                        StartCoroutine(Cane_attack());//コルーチン開始
+                    }
                 }
-
             }
             else
             {
@@ -115,11 +118,23 @@ public class EnemyHeadman : MonoBehaviour
             return;//ダメージ中は操作による移動はさせない
         }
     }
-    private void FixedUpdate()
+    
+    //コルーチン
+    private IEnumerator Bird_attack()
     {
-        if (OnAttack)
+        create_bird_count = 0.0f;//リセット
+        OnAttack = false;
+
+        //アニメション
+        animator.Play(attackanime);
+        //SE
+        tueAudioSource.Play();
+
+        yield return new WaitForSeconds(0.2f);//0.2静止
+        animator.Play(Stopanime);
+        
+        for(int i =0; i<8;i++)
         {
-            animator.Play(Stopanime);
             //Debug.Log("鳥生成");
             float vecX = Random.Range(135f, 150f);//ランダムを（）範囲で設定
             var t = Instantiate(bird) as GameObject;//オブジェクトを作成
@@ -128,29 +143,13 @@ public class EnemyHeadman : MonoBehaviour
             t.transform.position = new Vector3(vecX, 10.0f, 0);
 
             t.AddComponent<HeadmanBird>();//birdの動きを決める
-            tagObjects = GameObject.FindGameObjectsWithTag("bird");//数を数える
-            if (tagObjects.Length >= 1)
-            {
-                OnAttack = false;
-                create_bird_count = 0.0f;//リセット
-                create_cane_count = 2.0f;//リセット
-            }
+            yield return new WaitForSeconds(0.2f);
         }
-    }
-    //コルーチン
-    private IEnumerator Bird_attack()
-    {
-        //アニメション
-        animator.Play(attackanime);
-
-        //SE
-        tueAudioSource.Play();
-
-        yield return new WaitForSeconds(0.2f);//0.2静止
-
-        OnAttack = true;//攻撃（bird）のフラグを上げる
-
+    
         yield return new WaitForSeconds(0.5f);//0.5静止
+
+        OnAttack = true;
+        create_cane_count = 2.0f;//リセット
 
         //Debug.Log("終了");
         yield break;//コルーチン終了

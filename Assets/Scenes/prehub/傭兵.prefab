@@ -149,9 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f868a5edc4923024db37b1fca720c673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkCollision: {fileID: 5588051262757164296}
   speed: 3
   hpMax: 40
-  reactionDistance: 10
+  reactionDistance: 7
   explode: {fileID: 8207771093403354925, guid: acfae1a1b76846340aa9849829d74dbf, type: 3}
   Point: {fileID: 6438254017414268566}
   swordAudioSource: {fileID: -8389846748364659652}
@@ -356,6 +357,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6438254017414268566}
+  - component: {fileID: 5588051262757164296}
+  - component: {fileID: 4668166206502092670}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -378,3 +381,32 @@ Transform:
   m_Father: {fileID: 6438254016603862257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5588051262757164296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6438254017414268565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34336436252c6e74cbb6909ac18c056a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+--- !u!70 &4668166206502092670
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6438254017414268565}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.17348653, y: 0}
+  m_Size: {x: 0.84697306, y: 1}
+  m_Direction: 0
