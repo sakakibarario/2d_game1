@@ -31,12 +31,17 @@ public class TimeCounter : MonoBehaviour
                 //ポーズ状態を解除する
                 isPose = false;
                 PlayerController.pose = false;
+                //SE
+                GetComponent<AudioSource>().Play();
             }
             //進行中にクリックされたとき
-            else{
+            else
+            {
                 //ポーズ状態にする
                 isPose = true;
                 PlayerController.pose = true;
+                //SE
+                GetComponent<AudioSource>().Play();
             }
         }
 
