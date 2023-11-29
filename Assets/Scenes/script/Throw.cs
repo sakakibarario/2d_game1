@@ -73,7 +73,7 @@ public class Throw : MonoBehaviour
                     make_naihu();
 
                     //SE 
-                    GetComponent<AudioSource>().Play();
+                    ThrowAudioSource.Play();
                 }
             }
             else
@@ -124,15 +124,18 @@ public class Throw : MonoBehaviour
             Debug.Log(T_Hp);
             inDamage = true;
             //SE
-            ThrowAudioSource.Play();
+            GetComponent<AudioSource>().Play();
         }
-        if(other.gameObject.tag == "Fireball")
+        if (other.gameObject.tag == "Fireball")
         {
             //ダメージ
             T_Hp -= buresball;
             Debug.Log(T_Hp);
             inDamage = true;
             Destroy(other.gameObject);//当たったブレスを消す
+            //SE
+            GetComponent<AudioSource>().Play();
+
         }
         EnemyDamage();//倒れているか調べる
     }
