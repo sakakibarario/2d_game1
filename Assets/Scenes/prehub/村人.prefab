@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2415991446922131863}
+  - component: {fileID: 2651424626128805861}
+  - component: {fileID: 5099422452990860793}
   m_Layer: 0
   m_Name: Point
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,6 +33,35 @@ Transform:
   m_Father: {fileID: 2415991447010522118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2651424626128805861
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415991446922131860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!114 &5099422452990860793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415991446922131860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34336436252c6e74cbb6909ac18c056a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
 --- !u!1 &2415991447010522114
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f159f1c80840c6546b44c4f80939731a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkCollision: {fileID: 5099422452990860793}
   speed: 2
   hpMax: 30
   reactionDistance: 8
