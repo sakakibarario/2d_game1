@@ -89,7 +89,7 @@ public class Hero : MonoBehaviour
             {    if (count)
                 {
                     currentTime += Time.deltaTime;
-                    Debug.Log(currentTime);
+                    //Debug.Log(currentTime);
                 }
                 if (targetTime < currentTime )
                 {

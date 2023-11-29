@@ -22,7 +22,9 @@ public class Throw : MonoBehaviour
     private int T_Hp;
 
     //主人公の攻撃
-    private int rushdamage = 10;
+    int buresball = Global.GBures;
+    int rushdamage = Global.GRush;
+    
 
     private bool inDamage = false;
     private bool isActive = false;
@@ -123,6 +125,14 @@ public class Throw : MonoBehaviour
             inDamage = true;
             //SE
             ThrowAudioSource.Play();
+        }
+        if(other.gameObject.tag == "Fireball")
+        {
+            //ダメージ
+            T_Hp -= buresball;
+            Debug.Log(T_Hp);
+            inDamage = true;
+            Destroy(other.gameObject);//当たったブレスを消す
         }
         EnemyDamage();//倒れているか調べる
     }

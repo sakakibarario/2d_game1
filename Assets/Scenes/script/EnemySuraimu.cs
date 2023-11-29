@@ -11,8 +11,8 @@ public class EnemySuraimu : MonoBehaviour
     public float reactionDistance = 4.0f;//”½‰‹——£
     private int hp;                  
 
-    private int rushdamage = 10;    //“Ëi‚ÌUŒ‚—Í
-    private int buresball = 30;     //‰Î‹…‚ÌUŒ‚—Í
+    private int rushdamage = Global.GRush;    //“Ëi‚ÌUŒ‚—Í
+    private int buresball = Global.GBures;     //‰Î‹…‚ÌUŒ‚—Í
 
     private bool inDamage = false;  //ƒ_ƒ[ƒW”»’è
 

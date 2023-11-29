@@ -20,7 +20,10 @@ public class DropBall : MonoBehaviour
 
     private int Torent_Hp;
 
-    private int rushdamage = 10;
+    //主人公の攻撃
+    private int rushdamage = Global.GRush;
+    private int buresball = Global.GBures;
+
     private bool inDamage = false;
     private bool isActive = false;
 
@@ -130,6 +133,14 @@ public class DropBall : MonoBehaviour
             inDamage = true;
             //SE
             GetComponent<AudioSource>().Play();
+        }
+        if (other.gameObject.tag == "Fireball")
+        {
+            //ダメージ
+            Torent_Hp -= buresball;
+            Debug.Log(Torent_Hp);
+            inDamage = true;
+            Destroy(other.gameObject);//当たったブレスを消す
         }
         EnemyDamage();//倒れているか調べる
     }

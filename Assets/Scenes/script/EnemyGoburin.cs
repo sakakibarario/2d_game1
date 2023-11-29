@@ -17,7 +17,8 @@ public class EnemyGoburin : MonoBehaviour
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
     private int hp_g;
-    private int rushdamage = 10;
+    private int rushdamage = Global.GRush;
+    private int buresball = Global.GBures;
 
     private BoxCollider2D col = null;
     private bool rightTleftF = false;
@@ -104,7 +105,15 @@ public class EnemyGoburin : MonoBehaviour
             inDamage = true;
             //SE
             GetComponent<AudioSource>().Play();
-
+        }
+        //‰Î‹…UŒ‚‚Æ‚ÌÚG
+        if(other.gameObject.tag == "Fireball")
+        {
+            //ƒ_ƒ[ƒW
+            hp_g -= buresball;
+            Debug.Log(hp_g);
+            inDamage = true;
+            Destroy(other.gameObject);
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }
