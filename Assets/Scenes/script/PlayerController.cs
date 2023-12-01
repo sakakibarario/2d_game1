@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float jump = 5.0f;   //ジャンプ力
     public float rush = 2.0f;   //突進の力
     public int D_HP;          　//ドラゴンのHP
+    private int Max_D_HP;       //最大HP保存用
 
     private int S_D_HP = 50;     //草原でのドラゴンHP
     private int V_D_HP = 100;    //村でのHP
@@ -47,16 +48,20 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region//主人公の動き関係フラグ
-    bool gojump = false;       //ジャンプ判定
-    bool ongrond = false;       //地面判定
+    bool gojump = false;                     //ジャンプ判定
+    bool ongrond = false;                    //地面判定
     public static bool gorush = false;       //攻撃判定(突進)
-    bool Fireball_F = false;    // 火球攻撃判定
+    bool Fireball_F = false;                 // 火球攻撃判定
     static public bool horizon = true;       //向き
-    bool inDamage = false;      //ダメージ中フラグ
+    bool inDamage = false;                   //ダメージ中フラグ
+    bool inrecovery = false;                 //回復中フラグ
 
     //技のフラグ
     static public bool SougenBoss = true;
     static public bool VillageBoss = true;
+
+    //回復アイテム
+    private int meat = Global.GRecoveryMeat;
     #endregion
 
     //クールタイム
@@ -114,11 +119,13 @@ public class PlayerController : MonoBehaviour
         if(SougenBoss)
         {
             D_HP = V_D_HP;
+            Max_D_HP = V_D_HP;
             slider.maxValue = 2;
             slider.value = 2;
             if (VillageBoss)
             {
                 D_HP = C_D_HP;
+                Max_D_HP = C_D_HP;
                 slider.maxValue = 3;
                 slider.value = 3;
             }
@@ -127,6 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             slider.value = 1;
             D_HP = S_D_HP;
+            Max_D_HP = S_D_HP;
         }
  
         if (isCountDown)
@@ -282,7 +290,23 @@ public class PlayerController : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-
+        if(inrecovery)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color =new Color32(0, 255, 3, 255);
+            //回復中点滅させる
+            float val = Mathf.Sin(Time.time * 20);
+            Debug.Log(val);
+            if (val > 0)
+            {
+                //スプライトを表示
+                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                //スプライトを非表示
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
         if (ongrond || axisH != 0 || gorush == true)
         {
             //地上or速度が０ではないor攻撃中ではない
@@ -636,6 +660,17 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("slider.value : " + slider.value);
                 GetDamage(collision.gameObject);
             }
+            if (collision.gameObject.tag == "meat")//Hpを回復
+            {
+                if(D_HP != Max_D_HP)
+                {
+                    D_HP += meat;
+                    Destroy(collision.gameObject);//当たったオブジェクトを削除
+                    slider.value = (float)D_HP / (float)S_D_HP; ;
+                    Debug.Log("slider.value : " + slider.value);
+                    GetRecovery();
+                } 
+            }
         }
         if (collision.gameObject.tag == "dead")
         {
@@ -672,6 +707,21 @@ public class PlayerController : MonoBehaviour
         inDamage = false;
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    //回復中
+    void GetRecovery()
+    {
+        inrecovery = true;
+        Invoke("RecoveryEnd", 0.5f);
+    }
+    //回復終了
+    void RecoveryEnd()
+    {
+        //回復フラグおろす
+        inrecovery = false;
+        //スプライトをもとに戻す
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
     }
     //ゲームオーバー
     void GameOver()
