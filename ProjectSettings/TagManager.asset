@@ -30,6 +30,7 @@ TagManager:
   - heroattack
   - thunder
   - kingStart
+  - meat
   layers:
   - Default
   - TransparentFX
