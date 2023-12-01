@@ -141,6 +141,8 @@ public class DropBall : MonoBehaviour
             Debug.Log(Torent_Hp);
             inDamage = true;
             Destroy(other.gameObject);//“–‚½‚Á‚½ƒuƒŒƒX‚ğÁ‚·
+            //SE
+            GetComponent<AudioSource>().Play();
         }
         EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
     }
