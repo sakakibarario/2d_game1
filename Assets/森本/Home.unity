@@ -270,9 +270,9 @@ GameObject:
   - component: {fileID: 89437012}
   - component: {fileID: 89437011}
   - component: {fileID: 89437010}
-  - component: {fileID: 89437009}
   - component: {fileID: 89437014}
   - component: {fileID: 89437013}
+  - component: {fileID: 89437015}
   m_Layer: 5
   m_Name: "Title\u30DC\u30BF\u30F3"
   m_TagString: Untagged
@@ -301,18 +301,6 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: 30}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &89437009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89437007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07d17b42941881429a8fe3508c8bc0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &89437010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +345,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89437009}
+      - m_Target: {fileID: 89437015}
         m_TargetAssemblyTypeName: ToTitle, Assembly-CSharp
         m_MethodName: OnClickStartButton
         m_Mode: 1
@@ -544,6 +532,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &89437015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89437007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07d17b42941881429a8fe3508c8bc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136253208
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,7 +4003,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
