@@ -2348,6 +2348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 365155080}
   Point: {fileID: 1178601445}
+  SougenPoint: {fileID: 1178601445}
+  MuraPoint: {fileID: 300837290}
 --- !u!114 &1129109852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3269,6 +3271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 365155080}
   Point: {fileID: 300837290}
+  SougenPoint: {fileID: 1178601445}
+  MuraPoint: {fileID: 300837290}
 --- !u!82 &1489109641
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4509,6 +4513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 365155080}
   Point: {fileID: 1650571913}
+  SougenPoint: {fileID: 1178601445}
+  MuraPoint: {fileID: 300837290}
 --- !u!114 &2059959808
 MonoBehaviour:
   m_ObjectHideFlags: 0
