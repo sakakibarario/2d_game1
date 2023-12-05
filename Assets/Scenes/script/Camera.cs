@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
+    public BoxCollider2D bx;
     GameObject player;
     //画面制御用
     private int   CPosleftx = -3;
@@ -14,6 +15,8 @@ public class Camera : MonoBehaviour
     void Start()
     {
         this.player = GameObject.Find("主人公");
+        bx = GetComponent<BoxCollider2D>();
+        bx.enabled = false;
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class Camera : MonoBehaviour
         {
             transform.position = new Vector3
            (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
+            bx.enabled = true;
         }
         else if (playerPos.x > PPosleftx)
         {

@@ -10,7 +10,7 @@ public class SpawnButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class SpawnButton : MonoBehaviour
             //村ボタン
             SpawnButtonv.gameObject.SetActive(true);
 
-            if(PlayerController.VillageBoss)
+            if (PlayerController.VillageBoss)
             {
                 //城ボタン
                 SpawnButtonc.gameObject.SetActive(true);
