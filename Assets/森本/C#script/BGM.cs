@@ -12,11 +12,13 @@ public class BGM : MonoBehaviour
     AudioSource BossAudioSource;
 
     bool BG;
+    bool one;
 
     // Start is called before the first frame update
     void Start()
     {
         BG = true;
+        one = false;
     }
 
     // Update is called once per frame
@@ -29,9 +31,16 @@ public class BGM : MonoBehaviour
     {
         if(BG)
         {
-            DefaultAudioSource.Stop();
-            BossAudioSource.Play();
+            if (collision.gameObject.tag == "Player")//Player‚É“–‚½‚Á‚½‚ç
+            {
+                DefaultAudioSource.Stop();
+                BossAudioSource.Play();
+                one = true;
+            }
         }
-        BG = false;
+        if(one)
+        {
+            BG = false;
+        }
     }
 }
