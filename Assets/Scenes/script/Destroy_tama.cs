@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Destroy_tama : MonoBehaviour
 {
-    float count = 3.0f;
+    float count = 3.5f;
     private void Update()
     {
         count -= Time.deltaTime;
         if(count <=0 )
         {
-            count = 3.0f;
+            count = 3.5f;
             Destroy(this.gameObject);
         }
     }

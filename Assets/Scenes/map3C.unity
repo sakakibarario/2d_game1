@@ -2374,10 +2374,12 @@ MonoBehaviour:
     m_Bits: 256
   slider: {fileID: 208386209}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
+  bx: {fileID: 216599309}
   speed: 3
   jump: 6
   rush: 15
   D_HP: 0
+  stop: 0
   isCountDown: 1
   AnimeCount: 1
   isTimeOver: 0
@@ -2478,7 +2480,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: e0537eac1e29db543b5b4b51c1837671, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
