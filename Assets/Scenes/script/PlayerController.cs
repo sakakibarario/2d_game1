@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
     bool inrecovery = false;                 //回復中フラグ
 
     //技のフラグ
-    static public bool SougenBoss = false;
-    static public bool VillageBoss = false;
+    static public bool SougenBoss = true;
+    static public bool VillageBoss = true;
 
     //回復アイテム
     private int meat = Global.GRecoveryMeat;
