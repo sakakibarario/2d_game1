@@ -29,21 +29,20 @@ public class CaneraMap3 : MonoBehaviour
     {
         Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
 
-        if (transform.position.x > CPosright)
-        {
-            transform.position = new Vector3
-           (transform.position.x, 0, transform.position.z);//ボス画面を固定
-            bxleft.enabled = true;
-            Debug.Log("false2");
-        }
-        else if (playerPos.x > PPosleftx || playerPos.y > 8)
+        if (playerPos.x > PPosleftx || playerPos.y > 8 || playerPos.x >217)
         {
             transform.position = new Vector3
            (playerPos.x, playerPos.y + 3.5f, transform.position.z);//playerに追従
             Debug.Log("false3");
             Oncamera = false;
         }
-       
+        //else if (transform.position.x > CPosright)
+        //{
+        //    transform.position = new Vector3
+        //   (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
+        //    bxleft.enabled = true;
+        //    Debug.Log("false2");
+        //}
         else
         {
            transform.position = new Vector3
