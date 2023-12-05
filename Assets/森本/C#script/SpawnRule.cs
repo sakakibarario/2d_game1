@@ -5,12 +5,14 @@ using UnityEngine;
 public class SpawnRule : MonoBehaviour
 {
     public GameObject rule;
-    bool Text;
+    bool Text = true;
+    bool one;
 
     // Start is called before the first frame update
     void Start()
     {
         Text = true;
+        one = false;
     }
 
     // Update is called once per frame
@@ -20,13 +22,17 @@ public class SpawnRule : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(Text)
+        if (Text)
         {
             if (collision.gameObject.tag == "Player")//Player‚É“–‚½‚Á‚½‚ç
             {
                 rule.gameObject.SetActive(true);
+                one = true;
             }
         }
-        Text = false;
+        if(one)
+        {
+            Text = false;
+        }
     }    
 }
