@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class retry : MonoBehaviour
 {
-    bool Sougenretry;
-    bool Muraretry;
-    bool Siroretry;
+
+    static public bool Sougenretry;
+    static public bool Muraretry;
+    static public bool Siroretry;
     public GameObject SougenretryButton;
     public GameObject MuraretryButton;
     public GameObject SiroretryButton;
@@ -17,8 +18,7 @@ public class retry : MonoBehaviour
     {
         Sougenretry = PlayerController.SougenBoss;
         Muraretry = PlayerController.VillageBoss;
-        //Siroretry = 
-
+        Siroretry = PlayerController.CastleBoss;
     }
 
     // Update is called once per frame
@@ -27,25 +27,28 @@ public class retry : MonoBehaviour
         //草原ステージでGameover
         if (Sougenretry == false)
         {
-            MuraretryButton.gameObject.SetActive(false);//村リトライを一応falseにする
-            SiroretryButton.gameObject.SetActive(false);//城リトライを一応falseにする
+            MuraretryButton.gameObject.SetActive(false);
+            SiroretryButton.gameObject.SetActive(false);
             SougenretryButton.gameObject.SetActive(true);
+
             Sougenretry = true;
         }
         //村ステージでGameover
-        else if (Muraretry == false)
+        if (Muraretry == false)
         {
-            SougenretryButton.gameObject.SetActive(false);//草原リトライを一応falseにする
-            SiroretryButton.gameObject.SetActive(false);//城リトライを一応falseにする
+            SougenretryButton.gameObject.SetActive(false);
+            SiroretryButton.gameObject.SetActive(false);
             MuraretryButton.gameObject.SetActive(true);
+
             Muraretry = true;
         }
         //城ステージでGameover
-        else if(SiroretryButton == false)
+        if (SiroretryButton == false)
         {
-            SougenretryButton.gameObject.SetActive(false);//草原リトライを一応falseにする
-            MuraretryButton.gameObject.SetActive(false);//村リトライを一応falseにする
+            SougenretryButton.gameObject.SetActive(false);
+            MuraretryButton.gameObject.SetActive(false);
             SiroretryButton.gameObject.SetActive(true);
+
             Siroretry = true;
         }
     }
