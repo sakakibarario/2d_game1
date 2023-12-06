@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private int C_D_HP = 150;    //城でのHP
 
     public static string gameState = "playing";//ゲームの状態
-    public bool stop = false;
+    static public bool stop = false;
 
     #region//敵の攻撃
     private int Suraimu = 5;    //スライムのダメージ
@@ -58,8 +58,9 @@ public class PlayerController : MonoBehaviour
     bool inrecovery = false;                 //回復中フラグ
 
     //技のフラグ
-    static public bool SougenBoss = false;
-    static public bool VillageBoss = false;
+    static public bool SougenBoss = true;
+    static public bool VillageBoss = true;
+    static public bool CastleBoss = false;
 
     //回復アイテム
     private int meat = Global.GRecoveryMeat;
@@ -169,22 +170,29 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       　//ゲームステータス管理
-        if(pose)
-        {
-            gameState = "posing";
-            rb.isKinematic = true;
-        }
-        else
-        {
-            gameState = "playing";
-            rb.isKinematic = false;
-        }
-
+       
+      
         //ゲーム中以外とダメージ中は何もしない
         if (stop)
         {
-
+            //ゲームステータス管理
+            if (pose)
+            {
+                gameState = "posing";
+                rb.isKinematic = true;
+            }
+            else
+            {
+                gameState = "playing";
+                rb.isKinematic = false;
+            }
+            //ゲーム中以外とダメージ中は何もしない
+            if (gameState != "playing")
+            {
+                rb.velocity = new Vector2(0, 0);
+                animator.Play(stopAnime);
+                return;
+            }
             //水平方向のチェック
             axisH = Input.GetAxisRaw("Horizontal");
 
@@ -273,7 +281,10 @@ public class PlayerController : MonoBehaviour
         //ゲーム中以外は何もしない
         if (stop)
         {
-
+            if(gameState != "playing")
+            {
+                return;
+            }
 
             if (inDamage)
             {

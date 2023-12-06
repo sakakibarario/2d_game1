@@ -19,8 +19,7 @@ public class Hero : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
-
-
+    private bool stop = false;//動き制御
 
     Rigidbody2D rb;
 
@@ -66,6 +65,7 @@ public class Hero : MonoBehaviour
         Hero_Hp = hp;
         oldHP = hp;
         animator = GetComponent<Animator>();
+        stop = true;
 
         for (int i = start; i <= end; i++)
         {
@@ -81,67 +81,71 @@ public class Hero : MonoBehaviour
         {
             return;
         }
-        //Player　のゲームオブジェクトを得る
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null && DamageT)
+        if (stop)
         {
-            if (isActive && Hero_Hp > 0)
-            {    if (count)
+            //Player　のゲームオブジェクトを得る
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null && DamageT)
+            {
+                if (isActive && Hero_Hp > 0)
                 {
-                    currentTime += Time.deltaTime;
-                    //Debug.Log(currentTime);
-                }
-                if (targetTime < currentTime )
-                {
-                    StartCoroutine(Slashing()); //斬撃コルーチン
-                }
+                    if (count)
+                    {
+                        currentTime += Time.deltaTime;
+                        //Debug.Log(currentTime);
+                    }
+                    if (targetTime < currentTime)
+                    {
+                        StartCoroutine(Slashing()); //斬撃コルーチン
+                    }
 
-                if (Hero_Hp != oldHP)
-                {
-                    DamageT = false;//すべての動作を停止
-                    StartCoroutine(CountT());//カウントサンダーコルーチン
-                    oldHP = Hero_Hp;
-                }
+                    if (Hero_Hp != oldHP)
+                    {
+                        DamageT = false;//すべての動作を停止
+                        StartCoroutine(CountT());//カウントサンダーコルーチン
+                        oldHP = Hero_Hp;
+                    }
 
-            }
-            else
-            {
-                //プレイヤーとの距離を求める
-                float dist = Vector2.Distance(transform.position, player.transform.position);
-                if (dist < reactionDistance)
+                }
+                else
                 {
-                    isActive = true; //アクティブにする
+                    //プレイヤーとの距離を求める
+                    float dist = Vector2.Distance(transform.position, player.transform.position);
+                    if (dist < reactionDistance)
+                    {
+                        isActive = true; //アクティブにする
+                    }
                 }
             }
-        }
-        else if (isActive)
-        {
-            isActive = false;
-        }
-        if (inDamage)
-        {
-            //ダメージ中点滅させる
-            float val = Mathf.Sin(Time.time * 50);
-            // Debug.Log(val);
-            if (val > 0)
+            else if (isActive)
             {
-                //スプライトを表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                isActive = false;
             }
-            else
+            if (inDamage)
             {
-                //スプライトを非表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                //ダメージ中点滅させる
+                float val = Mathf.Sin(Time.time * 50);
+                // Debug.Log(val);
+                if (val > 0)
+                {
+                    //スプライトを表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    //スプライトを非表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+                return;//ダメージ中は操作による移動はさせない
             }
-            return;//ダメージ中は操作による移動はさせない
-        }
-        if (random)//リストの配列作成
-        {
-            for (int i = start; i <= end; i++)
+            if (random)//リストの配列作成
             {
-                numbers.Add(i);
+                for (int i = start; i <= end; i++)
+                {
+                    numbers.Add(i);
+                }
+                random = false;
             }
-            random = false;
         }
     }
 
@@ -174,16 +178,28 @@ public class Hero : MonoBehaviour
         Invoke("DamageEnd", 0.25f);
         if (Hero_Hp <= 0)
         {
+            StartCoroutine(Bossdown());
             DangerArea1.gameObject.SetActive(false);//倒れている場合は実行しない
             DangerArea2.gameObject.SetActive(false);//倒れている場合は実行しない
             DangerArea3.gameObject.SetActive(false);//倒れている場合は実行しない
             Debug.Log("敵が倒れている");
-
-            //エンディングへ
-            SceneManager.LoadScene("End");
-
-            Destroy(gameObject, 0.2f);//0.2かけて敵を消す
         }
+    }
+    IEnumerator Bossdown()
+    {
+        stop = false;
+        PlayerController.stop = false;
+        PlayerController.gameState = "gameclear";
+        Debug.Log("ゲームクリア");
+
+        yield return new WaitForSeconds(0.2f);
+        this.enabled = false;
+        //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        //エンディングへ
+        SceneManager.LoadScene("End");
+        yield break;
     }
     void DamageEnd()
     {

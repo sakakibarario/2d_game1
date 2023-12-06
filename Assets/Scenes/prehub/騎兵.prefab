@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   hpMax: 60
-  reactionDistance: 8
+  reactionDistance: 10
   explode1: {fileID: 9138591584427733926, guid: 4442dcf952800bc48a26e6b7d41141cf, type: 3}
   explode2: {fileID: 1136353045937221329, guid: 39df5fad1624c204f85391bb14a78ac5, type: 3}
   Point1: {fileID: 4326307979561257064}
@@ -183,8 +183,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 8
+  m_Material: {fileID: 6200000, guid: 5594b5c911d702d489460b536b9fc143, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

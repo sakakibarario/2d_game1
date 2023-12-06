@@ -9,6 +9,8 @@ public class EnemyHeadman : MonoBehaviour
     public GameObject cane;//caneを取得
     public GameObject player;//playerを取得
 
+    private bool stop = false;//動き制御
+
     private int Headman_HP;//村長のHP
     public int HP = 100;    //最大HP
 
@@ -50,6 +52,7 @@ public class EnemyHeadman : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stop = true;
         animator = GetComponent<Animator>();
         Headman_HP = HP;//最大HPを設定
         OnAttack = true;
@@ -63,59 +66,62 @@ public class EnemyHeadman : MonoBehaviour
         {
             return;
         }
-        //Player　のゲームオブジェクトを得る
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (stop)
         {
-            if (isActive && Headman_HP > 0)
+            //Player　のゲームオブジェクトを得る
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
             {
-
-                create_bird_count += Time.deltaTime;//カウント
-                create_cane_count += Time.deltaTime;//カウント
-                //Debug.Log(create_bird_count);
-                if (OnAttack)
+                if (isActive && Headman_HP > 0)
                 {
-                    if (create_bird_count > create_bird_time)
+
+                    create_bird_count += Time.deltaTime;//カウント
+                    create_cane_count += Time.deltaTime;//カウント
+                                                        //Debug.Log(create_bird_count);
+                    if (OnAttack)
                     {
-                        StartCoroutine(Bird_attack());//コルーチン開始
+                        if (create_bird_count > create_bird_time)
+                        {
+                            StartCoroutine(Bird_attack());//コルーチン開始
+                        }
+                        else if (create_cane_count > create_cane_time)
+                        {
+                            StartCoroutine(Cane_attack());//コルーチン開始
+                        }
                     }
-                    else if (create_cane_count > create_cane_time)
+                }
+                else
+                {
+                    //プレイヤーとの距離を求める
+                    float dist = Vector2.Distance(transform.position, player.transform.position);
+                    if (dist < reactionDistance)
                     {
-                        StartCoroutine(Cane_attack());//コルーチン開始
+                        isActive = true; //アクティブにする
                     }
                 }
             }
-            else
+            else if (isActive)
             {
-                //プレイヤーとの距離を求める
-                float dist = Vector2.Distance(transform.position, player.transform.position);
-                if (dist < reactionDistance)
-                {
-                    isActive = true; //アクティブにする
-                }
+                isActive = false;//非アクティブ
             }
-        }
-        else if (isActive)
-        {
-            isActive = false;//非アクティブ
-        }
 
-        if (inDamage)
-        {
-            //ダメージ中点滅させる
-            float val = Mathf.Sin(Time.time * 50);
-            // Debug.Log(val);
-            if (val > 0)
+            if (inDamage)
             {
-                //スプライトを表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                //ダメージ中点滅させる
+                float val = Mathf.Sin(Time.time * 50);
+                // Debug.Log(val);
+                if (val > 0)
+                {
+                    //スプライトを表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    //スプライトを非表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+                return;//ダメージ中は操作による移動はさせない
             }
-            else
-            {
-                //スプライトを非表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            }
-            return;//ダメージ中は操作による移動はさせない
         }
     }
     
@@ -210,12 +216,23 @@ public class EnemyHeadman : MonoBehaviour
         {
             Debug.Log("敵が倒れている");
             PlayerController.VillageBoss = true;
-
-            Debug.Log("ゲームクリア");
-            SceneManager.LoadScene("GameClear");
-
-            Destroy(gameObject, 0.2f);//0.2かけて敵を消す
+            StartCoroutine(Bossdown());
         }
+    }
+    IEnumerator Bossdown()
+    {
+        stop = false;
+        PlayerController.stop = false;
+        PlayerController.gameState = "gameclear";
+        Debug.Log("ゲームクリア");
+
+        yield return new WaitForSeconds(0.2f);
+        this.enabled = false;
+        //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        SceneManager.LoadScene("GameClear");
+        yield break;
     }
     void DamageEnd()
     {

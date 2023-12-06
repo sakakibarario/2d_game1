@@ -8,10 +8,9 @@ public class CaneraMap3 : MonoBehaviour
     public BoxCollider2D bxup;
     GameObject player;
     //âÊñ êßå‰óp
-    private int CPosleftx = -20;
+    //private int CPosleftx = -20;
     private float CPosright = 217.0f;
     private int PPosleftx = 0;
-    private bool Oncamera = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,6 @@ public class CaneraMap3 : MonoBehaviour
         bxleft.enabled = false;
         bxup = GetComponent<BoxCollider2D>();
         bxup.enabled = false;
-        Oncamera = true;
     }
 
     // Update is called once per frame
