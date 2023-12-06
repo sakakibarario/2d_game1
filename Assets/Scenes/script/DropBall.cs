@@ -16,7 +16,7 @@ public class DropBall : MonoBehaviour
     public float reactionDistance = 8.0f;//反応距離
     private float targetTime = 5.0f;
     private float currentTime = 0;
-
+    private bool stop = false;//動き制御
 
     private int Torent_Hp;
 
@@ -39,6 +39,7 @@ public class DropBall : MonoBehaviour
     void Start()
     {
         Torent_Hp = hp;
+        stop = true;
     }
 
     // Update is called once per frame
@@ -48,72 +49,75 @@ public class DropBall : MonoBehaviour
         {
             return;
         }
-        //Player　のゲームオブジェクトを得る
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (stop)
         {
-            if (isActive && Torent_Hp > 0)
+            //Player　のゲームオブジェクトを得る
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
             {
-                currentTime += Time.deltaTime;
-
-                if (targetTime < currentTime)
+                if (isActive && Torent_Hp > 0)
                 {
-                    currentTime = 0;
-                    //敵の座標を変数posに保存
-                    var pos = this.gameObject.transform.position;
-                    //弾のプレハブを作成
-                    var t = Instantiate(tama) as GameObject;
-                    //弾のプレハブの位置を敵の位置にする
-                    t.transform.position = pos;
-                    make_naihu();
-                    //SE葉っぱ
-                    leafAudioSource.Play();
-                }
+                    currentTime += Time.deltaTime;
 
-                count -= Time.deltaTime;
-                if (count <= 0)
+                    if (targetTime < currentTime)
+                    {
+                        currentTime = 0;
+                        //敵の座標を変数posに保存
+                        var pos = this.gameObject.transform.position;
+                        //弾のプレハブを作成
+                        var t = Instantiate(tama) as GameObject;
+                        //弾のプレハブの位置を敵の位置にする
+                        t.transform.position = pos;
+                        make_naihu();
+                        //SE葉っぱ
+                        leafAudioSource.Play();
+                    }
+
+                    count -= Time.deltaTime;
+                    if (count <= 0)
+                    {
+                        vecX = Random.Range(210, 229);
+
+                        Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
+
+                        //SE
+                        rootAudioSource.Play();
+
+                        count = 2.0f;
+                    }
+                }
+                else
                 {
-                    vecX = Random.Range(210, 229);
-
-                    Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
-
-                    //SE
-                    rootAudioSource.Play();
-
-                    count = 2.0f;
+                    //プレイヤーとの距離を求める
+                    float dist = Vector2.Distance(transform.position, player.transform.position);
+                    if (dist < reactionDistance)
+                    {
+                        isActive = true; //アクティブにする
+                    }
                 }
             }
-            else
+            else if (isActive)
             {
-                //プレイヤーとの距離を求める
-                float dist = Vector2.Distance(transform.position, player.transform.position);
-                if (dist < reactionDistance)
+                isActive = false;
+            }
+
+            if (inDamage)
+            {
+                //ダメージ中点滅させる
+                float val = Mathf.Sin(Time.time * 50);
+                // Debug.Log(val);
+                if (val > 0)
                 {
-                    isActive = true; //アクティブにする
+                    //スプライトを表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 }
+                else
+                {
+                    //スプライトを非表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+                return;//ダメージ中は操作による移動はさせない
             }
-        }
-        else if (isActive)
-        {
-            isActive = false;
-        }
-
-        if (inDamage)
-        {
-            //ダメージ中点滅させる
-            float val = Mathf.Sin(Time.time * 50);
-            // Debug.Log(val);
-            if (val > 0)
-            {
-                //スプライトを表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            }
-            else
-            {
-                //スプライトを非表示
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            }
-            return;//ダメージ中は操作による移動はさせない
         }
     }
 
@@ -154,13 +158,7 @@ public class DropBall : MonoBehaviour
         {
             Debug.Log("敵が倒れている");
             PlayerController.SougenBoss = true;
-
-            PlayerController.gameState = ("gameclear");
-
-            Debug.Log("ゲームクリア");
-            SceneManager.LoadScene("GameClear");
-            Destroy(gameObject, 0.2f);//0.2かけて敵を消す
-
+            StartCoroutine(Bossdown());
         }
     }
     void DamageEnd()
@@ -169,6 +167,21 @@ public class DropBall : MonoBehaviour
         inDamage = false;
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    IEnumerator Bossdown()
+    {
+        stop = false;
+        PlayerController.stop = false;
+        PlayerController.gameState = "gameclear";
+        Debug.Log("ゲームクリア");
+
+        yield return new WaitForSeconds(0.2f);
+        this.enabled = false;
+        //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        SceneManager.LoadScene("GameClear");
+        yield break;
     }
     void make_naihu()
     {
