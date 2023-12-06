@@ -9485,7 +9485,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b18f5e2ece7bbd140bea9080cc26fa3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12763,7 +12763,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b18f5e2ece7bbd140bea9080cc26fa3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -16699,28 +16699,25 @@ MonoBehaviour:
     m_Bits: 256
   slider: {fileID: 235910582}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
-
   bx: {fileID: 0}
-
   speed: 3
-  jump: 6
-  rush: 15
+  jump: 5
+  rush: 2
   D_HP: 0
-  stop: 0
   isCountDown: 1
   AnimeCount: 1
   isTimeOver: 0
   animeOver: 1
   displayTime: 0
   Animetime: 0
-  animerushtime: 0.1
+  animerushtime: 2
   K_isCountDown: 1
   buresutime: 0
   stopAnime: PlayerStop
   moveAnime: PlayerMove
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
-  flameAudioSource: {fileID: 1729734937}
+  flameAudioSource: {fileID: 0}
 --- !u!70 &1729734935
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -16986,7 +16983,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b18f5e2ece7bbd140bea9080cc26fa3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
