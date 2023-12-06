@@ -102,6 +102,7 @@ public class EnemyArtillery : MonoBehaviour
             //ƒ_ƒ[ƒW
             inDamage = true;
             move = false;
+            Destroy(this.gameObject);
             EnemyDamage();//“|‚ê‚Ä‚¢‚é‚©’²‚×‚é
         }
     }

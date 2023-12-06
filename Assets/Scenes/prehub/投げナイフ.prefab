@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6373566106748545141}
   - component: {fileID: 6373566106748545140}
   - component: {fileID: 6373566106748545131}
+  - component: {fileID: -2432237558302131179}
   m_Layer: 0
   m_Name: "\u6295\u3052\u30CA\u30A4\u30D5"
   m_TagString: tama
@@ -147,3 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &-2432237558302131179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373566106748545130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d49ad42f06dc03468b8d6141ce6ed03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
