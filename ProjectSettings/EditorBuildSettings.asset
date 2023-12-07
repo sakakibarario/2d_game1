@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/map.unity
     guid: 437d64c29ae822f479a5726d4c8ef780
   - enabled: 1
+    path: "Assets/\u68EE\u672C/Tutorial.unity"
+    guid: e612d29614bb7e24db319b169702b0cd
+  - enabled: 1
     path: "Assets/\u68EE\u672C/Home.unity"
     guid: 9e8aa6418ac34084ba7318a2351777f4
   - enabled: 1
@@ -26,9 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\u68EE\u672C/Status.unity"
     guid: d651cea2fe4e2e14da9cc20f635aa552
-  - enabled: 1
-    path: "Assets/\u68EE\u672C/Tutorial.unity"
-    guid: e612d29614bb7e24db319b169702b0cd
   - enabled: 1
     path: Assets/Scenes/map2V.unity
     guid: 77c19e5d52e08344b890c487f7e28092
