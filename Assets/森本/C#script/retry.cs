@@ -25,31 +25,25 @@ public class retry : MonoBehaviour
     void Update()
     {
         //草原ステージでGameover
-        if (Sougenretry == false)
-        {
-            MuraretryButton.gameObject.SetActive(false);
-            SiroretryButton.gameObject.SetActive(false);
-            SougenretryButton.gameObject.SetActive(true);
-
-            Sougenretry = true;
-        }
-        //村ステージでGameover
-        if (Muraretry == false)
+        if (Sougenretry)
         {
             SougenretryButton.gameObject.SetActive(false);
-            SiroretryButton.gameObject.SetActive(false);
             MuraretryButton.gameObject.SetActive(true);
 
-            Muraretry = true;
+            Sougenretry = false;
         }
-        //城ステージでGameover
-        if (SiroretryButton == false)
+        //村ステージでGameover
+        if (Muraretry)
         {
-            SougenretryButton.gameObject.SetActive(false);
             MuraretryButton.gameObject.SetActive(false);
             SiroretryButton.gameObject.SetActive(true);
 
-            Siroretry = true;
+            Muraretry = false;
         }
+        //城ステージでGameover
+        //if (SiroretryButton == false)
+        //{
+        //    Siroretry = true;
+        //}
     }
 }
