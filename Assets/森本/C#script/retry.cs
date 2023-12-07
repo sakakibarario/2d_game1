@@ -39,7 +39,7 @@ public class retry : MonoBehaviour
             Muraretry = false;
         }
         //城ステージでGameover
-        if (SiroretryButton)
+        if (Siroretry)
         {
             SiroretryButton.gameObject.SetActive(true);
             SougenretryButton.gameObject.SetActive(false);

@@ -14,7 +14,9 @@ public class Tocastle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        retry.Siroretry = true;
+        retry.Muraretry = false;
+        retry.Sougenretry = false;
     }
     public void OnClickStartButton()
     {

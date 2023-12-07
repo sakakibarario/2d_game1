@@ -8,7 +8,9 @@ public class Tomap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        retry.Sougenretry = true;
+        retry.Muraretry = false;
+        retry.Siroretry = false;
     }
 
     // Update is called once per frame

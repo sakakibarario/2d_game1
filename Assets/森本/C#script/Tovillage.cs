@@ -8,13 +8,15 @@ public class Tovillage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        retry.Muraretry = true;
+        retry.Sougenretry = false;
+        retry.Siroretry = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       
     }
     public void OnClickStartButton()
     {
