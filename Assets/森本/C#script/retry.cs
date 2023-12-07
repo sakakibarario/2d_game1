@@ -16,9 +16,7 @@ public class retry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Sougenretry = PlayerController.SougenBoss;
-        Muraretry = PlayerController.VillageBoss;
-        Siroretry = PlayerController.CastleBoss;
+        
     }
 
     // Update is called once per frame
@@ -27,23 +25,26 @@ public class retry : MonoBehaviour
         //草原ステージでGameover
         if (Sougenretry)
         {
-            SougenretryButton.gameObject.SetActive(false);
-            MuraretryButton.gameObject.SetActive(true);
-
-            Sougenretry = false;
+            SougenretryButton.gameObject.SetActive(true);
+            MuraretryButton.gameObject.SetActive(false);
+            SiroretryButton.gameObject.SetActive(false);
         }
         //村ステージでGameover
         if (Muraretry)
         {
-            MuraretryButton.gameObject.SetActive(false);
-            SiroretryButton.gameObject.SetActive(true);
+            MuraretryButton.gameObject.SetActive(true);
+            SougenretryButton.gameObject.SetActive(false);
+            SiroretryButton.gameObject.SetActive(false);
 
             Muraretry = false;
         }
         //城ステージでGameover
-        //if (SiroretryButton == false)
-        //{
-        //    Siroretry = true;
-        //}
+        if (SiroretryButton)
+        {
+            SiroretryButton.gameObject.SetActive(true);
+            SougenretryButton.gameObject.SetActive(false);
+            MuraretryButton.gameObject.SetActive(false);
+
+        }
     }
 }
