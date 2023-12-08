@@ -777,6 +777,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8d20c046ede3145826c0e3ebeb1431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: map3C
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 3
 --- !u!114 &654557192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,6 +948,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477ea331eb312f6458f6de4c58a6f06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: map2V
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 3
 --- !u!114 &685195511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1304,6 +1310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182ff406bb4ee2c4cb8d2be28e2c14e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: map
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 3
 --- !u!114 &1233985304
 MonoBehaviour:
   m_ObjectHideFlags: 0
