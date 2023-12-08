@@ -8,16 +8,18 @@ public class Tovillage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
     public void OnClickStartButton()
     {
         SceneManager.LoadScene("map2V");
+        retry.Muraretry = true;
+        retry.Sougenretry = false;
+        retry.Siroretry = false;
     }
 }

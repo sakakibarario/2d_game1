@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Tomap : MonoBehaviour
+public class tutorial : MonoBehaviour
 {
+
+    static public bool tut = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +17,18 @@ public class Tomap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("map");
-        retry.Sougenretry = true;
-        retry.Muraretry = false;
-        retry.Siroretry = false;
+        if (tut == true)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        if (tut == false)
+        {
+            SceneManager.LoadScene("Home");
+        }
+        tut = false;
     }
-
 }
