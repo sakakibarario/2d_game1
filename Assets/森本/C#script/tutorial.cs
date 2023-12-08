@@ -8,6 +8,10 @@ public class tutorial : MonoBehaviour
 
     static public bool tut = true;
 
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +27,13 @@ public class tutorial : MonoBehaviour
     {
         if (tut == true)
         {
-            SceneManager.LoadScene("Tutorial");
+            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+            //SceneManager.LoadScene("Tutorial");
         }
         if (tut == false)
         {
-            SceneManager.LoadScene("Home");
+            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+            //SceneManager.LoadScene("Home");
         }
         tut = false;
     }
