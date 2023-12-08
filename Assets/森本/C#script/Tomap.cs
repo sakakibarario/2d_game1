@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Tomap : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,8 @@ public class Tomap : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("map");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+        //SceneManager.LoadScene("map");
         retry.Sougenretry = true;
         retry.Muraretry = false;
         retry.Siroretry = false;

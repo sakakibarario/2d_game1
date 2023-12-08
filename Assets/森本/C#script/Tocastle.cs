@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Tocastle : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,8 @@ public class Tocastle : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("map3C");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+        //SceneManager.LoadScene("map3C");
         retry.Siroretry = true;
         retry.Muraretry = false;
         retry.Sougenretry = false;

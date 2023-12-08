@@ -32,8 +32,7 @@ public class tutorial : MonoBehaviour
         }
         if (tut == false)
         {
-            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-            //SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("Home");
         }
         tut = false;
     }
