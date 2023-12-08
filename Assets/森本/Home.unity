@@ -544,9 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07d17b42941881429a8fe3508c8bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Title
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  fadeSpeed: 3
 --- !u!1 &136253208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,7 +1605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: map3C
-  fadeColor: {r: 0.15864186, g: 0.25016728, b: 0.2924528, a: 1}
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeSpeed: 2
 --- !u!82 &720811015
 AudioSource:
@@ -3579,7 +3576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: map
-  fadeColor: {r: 0.14470018, g: 0.2830189, b: 0.1294945, a: 1}
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeSpeed: 2
 --- !u!82 &1582230879
 AudioSource:
@@ -4205,7 +4202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: map2V
-  fadeColor: {r: 0.30140603, g: 0.3018868, b: 0.10964756, a: 1}
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeSpeed: 2
 --- !u!82 &1910267930
 AudioSource:
