@@ -32,6 +32,7 @@ public class CaneraMap3 : MonoBehaviour
             transform.position = new Vector3
            (transform.position.x, 0, transform.position.z);//ƒ{ƒX‰æ–Ê‚ðŒÅ’è
             bxleft.enabled = true;
+            OnOffBlock.OnOffswitch = true;
             Debug.Log("false2");
         }
         else if (playerPos.x > PPosleftx || playerPos.y > 8)
