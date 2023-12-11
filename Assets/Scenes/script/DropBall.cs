@@ -9,8 +9,24 @@ public class DropBall : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
+    public GameObject Point1;
+    public GameObject Point2;
+    public GameObject Point3;
+    public GameObject Point21;
+    public GameObject Point22;
+    public GameObject Point23;
+    public GameObject Point31;
+    public GameObject Point32;
+    public GameObject Point33;
+    public GameObject Point41;
+    public GameObject Point42;
+    public GameObject Point43;
+    public GameObject DangerArea1;
+    public GameObject DangerArea2;
+    public GameObject DangerArea3;
+    public GameObject DangerArea4;
 
-    private float count = 1.0f;
+    private float count = 5.0f;
     private int vecX;
     public int hp = 50;
     public float reactionDistance = 8.0f;//反応距離
@@ -35,11 +51,27 @@ public class DropBall : MonoBehaviour
     AudioSource rootAudioSource;
 
 
+
+    //根っこ用りすと
+    int start = 1;
+    int end = 4;
+    List<int> numbers = new List<int>();
+    bool random = false;
+    public int i = 0;
+    private int rnd = 0;
+    bool DamageT = false;
+
     // Start is called before the first frame update
     void Start()
     {
         Torent_Hp = hp;
         stop = true;
+        DamageT = true;
+
+        for (int i = start; i <= end; i++)
+        {
+            numbers.Add(i);
+        }
     }
 
     // Update is called once per frame
@@ -73,17 +105,17 @@ public class DropBall : MonoBehaviour
                         leafAudioSource.Play();
                     }
 
-                    count -= Time.deltaTime;
-                    if (count <= 0)
+                    if (DamageT)
                     {
-                        vecX = Random.Range(210, 229);
+                        count -= Time.deltaTime;
+                        if (count < 0)
+                        {
+                            Debug.Log("開始");
+                            //SE
+                            rootAudioSource.Play();
+                            StartCoroutine(RootRandom());
 
-                        Instantiate(ball, new Vector3(vecX, -4.3f, 5), Quaternion.identity);
-
-                        //SE
-                        rootAudioSource.Play();
-
-                        count = 2.0f;
+                        }
                     }
                 }
                 else
@@ -117,6 +149,14 @@ public class DropBall : MonoBehaviour
                     gameObject.GetComponent<SpriteRenderer>().enabled = false;
                 }
                 return;//ダメージ中は操作による移動はさせない
+            }
+            if (random)//リストの配列作成
+            {
+                for (int i = start; i <= end; i++)
+                {
+                    numbers.Add(i);
+                }
+                random = false;
             }
         }
     }
@@ -157,6 +197,10 @@ public class DropBall : MonoBehaviour
         if (Torent_Hp <= 0)
         {
             Debug.Log("敵が倒れている");
+            DangerArea1.gameObject.SetActive(false);
+            DangerArea2.gameObject.SetActive(false);
+            DangerArea3.gameObject.SetActive(false);
+            DangerArea4.gameObject.SetActive(false);
             PlayerController.SougenBoss = true;
             StartCoroutine(Bossdown());
         }
@@ -183,10 +227,165 @@ public class DropBall : MonoBehaviour
         SceneManager.LoadScene("GameClear");
         yield break;
     }
+
     void make_naihu()
     {
         EnemyBossGan.Naihu = true;
     }
+
+    IEnumerator RootRandom()
+    {
+        count = 5.0f;
+        DamageT = false;
+
+        for (i = 0; i < 4; i++)
+        {
+            int index = Random.Range(0, numbers.Count);//ランダム取得
+
+            rnd = numbers[index];//使えるように
+            Debug.Log(rnd);
+
+            numbers.RemoveAt(index);//取得した情報を消す
+
+            if (rnd == 1)
+            {
+                //危険エリア表示
+                DangerArea1.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Root1());
+            }
+            if (rnd == 2)
+            {
+                //危険エリア表示
+                DangerArea2.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Root2());
+            }
+            if (rnd == 3)
+            {   //危険エリア表示
+                DangerArea3.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Root3());
+
+            }
+            if (rnd == 4)
+            {   //危険エリア表示
+                DangerArea4.gameObject.SetActive(true);
+                //コルーチン呼び出し
+                StartCoroutine(Root4());
+
+            }
+            yield return new WaitForSeconds(1.0f);//待機
+            if (i == 3)
+            {
+                random = true;  //リスト初期化の開始
+                DamageT = true;
+                yield break;
+            }
+        }
+
+    }
+    private IEnumerator Root1()
+    {
+
+        yield return new WaitForSeconds(2.0f);//待機
+
+        //Point1の座標を変数posに保存
+        var pos1 = Point1.gameObject.transform.position;
+        var pos2 = Point2.gameObject.transform.position;
+        var pos3 = Point3.gameObject.transform.position;
+
+        //弾のプレハブを作成
+        var t1 = Instantiate(ball) as GameObject;
+        var t2 = Instantiate(ball) as GameObject;
+        var t3 = Instantiate(ball) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t1.transform.position = pos1;
+        yield return new WaitForSeconds(0.2f);
+        t2.transform.position = pos2;
+        yield return new WaitForSeconds(0.2f);
+        t3.transform.position = pos3;
+        yield return new WaitForSeconds(0.2f);
+        //危険エリア非表示
+        DangerArea1.gameObject.SetActive(false);
+    }
+    private IEnumerator Root2()
+    {
+
+        yield return new WaitForSeconds(2.0f);//待機
+
+        //Point1の座標を変数posに保存
+        var pos1 = Point21.gameObject.transform.position;
+        var pos2 = Point22.gameObject.transform.position;
+        var pos3 = Point23.gameObject.transform.position;
+
+        //弾のプレハブを作成
+        var t1 = Instantiate(ball) as GameObject;
+        var t2 = Instantiate(ball) as GameObject;
+        var t3 = Instantiate(ball) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t1.transform.position = pos1;
+        yield return new WaitForSeconds(0.2f);
+        t2.transform.position = pos2;
+        yield return new WaitForSeconds(0.2f);
+        t3.transform.position = pos3;
+        yield return new WaitForSeconds(0.2f);
+        //危険エリア非表示
+        DangerArea2.gameObject.SetActive(false);
+    }
+    private IEnumerator Root3()
+    {
+
+        yield return new WaitForSeconds(2.0f);//待機
+
+        //Point1の座標を変数posに保存
+        var pos1 = Point31.gameObject.transform.position;
+        var pos2 = Point32.gameObject.transform.position;
+        var pos3 = Point33.gameObject.transform.position;
+
+        //弾のプレハブを作成
+        var t1 = Instantiate(ball) as GameObject;
+        var t2 = Instantiate(ball) as GameObject;
+        var t3 = Instantiate(ball) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t1.transform.position = pos1;
+        yield return new WaitForSeconds(0.2f);
+        t2.transform.position = pos2;
+        yield return new WaitForSeconds(0.2f);
+        t3.transform.position = pos3;
+        yield return new WaitForSeconds(0.2f);
+        //危険エリア非表示
+        DangerArea3.gameObject.SetActive(false);
+    }
+    private IEnumerator Root4()
+    {
+
+        yield return new WaitForSeconds(2.0f);//待機
+
+        //Point1の座標を変数posに保存
+        var pos1 = Point41.gameObject.transform.position;
+        var pos2 = Point42.gameObject.transform.position;
+        var pos3 = Point43.gameObject.transform.position;
+
+        //弾のプレハブを作成
+        var t1 = Instantiate(ball) as GameObject;
+        var t2 = Instantiate(ball) as GameObject;
+        var t3 = Instantiate(ball) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t1.transform.position = pos1;
+        yield return new WaitForSeconds(0.2f);
+        t2.transform.position = pos2;
+        yield return new WaitForSeconds(0.2f);
+        t3.transform.position = pos3;
+        yield return new WaitForSeconds(0.2f);
+        //危険エリア非表示
+        DangerArea4.gameObject.SetActive(false);
+    }
+
+
+
+
+
 }
 
 

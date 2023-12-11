@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7557546855404507514}
   - component: {fileID: 1200070485992045987}
   - component: {fileID: 5196507397246591434}
-  - component: {fileID: 2383657364483474266}
+  - component: {fileID: -4430674871359027893}
   m_Layer: 0
   m_Name: "\u30C8\u30EC\u30F3\u30C8\u6839"
   m_TagString: tama
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2383657364483474266
+--- !u!114 &-4430674871359027893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,6 +158,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8537008491532581221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d49ad42f06dc03468b8d6141ce6ed03, type: 3}
+  m_Script: {fileID: 11500000, guid: bd94a508cfacc9d4fac0ec640fbb7f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
