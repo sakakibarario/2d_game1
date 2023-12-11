@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public CapsuleCollider2D bx;
 
     public float speed = 3.0f;  //移動速度
-    public float jump = 5.0f;   //ジャンプ力
+    public float jump = 6.0f;   //ジャンプ力
     public float rush = 2.0f;   //突進の力
     public int D_HP;          　//ドラゴンのHP
     private int Max_D_HP;       //最大HP保存用
@@ -507,7 +507,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //接触開始
+    //接触開始ダメージ
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!inDamage)

@@ -11,6 +11,8 @@ public class ToTitle : MonoBehaviour
 
     public void OnClickStartButton()
     {
+        PlayerController.pose = false;//フラグおろす
+        TimeCounter.isPose = false;//フラグおろす
         Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         //SceneManager.LoadScene("Title");
     }
