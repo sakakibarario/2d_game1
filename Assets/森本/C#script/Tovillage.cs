@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Tovillage : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,8 @@ public class Tovillage : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("map2V");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+        //SceneManager.LoadScene("map2V");
         retry.Muraretry = true;
         retry.Sougenretry = false;
         retry.Siroretry = false;

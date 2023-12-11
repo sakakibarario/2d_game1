@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ToTitle : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("Title");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+        //SceneManager.LoadScene("Title");
     }
 }
