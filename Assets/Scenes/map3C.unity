@@ -3290,6 +3290,9 @@ MonoBehaviour:
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
   flameAudioSource: {fileID: 216599307}
+  sceneName: Gameover
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 3
 --- !u!61 &216599312
 BoxCollider2D:
   m_ObjectHideFlags: 0

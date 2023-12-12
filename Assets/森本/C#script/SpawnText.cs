@@ -6,7 +6,8 @@ public class SpawnText : MonoBehaviour
 {
     public GameObject KakyuText;
     public GameObject HisyouText;
-
+    static public bool SpTextS;
+    static public bool SpTextV = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +19,22 @@ public class SpawnText : MonoBehaviour
     {
         if (PlayerController.SougenBoss)//ëêå¥CLEAR
         {
-            KakyuText.gameObject.SetActive(true);
-            HisyouText.gameObject.SetActive(false);
+            if(SpTextS)
+            {
+                KakyuText.gameObject.SetActive(true);
+                HisyouText.gameObject.SetActive(false);
+            }
 
             if (PlayerController.VillageBoss)//ë∫CLEAR
             {
-                HisyouText.gameObject.SetActive(true);
-                KakyuText.gameObject.SetActive(false);
+                if(SpTextV && EnemyHeadman.one)
+                {                   
+                    HisyouText.gameObject.SetActive(true);
+                    KakyuText.gameObject.SetActive(false);
+                }
+                EnemyHeadman.one = false;
             }
+            SpTextS = false;
         }
     }
 }

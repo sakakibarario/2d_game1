@@ -102,6 +102,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioSource flameAudioSource;
 
+    //ÉVÅ[ÉìêÿÇËë÷Ç¶óp
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -761,6 +766,7 @@ public class PlayerController : MonoBehaviour
 
         
         yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("Gameover");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+        //SceneManager.LoadScene("Gameover");
     }
 }
