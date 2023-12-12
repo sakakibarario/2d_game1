@@ -51,7 +51,8 @@ public class DropBall : MonoBehaviour
     [SerializeField]
     AudioSource rootAudioSource;
 
-
+    //CLEARテキスト一回だけ出す用
+    static public bool oneS = false;
 
     //根っこ用りすと
     int start = 1;
@@ -238,6 +239,8 @@ public class DropBall : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+
+        oneS = true;//CLEARシーンの獲得テキスト一回だけ出すフラグあげる
         SceneManager.LoadScene("GameClear");
         yield break;
     }

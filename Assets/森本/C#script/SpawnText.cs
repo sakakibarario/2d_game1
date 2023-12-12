@@ -19,10 +19,11 @@ public class SpawnText : MonoBehaviour
     {
         if (PlayerController.SougenBoss)//ëêå¥CLEAR
         {
-            if(SpTextS)
+            if(SpTextS && DropBall.oneS)
             {
                 KakyuText.gameObject.SetActive(true);
                 HisyouText.gameObject.SetActive(false);
+                //DropBall.oneS = false;
             }
 
             if (PlayerController.VillageBoss)//ë∫CLEAR
@@ -34,7 +35,6 @@ public class SpawnText : MonoBehaviour
                 }
                 EnemyHeadman.one = false;
             }
-            SpTextS = false;
         }
     }
 }
