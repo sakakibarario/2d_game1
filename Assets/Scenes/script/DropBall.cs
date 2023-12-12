@@ -9,6 +9,7 @@ public class DropBall : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
+    //root攻撃の座標取得オブジェクト
     public GameObject Point1;
     public GameObject Point2;
     public GameObject Point3;
@@ -26,9 +27,8 @@ public class DropBall : MonoBehaviour
     public GameObject DangerArea3;
     public GameObject DangerArea4;
 
-    private float count = 5.0f;
-    private int vecX;
-    public int hp = 50;
+    private float count = 5.0f;     //root作成カウント用
+    public int hp = 50;             //ＭＡＸｈｐ
     public float reactionDistance = 8.0f;//反応距離
     private float targetTime = 5.0f;
     private float currentTime = 0;
@@ -42,6 +42,7 @@ public class DropBall : MonoBehaviour
 
     private bool inDamage = false;
     private bool isActive = false;
+    private bool isLeafAttack = false;
 
     //SE用
     [SerializeField]
@@ -68,7 +69,7 @@ public class DropBall : MonoBehaviour
         stop = true;
         DamageT = true;
 
-        for (int i = start; i <= end; i++)
+        for (int i = start; i <= end; i++)//リストの代入
         {
             numbers.Add(i);
         }
@@ -93,16 +94,9 @@ public class DropBall : MonoBehaviour
 
                     if (targetTime < currentTime)
                     {
-                        currentTime = 0;
-                        //敵の座標を変数posに保存
-                        var pos = this.gameObject.transform.position;
-                        //弾のプレハブを作成
-                        var t = Instantiate(tama) as GameObject;
-                        //弾のプレハブの位置を敵の位置にする
-                        t.transform.position = pos;
-                        make_naihu();
-                        //SE葉っぱ
-                        leafAudioSource.Play();
+                        StartCoroutine(LeafAttack());
+                        
+                        
                     }
 
                     if (DamageT)
@@ -114,7 +108,6 @@ public class DropBall : MonoBehaviour
                             //SE
                             rootAudioSource.Play();
                             StartCoroutine(RootRandom());
-
                         }
                     }
                 }
@@ -150,6 +143,25 @@ public class DropBall : MonoBehaviour
                 }
                 return;//ダメージ中は操作による移動はさせない
             }
+
+            if(isLeafAttack)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 3, 255);
+                //回復中点滅させる
+                float val = Mathf.Sin(Time.time * 20);
+                Debug.Log(val);
+                if (val > 0)
+                {
+                    //スプライトを表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    //スプライトを非表示
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+            }
+
             if (random)//リストの配列作成
             {
                 for (int i = start; i <= end; i++)
@@ -190,6 +202,8 @@ public class DropBall : MonoBehaviour
         }
         EnemyDamage();//倒れているか調べる
     }
+    
+
 
     void EnemyDamage()
     {
@@ -212,6 +226,7 @@ public class DropBall : MonoBehaviour
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
+
     IEnumerator Bossdown()
     {
         stop = false;
@@ -232,7 +247,36 @@ public class DropBall : MonoBehaviour
     {
         EnemyBossGan.Naihu = true;
     }
+    IEnumerator LeafAttack()
+    {
+        currentTime = 0;
+        isLeafAttack = true;
 
+        yield return new WaitForSeconds(0.4f);
+
+
+        //回復フラグおろす
+        isLeafAttack = false;
+
+        //スプライトをもとに戻す
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.2f);
+
+
+        //敵の座標を変数posに保存
+        var pos = this.gameObject.transform.position;
+        //弾のプレハブを作成
+        var t = Instantiate(tama) as GameObject;
+        //弾のプレハブの位置を敵の位置にする
+        t.transform.position = pos;
+        make_naihu();
+        //SE葉っぱ
+        leafAudioSource.Play();
+        //currentTime = 0;
+
+        yield break;
+    }
     IEnumerator RootRandom()
     {
         count = 5.0f;
