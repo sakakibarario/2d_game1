@@ -105,8 +105,7 @@ public class DropBall : MonoBehaviour
                         if (count < 0)
                         {
                             Debug.Log("開始");
-                            //SE
-                            rootAudioSource.Play();
+                            
                             StartCoroutine(RootRandom());
                         }
                     }
@@ -146,7 +145,7 @@ public class DropBall : MonoBehaviour
 
             if(isLeafAttack)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 3, 255);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 3, 255);//赤色に点滅
                 //回復中点滅させる
                 float val = Mathf.Sin(Time.time * 20);
                 Debug.Log(val);
@@ -265,12 +264,13 @@ public class DropBall : MonoBehaviour
 
 
         //敵の座標を変数posに保存
-        var pos = this.gameObject.transform.position;
+        var pos = this.gameObject.transform.position + transform.up * -1.7f;
         //弾のプレハブを作成
         var t = Instantiate(tama) as GameObject;
         //弾のプレハブの位置を敵の位置にする
         t.transform.position = pos;
-        make_naihu();
+        t.AddComponent<TorentLeaf>();
+        //make_naihu();
         //SE葉っぱ
         leafAudioSource.Play();
         //currentTime = 0;
@@ -344,10 +344,16 @@ public class DropBall : MonoBehaviour
         var t2 = Instantiate(ball) as GameObject;
         var t3 = Instantiate(ball) as GameObject;
         //弾のプレハブの位置を敵の位置にする
+        //SE
+        rootAudioSource.Play();
         t1.transform.position = pos1;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t2.transform.position = pos2;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t3.transform.position = pos3;
         yield return new WaitForSeconds(0.2f);
         //危険エリア非表示
@@ -368,10 +374,16 @@ public class DropBall : MonoBehaviour
         var t2 = Instantiate(ball) as GameObject;
         var t3 = Instantiate(ball) as GameObject;
         //弾のプレハブの位置を敵の位置にする
+        //SE
+        rootAudioSource.Play();
         t1.transform.position = pos1;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t2.transform.position = pos2;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t3.transform.position = pos3;
         yield return new WaitForSeconds(0.2f);
         //危険エリア非表示
@@ -392,10 +404,16 @@ public class DropBall : MonoBehaviour
         var t2 = Instantiate(ball) as GameObject;
         var t3 = Instantiate(ball) as GameObject;
         //弾のプレハブの位置を敵の位置にする
+        //SE
+        rootAudioSource.Play();
         t1.transform.position = pos1;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t2.transform.position = pos2;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t3.transform.position = pos3;
         yield return new WaitForSeconds(0.2f);
         //危険エリア非表示
@@ -416,10 +434,16 @@ public class DropBall : MonoBehaviour
         var t2 = Instantiate(ball) as GameObject;
         var t3 = Instantiate(ball) as GameObject;
         //弾のプレハブの位置を敵の位置にする
+        //SE
+        rootAudioSource.Play();
         t1.transform.position = pos1;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t2.transform.position = pos2;
         yield return new WaitForSeconds(0.2f);
+        //SE
+        rootAudioSource.Play();
         t3.transform.position = pos3;
         yield return new WaitForSeconds(0.2f);
         //危険エリア非表示

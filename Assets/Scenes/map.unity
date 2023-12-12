@@ -17852,7 +17852,7 @@ MonoBehaviour:
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
   bx: {fileID: 1729734935}
   speed: 3
-  jump: 6
+  jump: 6.2
   rush: 15
   D_HP: 0
   isCountDown: 1
@@ -22521,6 +22521,10 @@ PrefabInstance:
       propertyPath: DangerArea4
       value: 
       objectReference: {fileID: 1367804665}
+    - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
+      propertyPath: reactionDistance
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ef945afca10098438810e73252671f8, type: 3}
 --- !u!4 &3769257701727891329 stripped
