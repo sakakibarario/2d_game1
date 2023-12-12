@@ -146,7 +146,7 @@ public class DropBall : MonoBehaviour
 
             if(isLeafAttack)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 3, 255);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 3, 255);
                 //‰ñ•œ’†“_–Å‚³‚¹‚é
                 float val = Mathf.Sin(Time.time * 20);
                 Debug.Log(val);
