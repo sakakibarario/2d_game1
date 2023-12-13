@@ -17869,9 +17869,9 @@ MonoBehaviour:
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
   flameAudioSource: {fileID: 1729734937}
-  sceneName: 
-  fadeColor: {r: 0, g: 0, b: 0, a: 0}
-  fadeSpeed: 0
+  sceneName: Gameover
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 3
 --- !u!70 &1729734935
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

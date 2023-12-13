@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class tutorial : MonoBehaviour
 {
-
-    static public bool tut = true;
-
     [SerializeField] private string sceneName;
     [SerializeField] private Color fadeColor;
     [SerializeField] private float fadeSpeed;
@@ -25,15 +22,6 @@ public class tutorial : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        if (tut == true)
-        {
-            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-            //SceneManager.LoadScene("Tutorial");
-        }
-        if (tut == false)
-        {
-            SceneManager.LoadScene("Home");
-        }
-        tut = false;
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
     }
 }
