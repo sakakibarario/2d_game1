@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ToHome : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +22,7 @@ public class ToHome : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("Home");
-
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
     }
 
 }
