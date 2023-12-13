@@ -232,9 +232,6 @@ public class EnemyHeadman : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
 
-        //CLEARシーンの獲得テキストフラグをあげる
-        SpawnText.SpTextV = true;
-
         SceneManager.LoadScene("GameClear");
         yield break;
     }

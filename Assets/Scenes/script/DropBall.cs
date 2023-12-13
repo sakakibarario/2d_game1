@@ -237,8 +237,6 @@ public class DropBall : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
 
-        //CLEARシーンの獲得テキストフラグをあげる
-        SpawnText.SpTextS = true;
         SceneManager.LoadScene("GameClear");
         yield break;
     }
