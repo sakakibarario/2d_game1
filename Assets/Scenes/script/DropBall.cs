@@ -51,8 +51,6 @@ public class DropBall : MonoBehaviour
     [SerializeField]
     AudioSource rootAudioSource;
 
-
-
     //ª‚Á‚±—p‚è‚·‚Æ
     int start = 1;
     int end = 4;
@@ -238,6 +236,7 @@ public class DropBall : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2‚©‚¯‚Ä“G‚ğÁ‚·
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+
         SceneManager.LoadScene("GameClear");
         yield break;
     }

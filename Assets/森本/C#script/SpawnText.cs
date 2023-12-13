@@ -6,35 +6,46 @@ public class SpawnText : MonoBehaviour
 {
     public GameObject KakyuText;
     public GameObject HisyouText;
-    static public bool SpTextS;
-    static public bool SpTextV = false;
+
+    static public bool ones = true;
+    static public bool onev = true;
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         if (PlayerController.SougenBoss)//ëêå¥CLEAR
         {
-            if(SpTextS)
+            if (ones)
             {
                 KakyuText.gameObject.SetActive(true);
+                HisyouText.gameObject.SetActive(false);
+                ones = false;
+            }
+            else if (ones == false)
+            {
+                KakyuText.gameObject.SetActive(false);
                 HisyouText.gameObject.SetActive(false);
             }
 
             if (PlayerController.VillageBoss)//ë∫CLEAR
             {
-                if(SpTextV && EnemyHeadman.one)
-                {                   
+                if(onev)
+                {
                     HisyouText.gameObject.SetActive(true);
                     KakyuText.gameObject.SetActive(false);
+                    onev = false;
                 }
-                EnemyHeadman.one = false;
+                else if(onev)
+                {
+                    HisyouText.gameObject.SetActive(false);
+                    KakyuText.gameObject.SetActive(false);
+                }          
             }
-            SpTextS = false;
         }
+    }
+
+// Update is called once per frame
+void Update()
+    {
+
     }
 }
