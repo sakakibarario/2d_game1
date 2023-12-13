@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DropBall : MonoBehaviour
 {
@@ -51,6 +52,20 @@ public class DropBall : MonoBehaviour
     [SerializeField]
     AudioSource rootAudioSource;
 
+    //パーティクル用
+    static public bool particleon = false;
+
+    //フェード用
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
+    //ゆっくり消す用
+    public Image Boss;
+    public GameObject BOSS;
+    bool fadeFlag;
+    public float timer = 1.2f;
+
     //根っこ用りすと
     int start = 1;
     int end = 4;
@@ -72,6 +87,7 @@ public class DropBall : MonoBehaviour
         {
             numbers.Add(i);
         }
+
     }
 
     // Update is called once per frame
@@ -233,10 +249,18 @@ public class DropBall : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         this.enabled = false;
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
-        yield return new WaitForSeconds(0.5f);
+
+        //ボスをゆっくり消す
+
+        ////パーティクル開始--------------------
+        particleon = true;
+
+        ////------------------------------------
+
+        yield return new WaitForSeconds(5.5f);
         Destroy(gameObject);
 
-        SceneManager.LoadScene("GameClear");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         yield break;
     }
 
@@ -447,11 +471,6 @@ public class DropBall : MonoBehaviour
         //危険エリア非表示
         DangerArea4.gameObject.SetActive(false);
     }
-
-
-
-
-
 }
 
 

@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class particle : MonoBehaviour
 {
-    ParticleSystem particlehosi;
+    //パーティクル用
+    public GameObject particlehosi;
+    public Vector3 particlePoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        particlehosi = this.GetComponent<ParticleSystem>(); 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(particlehosi.isStopped)//パーティクルが終了したか判別
-        //{
-        //    Destroy(this.gameObject);//パーティクル用ゲームオブジェクトを削除
-        //}
+        if (DropBall.particleon)
+        {
+            Instantiate(particlehosi, particlePoint, Quaternion.identity);
+            DropBall.particleon = false;
+        }
+
     }
 }
