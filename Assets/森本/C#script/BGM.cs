@@ -10,6 +10,7 @@ public class BGM : MonoBehaviour
 
     [SerializeField]
     AudioSource BossAudioSource;
+    static public bool BossStart = false;//ボス戦開始
 
     bool BG;
     bool one;
@@ -19,6 +20,7 @@ public class BGM : MonoBehaviour
     {
         BG = true;
         one = false;
+        BossStart = false;
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class BGM : MonoBehaviour
                 DefaultAudioSource.Stop();
                 BossAudioSource.Play();
                 one = true;
+                BossStart = true;//フラグを上げる
             }
         }
         if(one)

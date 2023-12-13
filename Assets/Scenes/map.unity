@@ -17869,6 +17869,9 @@ MonoBehaviour:
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
   flameAudioSource: {fileID: 1729734937}
+  sceneName: 
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  fadeSpeed: 0
 --- !u!70 &1729734935
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -22523,7 +22526,7 @@ PrefabInstance:
       objectReference: {fileID: 1367804665}
     - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
       propertyPath: reactionDistance
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ef945afca10098438810e73252671f8, type: 3}
