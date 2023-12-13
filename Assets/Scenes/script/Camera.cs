@@ -10,6 +10,7 @@ public class Camera : MonoBehaviour
     private int   CPosleftx = -3;
     private float CPosright = 131.5f;
     private int   PPosleftx = -3;
+    private float CScrollx = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +30,19 @@ public class Camera : MonoBehaviour
             transform.position = new Vector3
            (transform.position.x, transform.position.y, transform.position.z);//スタート画面を固定
         }
-        else if (transform.position.x > CPosright)
+        else if (BGM.BossStart)
         {
-            transform.position = new Vector3
-           (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
-            bx.enabled = true;
+            if (transform.position.x > CPosright)
+            {
+                transform.position = new Vector3
+               (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
+            }
+            else
+            {
+                bx.enabled = true;
+                transform.position = new Vector3
+                (transform.position.x + CScrollx, transform.position.y, transform.position.z);//画面をスクロール
+            }
         }
         else if (playerPos.x > PPosleftx)
         {

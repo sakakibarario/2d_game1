@@ -66,6 +66,7 @@ public class DropBall : MonoBehaviour
         Torent_Hp = hp;
         stop = true;
         DamageT = true;
+        count = 2.0f;  
 
         for (int i = start; i <= end; i++)//リストの代入
         {
@@ -88,13 +89,11 @@ public class DropBall : MonoBehaviour
             {
                 if (isActive && Torent_Hp > 0)
                 {
-                    currentTime += Time.deltaTime;
+                    currentTime += Time.deltaTime;//かうんとアップ
 
                     if (targetTime < currentTime)
                     {
-                        StartCoroutine(LeafAttack());
-                        
-                        
+                        StartCoroutine(LeafAttack());                        
                     }
 
                     if (DamageT)
