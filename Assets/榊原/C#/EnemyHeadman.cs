@@ -49,9 +49,6 @@ public class EnemyHeadman : MonoBehaviour
 
     GameObject[] tagObjects;//オブジェクトカウント用
 
-    //GameCLEAR用
-    static public bool one = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -235,7 +232,8 @@ public class EnemyHeadman : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
 
-        one = true;//CLEARシーンの獲得テキスト一回だけ出すフラグあげる
+        //CLEARシーンの獲得テキストフラグをあげる
+        SpawnText.SpTextV = true;
 
         SceneManager.LoadScene("GameClear");
         yield break;
