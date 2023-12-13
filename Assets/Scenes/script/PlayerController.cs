@@ -691,6 +691,10 @@ public class PlayerController : MonoBehaviour
                 {
                     D_HP += meat;
                     Destroy(collision.gameObject);//当たったオブジェクトを削除
+                    if(D_HP > Max_D_HP)
+                    {
+                        D_HP = Max_D_HP;
+                    }
                     slider.value = (float)D_HP / (float)S_D_HP; ;
                     Debug.Log("slider.value : " + slider.value);
                     GetRecovery();
