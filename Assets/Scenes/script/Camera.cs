@@ -23,34 +23,37 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
+        if (PlayerController.pose == false)
+        {
+            Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
 
-        if (transform.position.x < CPosleftx)
-        {
-            transform.position = new Vector3
-           (transform.position.x, transform.position.y, transform.position.z);//スタート画面を固定
-        }
-        else if (BGM.BossStart)
-        {
-            if (transform.position.x > CPosright)
+            if (transform.position.x < CPosleftx)
             {
                 transform.position = new Vector3
-               (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
+               (transform.position.x, transform.position.y, transform.position.z);//スタート画面を固定
             }
-            else
+            else if (BGM.BossStart)
             {
-                bx.enabled = true;
-                transform.position = new Vector3
-                (transform.position.x + CScrollx, transform.position.y, transform.position.z);//画面をスクロール
+                if (transform.position.x > CPosright)
+                {
+                    transform.position = new Vector3
+                   (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定
+                }
+                else
+                {
+                    bx.enabled = true;
+                    transform.position = new Vector3
+                    (transform.position.x + CScrollx, transform.position.y, transform.position.z);//画面をスクロール
+                }
             }
-        }
-        else if (playerPos.x > PPosleftx)
-        {
-            transform.position = new Vector3
-           (playerPos.x, transform.position.y, transform.position.z);//playerに追従
-        }
-        
+            else if (playerPos.x > PPosleftx)
+            {
+                transform.position = new Vector3
+               (playerPos.x, transform.position.y, transform.position.z);//playerに追従
+            }
 
-        this.player = GameObject.Find("主人公");
+
+            this.player = GameObject.Find("主人公");
+        }
     }
 }

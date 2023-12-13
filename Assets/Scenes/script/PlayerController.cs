@@ -183,11 +183,13 @@ public class PlayerController : MonoBehaviour
             //ゲームステータス管理
             if (pose)
             {
+                Time.timeScale = 0;
                 gameState = "posing";
                 rb.isKinematic = true;
             }
             else
             {
+                Time.timeScale = 1;
                 gameState = "playing";
                 rb.isKinematic = false;
             }

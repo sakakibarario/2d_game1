@@ -11,6 +11,7 @@ public class CaneraMap3 : MonoBehaviour
     //private int CPosleftx = -20;
     private float CPosright = 217.0f;
     private int PPosleftx = 0;
+    private float CScrollx = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,31 +26,40 @@ public class CaneraMap3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
-
-        if (transform.position.x > CPosright)
+        if (PlayerController.pose == false)
         {
-            transform.position = new Vector3
-           (transform.position.x, 0, transform.position.z);//ボス画面を固定
-            bxleft.enabled = true;
-            OnOffBlock.OnOffswitch = true;
-            Debug.Log("false2");
-        }
-        else if (playerPos.x > PPosleftx || playerPos.y > 8)
-        {
-            transform.position = new Vector3
-           (playerPos.x, playerPos.y + 3.5f, transform.position.z);//playerに追従
-            Debug.Log("false3");
-        }
-       
-        else
-        {
-           transform.position = new Vector3
-           (transform.position.x, 0, transform.position.z);//画面を固定
-           
-        }
+            Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
+
+            if (BGM.BossStart)
+            {
+                if (transform.position.x > CPosright)
+                {
+                    transform.position = new Vector3
+                   (transform.position.x, transform.position.y, transform.position.z);//ボス画面を固定   
+                }
+                else
+                {
+                    bxleft.enabled = true;
+                    OnOffBlock.OnOffswitch = true;
+                    transform.position = new Vector3
+                    (transform.position.x + CScrollx, transform.position.y, transform.position.z);//画面をスクロール
+                }
+            }
+            else if (playerPos.x > PPosleftx || playerPos.y > 8)
+            {
+                transform.position = new Vector3
+               (playerPos.x, playerPos.y + 3.5f, transform.position.z);//playerに追従
+            }
+
+            else
+            {
+                transform.position = new Vector3
+                (transform.position.x, 0, transform.position.z);//画面を固定
+
+            }
 
 
-        this.player = GameObject.Find("主人公");
+            this.player = GameObject.Find("主人公");
+        }
     }
 }

@@ -7638,7 +7638,7 @@ MonoBehaviour:
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
   bx: {fileID: 1240946004}
   speed: 3
-  jump: 6
+  jump: 6.2
   rush: 15
   D_HP: 0
   isCountDown: 1
