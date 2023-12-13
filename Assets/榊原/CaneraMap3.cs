@@ -50,7 +50,6 @@ public class CaneraMap3 : MonoBehaviour
                 transform.position = new Vector3
                (playerPos.x, playerPos.y + 3.5f, transform.position.z);//player�ɒǏ]
             }
-
             else
             {
                 transform.position = new Vector3

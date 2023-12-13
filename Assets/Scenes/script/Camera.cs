@@ -46,7 +46,7 @@ public class Camera : MonoBehaviour
                     (transform.position.x + CScrollx, transform.position.y, transform.position.z);//âÊñ ÇÉXÉNÉçÅ[Éã
                 }
             }
-            else if (playerPos.x > PPosleftx)
+            else if (playerPos.x > PPosleftx && BGM.BossStart == false)
             {
                 transform.position = new Vector3
                (playerPos.x, transform.position.y, transform.position.z);//playerÇ…í«è]

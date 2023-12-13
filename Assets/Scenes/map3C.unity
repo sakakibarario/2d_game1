@@ -1814,8 +1814,8 @@ MonoBehaviour:
   DangerArea3: {fileID: 665243569}
   player: {fileID: 0}
   tama: {fileID: 7630295310857446435, guid: 0cf70074fb85e8f4ca9ae3f322c26cfb, type: 3}
-  hp: 300
-  reactionDistance: 30
+  hp: 250
+  reactionDistance: 12
   i: 0
   stopAnime: StopMove
   attack: attack
