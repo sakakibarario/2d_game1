@@ -18,26 +18,41 @@ public class TimeCounter : MonoBehaviour
 
     //ポーズしてるかどうか
     public static bool isPose = false;
+    //ボスを倒したときに返すフラグ
+    static public bool BossdownT = false;
+
+    private void Start()
+    {
+        BossdownT = true;
+    }
 
     //Uodate is called once per frame
     void Update()
     {
-        //クリックされたとき
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (BossdownT)
         {
-            //ポーズ中にクリックされたとき
-            if(isPose)
+            //クリックされたとき
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                //ポーズ状態を解除する
-                isPose = false;
-                PlayerController.pose = false;
+                //ポーズ中にクリックされたとき
+                if (isPose)
+                {
+                    //ポーズ状態を解除する
+                    isPose = false;
+                    PlayerController.pose = false;
+                }
+                //進行中にクリックされたとき
+                else
+                {
+                    //ポーズ状態にする
+                    isPose = true;
+                    PlayerController.pose = true;
+                }
             }
-            //進行中にクリックされたとき
-            else{
-                //ポーズ状態にする
-                isPose = true;
-                PlayerController.pose = true;
-            }
+        }
+        else
+        {
+            return;
         }
 
         //ポーズ中かどうか

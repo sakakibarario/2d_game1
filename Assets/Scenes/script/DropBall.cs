@@ -59,12 +59,7 @@ public class DropBall : MonoBehaviour
     [SerializeField] private string sceneName;
     [SerializeField] private Color fadeColor;
     [SerializeField] private float fadeSpeed;
-
-    //ゆっくり消す用
-    public Image Boss;
-    public GameObject BOSS;
-    bool fadeFlag;
-    public float timer = 1.2f;
+    public byte transparent_count;
 
     //根っこ用りすと
     int start = 1;
@@ -222,13 +217,18 @@ public class DropBall : MonoBehaviour
         Invoke("DamageEnd", 0.25f);
         if (Torent_Hp <= 0)
         {
+            TimeCounter.BossdownT = false;//タイめーを止めるフラグ
             Debug.Log("敵が倒れている");
-            DangerArea1.gameObject.SetActive(false);
-            DangerArea2.gameObject.SetActive(false);
-            DangerArea3.gameObject.SetActive(false);
-            DangerArea4.gameObject.SetActive(false);
-            PlayerController.SougenBoss = true;
-            StartCoroutine(Bossdown());
+            DangerArea1.gameObject.SetActive(false);//危険エリアを消す
+            DangerArea2.gameObject.SetActive(false);//危険エリアを消す
+            DangerArea3.gameObject.SetActive(false);//危険エリアを消す
+            DangerArea4.gameObject.SetActive(false);//危険エリアを消す
+            stop = false;                   //ボスの動きを止める
+            this.enabled = false;           //機能を消す
+            PlayerController.stop = false;  //主人公の動きを止める
+            PlayerController.gameState = "gameclear";
+            PlayerController.SougenBoss = true;//フラグをあげる
+            StartCoroutine(Bossdown());//ボスdown時の挙動
         }
     }
     void DamageEnd()
@@ -241,27 +241,30 @@ public class DropBall : MonoBehaviour
 
     IEnumerator Bossdown()
     {
-        stop = false;
-        PlayerController.stop = false;
-        PlayerController.gameState = "gameclear";
         Debug.Log("ゲームクリア");
 
         yield return new WaitForSeconds(0.2f);
-        this.enabled = false;
-        //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
-        //ボスをゆっくり消す
+        //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         ////パーティクル開始--------------------
         particleon = true;
+        for (transparent_count = 0; transparent_count <= 255; transparent_count++)
+        {
+            //ボスをゆっくり消す
+            gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
+        }
+        if(transparent_count == 255)
+        {
+            //yield return new WaitForSeconds(5.5f);
+            Destroy(gameObject);
 
+            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+            yield break;
+        }
         ////------------------------------------
 
-        yield return new WaitForSeconds(5.5f);
-        Destroy(gameObject);
-
-        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-        yield break;
+       
     }
 
     void make_naihu()
@@ -301,175 +304,220 @@ public class DropBall : MonoBehaviour
     }
     IEnumerator RootRandom()
     {
-        count = 5.0f;
-        DamageT = false;
-
-        for (i = 0; i < 4; i++)
+        if (stop)
         {
-            int index = Random.Range(0, numbers.Count);//ランダム取得
+            count = 5.0f;
+            DamageT = false;
 
-            rnd = numbers[index];//使えるように
-            Debug.Log(rnd);
-
-            numbers.RemoveAt(index);//取得した情報を消す
-
-            if (rnd == 1)
+            for (i = 0; i < 4; i++)
             {
-                //危険エリア表示
-                DangerArea1.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Root1());
-            }
-            if (rnd == 2)
-            {
-                //危険エリア表示
-                DangerArea2.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Root2());
-            }
-            if (rnd == 3)
-            {   //危険エリア表示
-                DangerArea3.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Root3());
+                int index = Random.Range(0, numbers.Count);//ランダム取得
 
-            }
-            if (rnd == 4)
-            {   //危険エリア表示
-                DangerArea4.gameObject.SetActive(true);
-                //コルーチン呼び出し
-                StartCoroutine(Root4());
+                rnd = numbers[index];//使えるように
+                Debug.Log(rnd);
 
+                numbers.RemoveAt(index);//取得した情報を消す
+
+                if (rnd == 1)
+                {
+                    if (stop)
+                    {
+                        //危険エリア表示
+                        DangerArea1.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Root1());
+                    }
+                }
+                if (rnd == 2)
+                {
+                    if (stop)
+                    {
+                        //危険エリア表示
+                        DangerArea2.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Root2());
+                    }
+                }
+                if (rnd == 3)
+                {
+                    if (stop)
+                    {
+                        //危険エリア表示
+                        DangerArea3.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Root3());
+                    }
+                }
+                if (rnd == 4)
+                {
+                    if (stop)
+                    {
+                        //危険エリア表示
+                        DangerArea4.gameObject.SetActive(true);
+                        //コルーチン呼び出し
+                        StartCoroutine(Root4());
+                    }
+                }
+                yield return new WaitForSeconds(1.0f);//待機
+                if (i == 3)
+                {
+                    random = true;  //リスト初期化の開始
+                    DamageT = true;
+                    yield break;
+                }
             }
-            yield return new WaitForSeconds(1.0f);//待機
-            if (i == 3)
-            {
-                random = true;  //リスト初期化の開始
-                DamageT = true;
-                yield break;
-            }
+        }
+        else
+        {
+            yield break;
         }
 
     }
     private IEnumerator Root1()
     {
+        if (stop)
+        {
+            yield return new WaitForSeconds(2.0f);//待機
 
-        yield return new WaitForSeconds(2.0f);//待機
+            //Point1の座標を変数posに保存
+            var pos1 = Point1.gameObject.transform.position;
+            var pos2 = Point2.gameObject.transform.position;
+            var pos3 = Point3.gameObject.transform.position;
 
-        //Point1の座標を変数posに保存
-        var pos1 = Point1.gameObject.transform.position;
-        var pos2 = Point2.gameObject.transform.position;
-        var pos3 = Point3.gameObject.transform.position;
-
-        //弾のプレハブを作成
-        var t1 = Instantiate(ball) as GameObject;
-        var t2 = Instantiate(ball) as GameObject;
-        var t3 = Instantiate(ball) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        //SE
-        rootAudioSource.Play();
-        t1.transform.position = pos1;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t2.transform.position = pos2;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t3.transform.position = pos3;
-        yield return new WaitForSeconds(0.2f);
-        //危険エリア非表示
-        DangerArea1.gameObject.SetActive(false);
+            //弾のプレハブを作成
+            var t1 = Instantiate(ball) as GameObject;
+            var t2 = Instantiate(ball) as GameObject;
+            var t3 = Instantiate(ball) as GameObject;
+            //弾のプレハブの位置を敵の位置にする
+            //SE
+            if (stop)
+            {
+                rootAudioSource.Play();
+                t1.transform.position = pos1;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t2.transform.position = pos2;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t3.transform.position = pos3;
+                yield return new WaitForSeconds(0.2f);
+                //危険エリア非表示
+                DangerArea1.gameObject.SetActive(false);
+            }
+        }
     }
     private IEnumerator Root2()
     {
+        if (stop)
+        {
 
-        yield return new WaitForSeconds(2.0f);//待機
 
-        //Point1の座標を変数posに保存
-        var pos1 = Point21.gameObject.transform.position;
-        var pos2 = Point22.gameObject.transform.position;
-        var pos3 = Point23.gameObject.transform.position;
+            yield return new WaitForSeconds(2.0f);//待機
 
-        //弾のプレハブを作成
-        var t1 = Instantiate(ball) as GameObject;
-        var t2 = Instantiate(ball) as GameObject;
-        var t3 = Instantiate(ball) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        //SE
-        rootAudioSource.Play();
-        t1.transform.position = pos1;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t2.transform.position = pos2;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t3.transform.position = pos3;
-        yield return new WaitForSeconds(0.2f);
-        //危険エリア非表示
-        DangerArea2.gameObject.SetActive(false);
+            //Point1の座標を変数posに保存
+            var pos1 = Point21.gameObject.transform.position;
+            var pos2 = Point22.gameObject.transform.position;
+            var pos3 = Point23.gameObject.transform.position;
+
+            //弾のプレハブを作成
+            var t1 = Instantiate(ball) as GameObject;
+            var t2 = Instantiate(ball) as GameObject;
+            var t3 = Instantiate(ball) as GameObject;
+            if (stop)
+            {
+                //弾のプレハブの位置を敵の位置にする
+                //SE
+                rootAudioSource.Play();
+                t1.transform.position = pos1;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t2.transform.position = pos2;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t3.transform.position = pos3;
+                yield return new WaitForSeconds(0.2f);
+                //危険エリア非表示
+                DangerArea2.gameObject.SetActive(false);
+            }
+        }
     }
     private IEnumerator Root3()
     {
+        if (stop)
+        {
 
-        yield return new WaitForSeconds(2.0f);//待機
 
-        //Point1の座標を変数posに保存
-        var pos1 = Point31.gameObject.transform.position;
-        var pos2 = Point32.gameObject.transform.position;
-        var pos3 = Point33.gameObject.transform.position;
+            yield return new WaitForSeconds(2.0f);//待機
 
-        //弾のプレハブを作成
-        var t1 = Instantiate(ball) as GameObject;
-        var t2 = Instantiate(ball) as GameObject;
-        var t3 = Instantiate(ball) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        //SE
-        rootAudioSource.Play();
-        t1.transform.position = pos1;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t2.transform.position = pos2;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t3.transform.position = pos3;
-        yield return new WaitForSeconds(0.2f);
-        //危険エリア非表示
-        DangerArea3.gameObject.SetActive(false);
+            //Point1の座標を変数posに保存
+            var pos1 = Point31.gameObject.transform.position;
+            var pos2 = Point32.gameObject.transform.position;
+            var pos3 = Point33.gameObject.transform.position;
+
+            //弾のプレハブを作成
+            var t1 = Instantiate(ball) as GameObject;
+            var t2 = Instantiate(ball) as GameObject;
+            var t3 = Instantiate(ball) as GameObject;
+            if (stop)
+            {
+                //弾のプレハブの位置を敵の位置にする
+                //SE
+                rootAudioSource.Play();
+                t1.transform.position = pos1;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t2.transform.position = pos2;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t3.transform.position = pos3;
+                yield return new WaitForSeconds(0.2f);
+                //危険エリア非表示
+                DangerArea3.gameObject.SetActive(false);
+            }
+        }
     }
     private IEnumerator Root4()
     {
+        if (stop)
+        {
 
-        yield return new WaitForSeconds(2.0f);//待機
 
-        //Point1の座標を変数posに保存
-        var pos1 = Point41.gameObject.transform.position;
-        var pos2 = Point42.gameObject.transform.position;
-        var pos3 = Point43.gameObject.transform.position;
+            yield return new WaitForSeconds(2.0f);//待機
 
-        //弾のプレハブを作成
-        var t1 = Instantiate(ball) as GameObject;
-        var t2 = Instantiate(ball) as GameObject;
-        var t3 = Instantiate(ball) as GameObject;
-        //弾のプレハブの位置を敵の位置にする
-        //SE
-        rootAudioSource.Play();
-        t1.transform.position = pos1;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t2.transform.position = pos2;
-        yield return new WaitForSeconds(0.2f);
-        //SE
-        rootAudioSource.Play();
-        t3.transform.position = pos3;
-        yield return new WaitForSeconds(0.2f);
-        //危険エリア非表示
-        DangerArea4.gameObject.SetActive(false);
+            //Point1の座標を変数posに保存
+            var pos1 = Point41.gameObject.transform.position;
+            var pos2 = Point42.gameObject.transform.position;
+            var pos3 = Point43.gameObject.transform.position;
+
+            //弾のプレハブを作成
+            var t1 = Instantiate(ball) as GameObject;
+            var t2 = Instantiate(ball) as GameObject;
+            var t3 = Instantiate(ball) as GameObject;
+            if (stop)
+            {
+                //弾のプレハブの位置を敵の位置にする
+                //SE
+                rootAudioSource.Play();
+                t1.transform.position = pos1;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t2.transform.position = pos2;
+                yield return new WaitForSeconds(0.2f);
+                //SE
+                rootAudioSource.Play();
+                t3.transform.position = pos3;
+                yield return new WaitForSeconds(0.2f);
+                //危険エリア非表示
+                DangerArea4.gameObject.SetActive(false);
+            }
+        }
     }
 }
 
