@@ -70,13 +70,21 @@ public class DropBall : MonoBehaviour
     private int rnd = 0;
     bool DamageT = false;
 
+    //アニメーション用
+    Animator animator; //アニメーター
+    public string stopAnime = "EnemyTrentoStop";
+    public string downAnime = "EnemyTrentoDown";
+
     // Start is called before the first frame update
     void Start()
     {
         Torent_Hp = hp;
         stop = true;
         DamageT = true;
-        count = 2.0f;  
+        count = 2.0f;
+
+        //Animator をとってくる
+        animator = GetComponent<Animator>();
 
         for (int i = start; i <= end; i++)//リストの代入
         {
@@ -244,19 +252,21 @@ public class DropBall : MonoBehaviour
         Debug.Log("ゲームクリア");
 
         yield return new WaitForSeconds(0.2f);
-
+        animator.Play("EnemyTrentoDown");
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         ////パーティクル開始--------------------
         particleon = true;
-        for (transparent_count = 0; transparent_count <= 255; transparent_count++)
+        for (transparent_count = 255; transparent_count > 0; transparent_count--)
         {
             //ボスをゆっくり消す
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
+            Debug.Log(transparent_count);
+            yield return new WaitForSeconds(0.01f);
         }
-        if(transparent_count == 255)
+        if(transparent_count == 0)
         {
-            //yield return new WaitForSeconds(5.5f);
+            yield return new WaitForSeconds(5.5f);
             Destroy(gameObject);
 
             Initiate.Fade(sceneName, fadeColor, fadeSpeed);
