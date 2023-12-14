@@ -22,6 +22,16 @@ public class particle : MonoBehaviour
             Instantiate(particlehosi, particlePoint, Quaternion.identity);
             DropBall.particleon = false;
         }
+        if(EnemyHeadman.particleonV)
+        {
+            Instantiate(particlehosi, particlePoint, Quaternion.identity);
+            EnemyHeadman.particleonV = false;
+        }
+        if(Hero.particleonC)
+        {
+            Instantiate(particlehosi, particlePoint, Quaternion.identity);
+            Hero.particleonC = false;
+        }
 
     }
 }

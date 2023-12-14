@@ -49,6 +49,14 @@ public class EnemyHeadman : MonoBehaviour
 
     GameObject[] tagObjects;//オブジェクトカウント用
 
+    //フェード用
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
+    //パーティクル用
+    static public bool particleonV = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -229,10 +237,13 @@ public class EnemyHeadman : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         this.enabled = false;
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
-        yield return new WaitForSeconds(0.5f);
+
+        particleonV = true;
+
+        yield return new WaitForSeconds(5.5f);
         Destroy(gameObject);
 
-        SceneManager.LoadScene("GameClear");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         yield break;
     }
     void DamageEnd()
