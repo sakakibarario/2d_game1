@@ -934,6 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8d677ebcc81c542bba44dcbfedfb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bx: {fileID: 0}
 --- !u!1001 &549128159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1138,6 +1139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07d17b42941881429a8fe3508c8bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Title
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  fadeSpeed: 1
 --- !u!1 &718841067
 GameObject:
   m_ObjectHideFlags: 0

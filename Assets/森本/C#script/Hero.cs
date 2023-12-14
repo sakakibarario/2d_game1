@@ -58,6 +58,14 @@ public class Hero : MonoBehaviour
     public string attack    = "attack";
     public string attackT   = "attackT";
 
+    //パーティクル用
+    static public bool particleonC = false;
+
+    //フェード用
+    [SerializeField] private string sceneName;
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private float fadeSpeed;
+
     private void Start()
     {
         //Rigidbody2D をとる
@@ -195,10 +203,13 @@ public class Hero : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         this.enabled = false;
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
-        yield return new WaitForSeconds(0.5f);
+
+        particleonC = true;//パーティクル用フラグをあげる
+
+        yield return new WaitForSeconds(5.5f);
         Destroy(gameObject);
         //エンディングへ
-        SceneManager.LoadScene("End");
+        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         yield break;
     }
     void DamageEnd()
