@@ -39,6 +39,7 @@ public class EnemyHeadman : MonoBehaviour
     public string attackanime = "EnemyHeadmanAttack";//鳥攻撃のモーション
     public string Caneanime = "EnemyHeadmanCane";    //杖攻撃のモーション
     public string Stopanime = "EnemyHeadmanStop";    //静止モーション
+    public string Downanime = "EnemyHeadmanDown";    //ダウンモーション
 
     //SE用斬撃
     [SerializeField]
@@ -56,6 +57,8 @@ public class EnemyHeadman : MonoBehaviour
 
     //パーティクル用
     static public bool particleonV = false;
+    //ゆっくりけす
+    private byte transparent_count;
 
     // Start is called before the first frame update
     void Start()
@@ -149,14 +152,19 @@ public class EnemyHeadman : MonoBehaviour
         
         for(int i =0; i<8;i++)
         {
+            if (HeadmanBird.HeadmanDown)
+            {
+                yield break;
+            }
             //Debug.Log("鳥生成");
-            float vecX = Random.Range(135f, 150f);//ランダムを（）範囲で設定
+            float vecX = Random.Range(128f, 147f);//ランダムを（）範囲で設定
             var t = Instantiate(bird) as GameObject;//オブジェクトを作成
 
             //弾のプレハブの位置を敵の位置にする
             t.transform.position = new Vector3(vecX, 10.0f, 0);
-
+            
             t.AddComponent<HeadmanBird>();//birdの動きを決める
+            
             yield return new WaitForSeconds(0.2f);
         }
     
@@ -222,16 +230,18 @@ public class EnemyHeadman : MonoBehaviour
         Invoke("DamageEnd", 0.25f);
         if (Headman_HP <= 0)
         {
+            TimeCounter.BossdownT = false;//タイめーを止めるフラグ
             Debug.Log("敵が倒れている");
-            PlayerController.VillageBoss = true;
-            StartCoroutine(Bossdown());
+            PlayerController.VillageBoss = true;//村ステージクリア
+            PlayerController.stop = false;      //主人公の動きを止める
+            PlayerController.gameState = "gameclear";//クリア
+            HeadmanBird.HeadmanDown = true;     //downフラグをあげる
+            stop = false;//村長停止
+            StartCoroutine(Bossdown());//downコルーチン
         }
     }
     IEnumerator Bossdown()
     {
-        stop = false;
-        PlayerController.stop = false;
-        PlayerController.gameState = "gameclear";
         Debug.Log("ゲームクリア");
 
         yield return new WaitForSeconds(0.2f);
@@ -239,12 +249,22 @@ public class EnemyHeadman : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         particleonV = true;
+        animator.Play("EnemyHeadmanDown");
+        for (transparent_count = 255; transparent_count > 0; transparent_count--)
+        {
+            //ボスをゆっくり消す
+            gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
+            Debug.Log(transparent_count);
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (transparent_count == 0)
+        {
+            yield return new WaitForSeconds(5.5f);
+            Destroy(gameObject);
 
-        yield return new WaitForSeconds(5.5f);
-        Destroy(gameObject);
-
-        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-        yield break;
+            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+            yield break;
+        }
     }
     void DamageEnd()
     {

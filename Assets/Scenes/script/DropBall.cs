@@ -163,7 +163,7 @@ public class DropBall : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 3, 255);//赤色に点滅
                 //回復中点滅させる
-                float val = Mathf.Sin(Time.time * 20);
+                float val = Mathf.Sin(Time.time * 10);
                 Debug.Log(val);
                 if (val > 0)
                 {
@@ -252,7 +252,7 @@ public class DropBall : MonoBehaviour
         Debug.Log("ゲームクリア");
 
         yield return new WaitForSeconds(0.2f);
-        animator.Play("EnemyTrentoDown");
+        animator.Play(downAnime);
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         ////パーティクル開始--------------------
@@ -284,17 +284,18 @@ public class DropBall : MonoBehaviour
     IEnumerator LeafAttack()
     {
         currentTime = 0;
-        isLeafAttack = true;
+        //isLeafAttack = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 10, 3, 255);//赤色に点滅
 
         yield return new WaitForSeconds(0.4f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
 
-
-        //回復フラグおろす
-        isLeafAttack = false;
+        //フラグおろす
+        //isLeafAttack = false;
 
         //スプライトをもとに戻す
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        //gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        
         yield return new WaitForSeconds(0.2f);
 
 

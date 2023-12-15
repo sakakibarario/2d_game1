@@ -6,6 +6,7 @@ public class HeadmanBird : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float moveSpeed = 10.0f;
+    static public bool HeadmanDown = false;//ê∂ñΩÉtÉâÉO
 
 
     private float vec_x_mai = -1.0f;
@@ -14,6 +15,7 @@ public class HeadmanBird : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        HeadmanDown = false;
     }
 
     // Update is called once per frame
@@ -23,7 +25,14 @@ public class HeadmanBird : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 moveVec1 = new Vector3(vec_x_mai, vec_y_mai, 0).normalized;
-        rb.velocity = moveVec1 * moveSpeed;
+        if (HeadmanDown)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Vector3 moveVec1 = new Vector3(vec_x_mai, vec_y_mai, 0).normalized;
+            rb.velocity = moveVec1 * moveSpeed;
+        }
     }
 }
