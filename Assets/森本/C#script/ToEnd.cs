@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class ToEnd : MonoBehaviour
 {
-    public GameObject Endscene;
-    public GameObject Button;
 
-    public byte END_count;
-    public byte END_counta;
-
+    static public bool END_ANI = false;
+    public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
     {
-        Endscene.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
+
     }
 
     // Update is called once per frame
@@ -26,19 +23,16 @@ public class ToEnd : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")//Player‚ª“–‚½‚Á‚½‚ç
         {
-            //Endscene.gameObject.SetActive(true);
-
-            for (END_count = 0; END_count < 255; END_count++)
-            {
-                if(END_count == 50)
-                {
-                    END_counta++;
-                    END_count = 0;
-                }
-                Endscene.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, END_counta);
-            }
-            Button.gameObject.SetActive(true);
-
+            StartCoroutine(EndP());
         }
+    }
+    IEnumerator EndP()
+    {
+        END_ANI = true;
+        yield return new WaitForSeconds(1.0f);
+
+        Destroy(Player);
+
+        yield break;
     }
 }
