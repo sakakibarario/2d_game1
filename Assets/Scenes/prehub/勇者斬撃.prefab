@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2528561041687465615}
   - component: {fileID: 2480112055687324417}
   - component: {fileID: -8251190314640931443}
+  - component: {fileID: 3060781086343647730}
   m_Layer: 0
   m_Name: "\u52C7\u8005\u65AC\u6483"
   m_TagString: heroattack
@@ -149,3 +150,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d49ad42f06dc03468b8d6141ce6ed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3060781086343647730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630295310857446435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59f28e6ed77b5745be36ed780d2dd1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5

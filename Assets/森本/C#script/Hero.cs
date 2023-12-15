@@ -57,9 +57,12 @@ public class Hero : MonoBehaviour
     public string stopAnime = "StopMove";
     public string attack    = "attack";
     public string attackT   = "attackT";
+    public string HeroDown = "EnemyHeroDown";
 
     //パーティクル用
     static public bool particleonC = false;
+    //ゆっくり消す用
+    private byte transparent_count;
 
     //フェード用
     [SerializeField] private string sceneName;
@@ -186,18 +189,21 @@ public class Hero : MonoBehaviour
         Invoke("DamageEnd", 0.25f);
         if (Hero_Hp <= 0)
         {
+            TimeCounter.BossdownT = false;//タイめーを止めるフラグ
             StartCoroutine(Bossdown());
             DangerArea1.gameObject.SetActive(false);//倒れている場合は実行しない
             DangerArea2.gameObject.SetActive(false);//倒れている場合は実行しない
             DangerArea3.gameObject.SetActive(false);//倒れている場合は実行しない
             Debug.Log("敵が倒れている");
+            stop = false;
+            PlayerController.stop = false;
+            PlayerController.gameState = "gameclear";
+            Deletethunder.HeroDown = true;
         }
     }
     IEnumerator Bossdown()
     {
-        stop = false;
-        PlayerController.stop = false;
-        PlayerController.gameState = "gameclear";
+       
         Debug.Log("ゲームクリア");
 
         yield return new WaitForSeconds(0.2f);
@@ -205,12 +211,22 @@ public class Hero : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         particleonC = true;//パーティクル用フラグをあげる
+        animator.Play(HeroDown);
+        for (transparent_count = 255; transparent_count > 0; transparent_count--)
+        {
+            //ボスをゆっくり消す
+            gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
+            Debug.Log(transparent_count);
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (transparent_count == 0)
+        {
+            yield return new WaitForSeconds(5.5f);
+            Destroy(gameObject);
 
-        yield return new WaitForSeconds(5.5f);
-        Destroy(gameObject);
-        //エンディングへ
-        Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-        yield break;
+            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+            yield break;
+        }
     }
     void DamageEnd()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Deletethunder : MonoBehaviour
 {
+    static public bool HeroDown = false;//生命フラグ
+
     // 加速度
     [SerializeField] private Vector3 _acceleration;
 
@@ -23,6 +25,10 @@ public class Deletethunder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(HeroDown)
+        {
+            Destroy(gameObject);
+        }
         // 加速度の時間積分から速度を求める
         _velocity += _acceleration * Time.deltaTime;
 

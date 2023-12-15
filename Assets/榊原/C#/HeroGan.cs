@@ -22,6 +22,10 @@ public class HeroGan : MonoBehaviour
     void Update()
     {     
         //transform.localScale = new Vector2(1, 1);
+        if(Deletethunder.HeroDown)
+        {
+            Destroy(gameObject);
+        }
         Vector3 moveVec1 = new Vector3(x, y, 0).normalized;
         rb1.velocity = moveVec1 * moveSpeed;
     }
