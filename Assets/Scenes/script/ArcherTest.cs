@@ -33,7 +33,9 @@ public class ArcherTest : MonoBehaviour
     private SpriteRenderer sr = null;
 
     //アニメーションに使う
-    private Animator anim = null;
+    Animator animator; //アニメーター
+    bool aniflag = false;
+    int aniTime = 0;
 
     //SE用
     [SerializeField]
@@ -45,14 +47,15 @@ public class ArcherTest : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         A_Hp = hp;
         sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+
+        //Animator をとってくる
+        animator = GetComponent<Animator>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (PlayerController.gameState != "playing")
         {        
             return;
@@ -61,9 +64,6 @@ public class ArcherTest : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null )
         {
-            //アニメーション
-            anim.SetBool("Attack", false);
-
             if (isActive && A_Hp > 0 && sr.isVisible)
             {
                 // PLAYERの位置を取得
@@ -85,8 +85,8 @@ public class ArcherTest : MonoBehaviour
                     archerAudioSource.Play();
 
                     //アニメーション
-                    anim.SetBool("Attack",true);
-
+                    animator.Play("Archer");
+                    aniflag = true;
                 }
             }
             else if(isActive == false)
@@ -126,6 +126,18 @@ public class ArcherTest : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
             return;//ダメージ中は操作による移動はさせない
+        }
+
+        if(aniflag)//アニメーションを戻すまでの時間を刻む
+        {
+            aniTime++;
+        }
+
+        if (aniTime == 150)//アニメーションを戻す
+        {
+            animator.Play("StopArcher");
+            aniTime = 0;
+            aniflag = false;
         }
 
     }
