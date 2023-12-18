@@ -17901,9 +17901,9 @@ MonoBehaviour:
   jump: 6.2
   rush: 15
   D_HP: 0
+  CJump: 0
   isCountDown: 1
   AnimeCount: 1
-  isTimeOver: 0
   animeOver: 1
   displayTime: 0
   Animetime: 0
@@ -17914,6 +17914,7 @@ MonoBehaviour:
   moveAnime: PlayerMove
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
+  clearAnime: PlayerClear
   flameAudioSource: {fileID: 1729734937}
   sceneName: Gameover
   fadeColor: {r: 0, g: 0, b: 0, a: 1}

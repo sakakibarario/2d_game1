@@ -10,4 +10,7 @@ public class Global : MonoBehaviour
 
     //主人公回復アイテム
     public static int GRecoveryMeat = 20;
+
+    //clear変数
+    public static bool Clear = false;
 }

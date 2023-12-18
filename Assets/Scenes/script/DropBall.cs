@@ -257,6 +257,7 @@ public class DropBall : MonoBehaviour
 
         ////パーティクル開始--------------------
         particleon = true;
+        Global.Clear = true;
         for (transparent_count = 255; transparent_count > 0; transparent_count--)
         {
             //ボスをゆっくり消す

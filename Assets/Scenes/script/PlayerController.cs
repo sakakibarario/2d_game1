@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private int toge = 10;　　　　//針の攻撃
     private int thunder = 40;     //雷攻撃
     private int heroattack = 30; //斬撃攻撃
+    private int TLeaf = 10;      //葉っぱ攻撃
     #endregion
 
     #region//主人公の動き関係フラグ
@@ -64,13 +65,16 @@ public class PlayerController : MonoBehaviour
 
     //回復アイテム
     private int meat = Global.GRecoveryMeat;
+
+    //clear後の動き
+    public int CJump = 0;
     #endregion
 
     //クールタイム
     public bool isCountDown = true;//true = 時間をカウントダウン計算する
     public bool AnimeCount = true;
     float rush_time = 1.5f;          //攻撃(突進)クールタイム
-    public bool isTimeOver = false;//true = タイマー停止
+    static public bool isTimeOver = false;//true = タイマー停止
     public bool animeOver = true;
     public float displayTime = 0;  //表示時間
     public float Animetime = 0;
@@ -79,7 +83,7 @@ public class PlayerController : MonoBehaviour
     //クールタイム火球
     public bool K_isCountDown = true; //true = 時間をカウントダウン計算する
     private float Onbures = 2.0f;     //攻撃（火球）クールタイム
-    private bool K_isTimeOver = false;//true = タイマー停止
+    static private bool K_isTimeOver = false;//true = タイマー停止
     public float buresutime = 0;      //表示時間
     float K_timesnow = 0;             //現在時間
 
@@ -88,10 +92,11 @@ public class PlayerController : MonoBehaviour
 
     //アニメーション対応
     Animator animator; //アニメーター
-    public string stopAnime = "PlayerStop";
-    public string moveAnime = "PlayerMove";
-    public string jumpAnime = "PlayerJump";
-    public string rushAnime = "PlayerRush";
+    public string stopAnime  = "PlayerStop";
+    public string moveAnime  = "PlayerMove";
+    public string jumpAnime  = "PlayerJump";
+    public string rushAnime  = "PlayerRush";
+    public string clearAnime = "PlayerClear";
     string nowAnime = "";
     string oldAnime = "";
 
@@ -143,7 +148,6 @@ public class PlayerController : MonoBehaviour
             D_HP = S_D_HP;
             Max_D_HP = S_D_HP;
         }
- 
         if (isCountDown)
         {
             //カウントダウン
@@ -270,9 +274,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         else
-        {
-            
+        {  
             animator.Play(stopAnime);
+        }
+        if(Global.Clear)
+        {
+            StartCoroutine(ClearMove());
         }
     }
 
@@ -551,6 +558,15 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("slider.value : " + slider.value);
                 GetDamage(collision.gameObject);
             }
+            if (collision.CompareTag("TLeaf"))
+            {
+                D_HP -= TLeaf;     //HPを減らす（盗賊の攻撃）
+                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);
+                slider.value = (float)D_HP / (float)S_D_HP; ;
+                Debug.Log("slider.value : " + slider.value);
+                GetDamage(collision.gameObject);
+            }
             if (collision.CompareTag("artillery"))
             {
                 D_HP -= artillery;     //HPを減らす（大砲の攻撃）
@@ -774,5 +790,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         //SceneManager.LoadScene("Gameover");
+    }
+    IEnumerator ClearMove()
+    {
+       
+        yield break;
     }
 }

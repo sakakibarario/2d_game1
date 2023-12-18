@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2502984350078892002}
   m_Layer: 0
   m_Name: "\u8449\u3063\u3071\u8ECD\u56E32"
-  m_TagString: tama
+  m_TagString: TLeaf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
