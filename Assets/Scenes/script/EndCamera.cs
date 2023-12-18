@@ -14,8 +14,11 @@ public class EndCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
-        transform.position = new Vector3
-                 (playerPos.x, transform.position.y, transform.position.z);//playerに追従
+        if(player != null)
+        {
+            Vector3 playerPos = this.player.transform.position;//playerのポジションを取得
+            transform.position = new Vector3
+                     (playerPos.x, transform.position.y, transform.position.z);//playerに追従
+        }
     }
 }
