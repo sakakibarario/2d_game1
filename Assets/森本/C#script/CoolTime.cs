@@ -18,11 +18,11 @@ public class CoolTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(kari == false)
+        if(PlayerController.isTimeOver == true)//クールタイムじゃない時は通常
         {
             TossinCoolTime.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
-        else if(kari == true)
+        else if(PlayerController.isTimeOver == false)//クールタイム中は薄くする
         {
             TossinCoolTime.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 130);
         }
@@ -31,11 +31,11 @@ public class CoolTime : MonoBehaviour
         {
             KakyuCoolTime.SetActive(true);
 
-            if (kariK == false)
+            if (PlayerController.K_isTimeOver == true)//クールタイムじゃない時は通常
             {
                 KakyuCoolTime.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             }
-            else if (kari == true)
+            else if (PlayerController.K_isTimeOver == false)//クールタイム中は薄くする
             {
                 KakyuCoolTime.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 130);
             }
