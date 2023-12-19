@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
     //クールタイム火球
     public bool K_isCountDown = true; //true = 時間をカウントダウン計算する
     private float Onbures = 2.0f;     //攻撃（火球）クールタイム
-    static private bool K_isTimeOver = false;//true = タイマー停止
+    static public bool K_isTimeOver = false;//true = タイマー停止
     public float buresutime = 0;      //表示時間
     float K_timesnow = 0;             //現在時間
 
