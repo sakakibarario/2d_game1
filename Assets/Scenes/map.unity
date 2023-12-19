@@ -18082,6 +18082,9 @@ MonoBehaviour:
   slider: {fileID: 235910582}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
   bx: {fileID: 1729734935}
+  camera1: {fileID: 251397875}
+  camera2: {fileID: 251397875}
+  camera3: {fileID: 251397875}
   speed: 3
   jump: 6.2
   rush: 15
@@ -22710,7 +22713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
       propertyPath: hp
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
       propertyPath: Point1

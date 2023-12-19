@@ -82,6 +82,7 @@ public class DropBall : MonoBehaviour
         stop = true;
         DamageT = true;
         count = 2.0f;
+        transparent_count = 255;
 
         //Animator をとってくる
         animator = GetComponent<Animator>();
@@ -258,21 +259,22 @@ public class DropBall : MonoBehaviour
         ////パーティクル開始--------------------
         particleon = true;
         Global.Clear = true;
-        for (transparent_count = 255; transparent_count > 0; transparent_count--)
+        for (; transparent_count > 0; transparent_count--)
         {
             //ボスをゆっくり消す
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
             Debug.Log(transparent_count);
             yield return new WaitForSeconds(0.01f);
+            if (transparent_count == 0)
+            {
+                yield return new WaitForSeconds(3.0f);
+                Destroy(gameObject);
+                //yield return new WaitForSeconds(5.5f);
+                Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+                yield break;
+            }
         }
-        if(transparent_count == 0)
-        {
-            yield return new WaitForSeconds(5.5f);
-            Destroy(gameObject);
-
-            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-            yield break;
-        }
+        
         ////------------------------------------
 
        

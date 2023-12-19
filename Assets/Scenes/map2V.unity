@@ -5194,7 +5194,7 @@ GameObject:
   - component: {fileID: 857159240}
   m_Layer: 20
   m_Name: 'Main Camera '
-  m_TagString: MainCamera
+  m_TagString: Main Camera2v
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7773,13 +7773,16 @@ MonoBehaviour:
   slider: {fileID: 1035137031}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
   bx: {fileID: 1240946004}
+  camera1: {fileID: 1557129599}
+  camera2: {fileID: 857159235}
+  camera3: {fileID: 1557129599}
   speed: 3
   jump: 6.2
   rush: 15
   D_HP: 0
+  CJump: 0
   isCountDown: 1
   AnimeCount: 1
-  isTimeOver: 0
   animeOver: 1
   displayTime: 0
   Animetime: 0
@@ -7790,6 +7793,7 @@ MonoBehaviour:
   moveAnime: PlayerMove
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
+  clearAnime: PlayerClear
   flameAudioSource: {fileID: 1240946011}
   sceneName: Gameover
   fadeColor: {r: 0, g: 0, b: 0, a: 1}

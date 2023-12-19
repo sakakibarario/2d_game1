@@ -3478,6 +3478,9 @@ MonoBehaviour:
   slider: {fileID: 208386209}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
   bx: {fileID: 216599309}
+  camera1: {fileID: 454292603}
+  camera2: {fileID: 1566262426}
+  camera3: {fileID: 790531469}
   speed: 3
   jump: 6.2
   rush: 15
@@ -6450,6 +6453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 636d9cc05d45a2742b6ce7f81d83a898, type: 3}
+--- !u!1 &454292603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181576505434362540, guid: 37603b64972518644a78fe43416ab163, type: 3}
+  m_PrefabInstance: {fileID: 403182506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &457348192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10069,7 +10077,7 @@ GameObject:
   - component: {fileID: 790531471}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Main Camera3c
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19000,6 +19008,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1566262426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181576505434362540, guid: 37603b64972518644a78fe43416ab163, type: 3}
+  m_PrefabInstance: {fileID: 305927919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1571307745
 PrefabInstance:
   m_ObjectHideFlags: 0

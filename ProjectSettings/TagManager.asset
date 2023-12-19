@@ -32,6 +32,8 @@ TagManager:
   - kingStart
   - meat
   - TLeaf
+  - Main Camera2v
+  - Main Camera3c
   layers:
   - Default
   - TransparentFX

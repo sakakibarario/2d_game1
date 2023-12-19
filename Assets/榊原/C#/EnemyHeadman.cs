@@ -67,6 +67,7 @@ public class EnemyHeadman : MonoBehaviour
         animator = GetComponent<Animator>();
         Headman_HP = HP;//ç≈ëÂHPÇê›íË
         OnAttack = true;
+        transparent_count = 255;
     }
 
     // Update is called once per frame
@@ -249,22 +250,24 @@ public class EnemyHeadman : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2Ç©ÇØÇƒìGÇè¡Ç∑
 
         particleonV = true;
+        Global.Clear = true;
         animator.Play("EnemyHeadmanDown");
-        for (transparent_count = 255; transparent_count > 0; transparent_count--)
+        for (; transparent_count > 0; transparent_count--)
         {
             //É{ÉXÇÇ‰Ç¡Ç≠ÇËè¡Ç∑
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
             Debug.Log(transparent_count);
             yield return new WaitForSeconds(0.01f);
-        }
-        if (transparent_count == 0)
-        {
-            yield return new WaitForSeconds(5.5f);
-            Destroy(gameObject);
+            if (transparent_count == 0)
+            {
+                yield return new WaitForSeconds(3.0f);
+                Destroy(gameObject);
 
-            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-            yield break;
+                Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+                yield break;
+            }
         }
+       
     }
     void DamageEnd()
     {

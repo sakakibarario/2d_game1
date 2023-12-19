@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public Slider slider;
     public GameObject tama;
     public CapsuleCollider2D bx;
+    public GameObject camera1;
+    public GameObject camera2;
+    public GameObject camera3;
 
     public float speed = 3.0f;  //ˆÚ“®‘¬“x
     public float jump = 6.0f;   //ƒWƒƒƒ“ƒv—Í
@@ -805,11 +808,25 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ClearMove()
     {
+        Debug.Log(sceneName);
         bx.enabled = false;
         rb.isKinematic = true;
-        Debug.Log("‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ");
-        this.transform.position = new Vector3(transform.position.x,-2.2f, 0);
-        animator.Play(clearAnime);
+        if(camera1.tag == ("MainCamera"))
+        {
+            this.transform.position = new Vector3(transform.position.x, -2.2f, 0);
+            animator.Play(clearAnime);
+        }
+        if (camera2.tag == ("Main Camera2v"))
+        {
+            this.transform.position = new Vector3(transform.position.x, -1.0f, 0);
+            animator.Play(clearAnime);
+        }
+        if (camera3.tag == ("Main Camera3c"))
+        {
+            this.transform.position = new Vector3(transform.position.x, 0.6f, 0);
+            animator.Play(clearAnime);
+        }
+
         yield break;
     }
 }

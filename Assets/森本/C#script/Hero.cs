@@ -77,6 +77,7 @@ public class Hero : MonoBehaviour
         oldHP = hp;
         animator = GetComponent<Animator>();
         stop = true;
+        transparent_count = 255;
 
         for (int i = start; i <= end; i++)
         {
@@ -211,22 +212,24 @@ public class Hero : MonoBehaviour
         //Destroy(gameObject, 0.2f);//0.2かけて敵を消す
 
         particleonC = true;//パーティクル用フラグをあげる
+        Global.Clear = true;
         animator.Play(HeroDown);
-        for (transparent_count = 255; transparent_count > 0; transparent_count--)
+        for (; transparent_count > 0; transparent_count--)
         {
             //ボスをゆっくり消す
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
             Debug.Log(transparent_count);
             yield return new WaitForSeconds(0.01f);
-        }
-        if (transparent_count == 0)
-        {
-            yield return new WaitForSeconds(5.5f);
-            Destroy(gameObject);
+            if (transparent_count == 0)
+            {
+                yield return new WaitForSeconds(3.0f);
+                Destroy(gameObject);
 
-            Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-            yield break;
+                Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+                yield break;
+            }
         }
+      
     }
     void DamageEnd()
     {
