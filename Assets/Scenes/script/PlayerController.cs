@@ -274,13 +274,18 @@ public class PlayerController : MonoBehaviour
             }
         }
         else
-        {  
-            animator.Play(stopAnime);
-        }
-        if(Global.Clear)
         {
-            StartCoroutine(ClearMove());
+            if (Global.Clear)
+            {
+                StartCoroutine(ClearMove());
+            }
+            else
+            {
+                animator.Play(stopAnime);
+                Debug.Log("stop");
+            }
         }
+        
     }
 
 
@@ -493,8 +498,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            
-            animator.Play(stopAnime);
+            if (Global.Clear)
+            {
+                StartCoroutine(ClearMove());
+            }
+            else
+            {
+                animator.Play(stopAnime);
+                Debug.Log("stop");
+            }
         }
     }
 
@@ -793,7 +805,11 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ClearMove()
     {
-       
+        bx.enabled = false;
+        rb.isKinematic = true;
+        Debug.Log("‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ ");
+        this.transform.position = new Vector3(transform.position.x,-2.2f, 0);
+        animator.Play(clearAnime);
         yield break;
     }
 }
