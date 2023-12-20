@@ -811,6 +811,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(sceneName);
         bx.enabled = false;
         rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
         if(camera1.tag == ("MainCamera"))
         {
             this.transform.position = new Vector3(transform.position.x, -2.2f, 0);
