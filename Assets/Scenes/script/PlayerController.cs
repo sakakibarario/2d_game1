@@ -798,18 +798,9 @@ public class PlayerController : MonoBehaviour
         new Vector3(transform.position.x, 0, 0);
         bx.enabled = false;
         
-        transform.localRotation = new Quaternion(180.0f, 0, 0,0);
+        transform.localRotation = new Quaternion(0, 0, 90,90);
+        
         rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
-        // 自身のtranformを取得
-        //Transform myTransform = this.transform;
-
-        ////ローカル座標での回転を取得
-        //Vector3 localAngle = myTransform.localEulerAngles;
-        //localAngle.x = 20.0f;
-        //localAngle.y = 20.0f;
-        //localAngle.z = 20.0f;
-        ////x,y,zをそれぞれ20度に変更
-        //myTransform.localEulerAngles = localAngle;
 
 
         yield return new WaitForSeconds(2.0f);
