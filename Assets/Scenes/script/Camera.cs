@@ -10,7 +10,7 @@ public class Camera : MonoBehaviour
     private int   CPosleftx = -3;
     private float CPosright = 131.5f;
     private int   PPosleftx = -3;
-    private float CScrollx = 0.05f;
+    private float CScrollx = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class Camera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (PlayerController.pose == false)
         {
@@ -55,5 +55,6 @@ public class Camera : MonoBehaviour
 
             this.player = GameObject.Find("éÂêlåˆ");
         }
+
     }
 }

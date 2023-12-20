@@ -265,7 +265,7 @@ public class DropBall : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, transparent_count);
             Debug.Log(transparent_count);
             yield return new WaitForSeconds(0.01f);
-            if (transparent_count == 0)
+            if (transparent_count == 1)
             {
                 yield return new WaitForSeconds(3.0f);
                 Destroy(gameObject);

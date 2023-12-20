@@ -10,7 +10,7 @@ public class NewCamera : MonoBehaviour
     private int CPosleftx = -3;
     private float CPosright = 224.5f;
     private int PPosleftx = 7;
-    private float i = 0.05f;
+    private float i = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,8 @@ public class NewCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   
+    private void FixedUpdate()
     {
         if (PlayerController.pose == false)
         {
