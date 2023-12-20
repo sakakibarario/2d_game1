@@ -11,7 +11,7 @@ public class CaneraMap3 : MonoBehaviour
     //private int CPosleftx = -20;
     private float CPosright = 217.0f;
     private int PPosleftx = 0;
-    private float CScrollx = 0.05f;
+    private float CScrollx = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class CaneraMap3 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (PlayerController.pose == false)
         {
@@ -60,5 +60,6 @@ public class CaneraMap3 : MonoBehaviour
 
             this.player = GameObject.Find("éÂêlåˆ");
         }
+
     }
 }
