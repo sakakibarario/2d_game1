@@ -10,7 +10,7 @@ public class NewCamera : MonoBehaviour
     private int CPosleftx = -3;
     private float CPosright = 224.5f;
     private int PPosleftx = 7;
-    float i = 0.05f;
+    private float i = 0.05f;
 
     // Start is called before the first frame update
     void Start()
