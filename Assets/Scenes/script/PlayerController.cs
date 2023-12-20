@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 animator.Play(stopAnime);
-                Debug.Log("stop");
+                nowAnime = stopAnime;
             }
         }
         
@@ -466,7 +466,6 @@ public class PlayerController : MonoBehaviour
                 GetComponent<AudioSource>().Play();
 
             }
-
             //アニメーション
             if (ongrond)
             {
@@ -477,6 +476,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("ムーブ");
                     nowAnime = moveAnime; //移動
                 }
                 if (gorush)
@@ -503,12 +503,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Global.Clear)
             {
-                StartCoroutine(ClearMove());
+               // StartCoroutine(ClearMove());
             }
             else
             {
                 animator.Play(stopAnime);
-                Debug.Log("stop");
+                nowAnime = stopAnime;
             }
         }
     }
@@ -797,18 +797,27 @@ public class PlayerController : MonoBehaviour
         
         new Vector3(transform.position.x, 0, 0);
         bx.enabled = false;
-        transform.localRotation = new Quaternion(180.0f, 0.0f, 0.0f, 0.0f);
-        rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
-       
-
         
+        transform.localRotation = new Quaternion(180.0f, 0, 0,0);
+        rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
+        // 自身のtranformを取得
+        //Transform myTransform = this.transform;
+
+        ////ローカル座標での回転を取得
+        //Vector3 localAngle = myTransform.localEulerAngles;
+        //localAngle.x = 20.0f;
+        //localAngle.y = 20.0f;
+        //localAngle.z = 20.0f;
+        ////x,y,zをそれぞれ20度に変更
+        //myTransform.localEulerAngles = localAngle;
+
+
         yield return new WaitForSeconds(2.0f);
         Initiate.Fade(sceneName, fadeColor, fadeSpeed);
         //SceneManager.LoadScene("Gameover");
     }
     IEnumerator ClearMove()
     {
-        Debug.Log(sceneName);
         bx.enabled = false;
         rb.isKinematic = true;
         rb.velocity = Vector2.zero;
