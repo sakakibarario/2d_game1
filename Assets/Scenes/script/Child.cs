@@ -13,8 +13,8 @@ public class Child : MonoBehaviour
 
     Rigidbody2D rb;
 
-    //1秒ごとに弾を発射するためのもの
-    private float targetTime = 5.0f;
+    //4秒ごとに弾を発射するためのもの
+    private float targetTime = 4.0f;
     private float currentTime = 0;
 
     public int hp = 20;
@@ -34,12 +34,21 @@ public class Child : MonoBehaviour
     [SerializeField]
     AudioSource tamaAudioSource;
 
+    //アニメーションに使う
+    Animator animator; //アニメーター
+    float kamaetime = 2.0f;//構えを取る時間をクールタイムから引く秒数
+
+
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         C_Hp = hp;
+
+        //Animator をとってくる
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -59,6 +68,12 @@ public class Child : MonoBehaviour
                 // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
+                //アニメーション 攻撃前ののモーション
+                if (currentTime > (targetTime - kamaetime))
+                {
+                    animator.Play("StoneChild");
+                }
+
                 if (targetTime < currentTime)
                 {
                     currentTime = 0;
@@ -71,6 +86,10 @@ public class Child : MonoBehaviour
                     t.AddComponent<HeroGan>();
                     //SE
                     tamaAudioSource.Play();
+
+                    //アニメーション 通常
+                    animator.Play("StopChild");
+
                 }
             }
             else if(isActive == false)
