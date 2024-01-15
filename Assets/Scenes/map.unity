@@ -14542,6 +14542,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2780978155849955846, guid: 1aa4fbdb4a3947049bc50dd5fccac5bb, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0a87f0ce9fe1cf14b9e5e0dea79b7054, type: 2}
     - target: {fileID: 3370181059878874976, guid: 1aa4fbdb4a3947049bc50dd5fccac5bb, type: 3}
       propertyPath: m_Size.y
       value: 0.57650125

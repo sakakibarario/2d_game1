@@ -36,12 +36,21 @@ public class Throw : MonoBehaviour
     [SerializeField]
     AudioSource ThrowAudioSource;
 
+    //アニメーションに使う
+    Animator animator; //アニメーター
+    float kamaetime = 1.0f;//構えを取る時間をクールタイムから引く秒数
+    float knifetime = 3.0f;//ナイフを持つ時間をクールタイムから引く秒数
+    bool knifeflag = true;
 
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         T_Hp = hp;
+
+        //Animator をとってくる
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -61,6 +70,19 @@ public class Throw : MonoBehaviour
                // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
+                //アニメーション ナイフを持つ
+                if(currentTime > (targetTime - knifetime)&& knifeflag )//2.0f
+                {
+                    animator.Play("KnifeThief");
+                    knifeflag = false;
+                }
+
+                //アニメーション 攻撃前ののモーション
+                if (currentTime > (targetTime - kamaetime)&& knifeflag == false )//4.0f
+                {
+                    animator.Play("kamaeThief");
+                }
+
                 if (targetTime < currentTime)
                 {
                     currentTime = 0;
@@ -74,6 +96,11 @@ public class Throw : MonoBehaviour
 
                     //SE 
                     ThrowAudioSource.Play();
+
+                    //アニメーション 通常
+                    animator.Play("StopThief");
+                    knifeflag = true;
+
                 }
             }
             else
