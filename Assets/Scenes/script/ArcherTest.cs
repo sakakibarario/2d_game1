@@ -12,8 +12,8 @@ public class ArcherTest : MonoBehaviour
 
     Rigidbody2D rb = null;
 
-    //5秒ごとに弾を発射するためのもの
-    private float targetTime = 5.0f;
+    //4秒ごとに弾を発射するためのもの
+    private float targetTime = 4.0f;
     private float currentTime = 0;
 
     public int hp = 30;
@@ -34,8 +34,7 @@ public class ArcherTest : MonoBehaviour
 
     //アニメーションに使う
     Animator animator; //アニメーター
-    bool aniflag = false;
-    int aniTime = 0;
+    float kamaetime = 2.0f;//構えを取る時間をクールタイムから引く秒数
 
     //SE用
     [SerializeField]
@@ -70,6 +69,12 @@ public class ArcherTest : MonoBehaviour
                 // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
+                //アニメーション 弓を引く
+                if(currentTime > (targetTime - kamaetime))
+                {
+                    animator.Play("kamaeArcher");
+                }
+
                 if (targetTime < currentTime)
                 {
                     currentTime = 0;
@@ -84,9 +89,8 @@ public class ArcherTest : MonoBehaviour
                     //SE
                     archerAudioSource.Play();
 
-                    //アニメーション
+                    //アニメーション 通常
                     animator.Play("Archer");
-                    aniflag = true;
                 }
             }
             else if(isActive == false)
@@ -127,19 +131,6 @@ public class ArcherTest : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-
-        if(aniflag)//アニメーションを戻すまでの時間を刻む
-        {
-            aniTime++;
-        }
-
-        if (aniTime == 150)//アニメーションを戻す
-        {
-            animator.Play("StopArcher");
-            aniTime = 0;
-            aniflag = false;
-        }
-
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
