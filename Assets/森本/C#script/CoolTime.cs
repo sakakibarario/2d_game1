@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CoolTime : MonoBehaviour
 {
-    bool kari = false;
-    bool kariK = false;
     public GameObject TossinCoolTime;
     public GameObject KakyuCoolTime;
+
+    static public bool KakyuCoolTimeflag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class CoolTime : MonoBehaviour
             TossinCoolTime.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 130);
         }
 
-        if(PlayerController.SougenBoss)//１ステージをCLEARしていないと火球のクールタイムグラフィックを表示させない
+        if(PlayerController.SougenBoss && KakyuCoolTimeflag)//１ステージをCLEARしていないと火球のクールタイムグラフィックを表示させない
         {
             KakyuCoolTime.SetActive(true);
 

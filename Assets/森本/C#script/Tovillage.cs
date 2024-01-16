@@ -18,6 +18,7 @@ public class Tovillage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CoolTime.KakyuCoolTimeflag = true;
     }
     public void OnClickStartButton()
     {

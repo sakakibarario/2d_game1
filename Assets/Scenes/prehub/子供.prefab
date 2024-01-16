@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5360482101951582345}
   - component: {fileID: 9086352240651839432}
   - component: {fileID: 2492327006630126560}
+  - component: {fileID: -3716136825240488350}
   m_Layer: 0
   m_Name: "\u5B50\u4F9B"
   m_TagString: Enemy
@@ -152,7 +153,6 @@ MonoBehaviour:
   tama: {fileID: 5344839529308671929, guid: 5ef97f7a69950744cbbaa95844c17041, type: 3}
   hp: 20
   reactionDistance: 10
-  bullet: {fileID: 7400673415296082285, guid: 5ef97f7a69950744cbbaa95844c17041, type: 3}
   tamaAudioSource: {fileID: 2492327006630126560}
 --- !u!82 &9086352240651839432
 AudioSource:
@@ -346,3 +346,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &-3716136825240488350
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360482101951582348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9a699b8173a75984a8200419e118ff32, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

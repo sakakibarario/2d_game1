@@ -2,51 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Throw : MonoBehaviour
+public class Magic : MonoBehaviour
 {
     //プレイヤーオブジェクト
     public GameObject player;
+    private SpriteRenderer sr = null;
 
     //弾のプレハブオブジェクト
     public GameObject tama;
 
     Rigidbody2D rb;
 
-    //1秒ごとに弾を発射するためのもの
-    private float targetTime = 5.0f;
+    //4秒ごとに弾を発射するためのもの
+    private float targetTime = 4.0f;
     private float currentTime = 0;
 
-    public int hp = 30;
+    public int hp = 20;
     public float reactionDistance = 4.0f;//反応距離
 
-    private int T_Hp;
+    private int C_Hp;
 
     //主人公の攻撃
-    int buresball = Global.GBures;
-    int rushdamage = Global.GRush;
-    
+    private int rushdamage = 10;    //突進の攻撃力
+    private int buresball = 30;     //火球の攻撃力
 
     private bool inDamage = false;
     private bool isActive = false;
 
 
-    public Enemygan bullet;
-
     //SE用
     [SerializeField]
-    AudioSource ThrowAudioSource;
+    AudioSource tamaAudioSource;
 
     //アニメーションに使う
     Animator animator; //アニメーター
-    float kamaetime = 1.0f;//構えを取る時間をクールタイムから引く秒数
-    float knifetime = 3.0f;//ナイフを持つ時間をクールタイムから引く秒数
-    bool knifeflag = true;
+    float kamaetime = 2.0f;//構えを取る時間をクールタイムから引く秒数
+
 
     private void Start()
     {
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
-        T_Hp = hp;
+        sr = GetComponent<SpriteRenderer>();
+        C_Hp = hp;
 
         //Animator をとってくる
         animator = GetComponent<Animator>();
@@ -61,26 +59,19 @@ public class Throw : MonoBehaviour
             return;
         }
         //Player　のゲームオブジェクトを得る
-      GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (isActive && T_Hp > 0)
+            if (isActive && C_Hp > 0 && sr.isVisible)
             {
                 // PLAYERの位置を取得
-               // Vector3 targetPos = player.transform.position;
+                // Vector3 targetPos = player.transform.position;
                 currentTime += Time.deltaTime;
 
-                //アニメーション ナイフを持つ
-                if(currentTime > (targetTime - knifetime)&& knifeflag )//2.0f
-                {
-                    animator.Play("KnifeThief");
-                    knifeflag = false;
-                }
-
                 //アニメーション 攻撃前ののモーション
-                if (currentTime > (targetTime - kamaetime)&& knifeflag == false )//4.0f
+                if (currentTime > (targetTime - kamaetime))
                 {
-                    animator.Play("kamaeThief");
+                    animator.Play("kamaeMagic");
                 }
 
                 if (targetTime < currentTime)
@@ -92,32 +83,34 @@ public class Throw : MonoBehaviour
                     var t = Instantiate(tama) as GameObject;
                     //弾のプレハブの位置を敵の位置にする
                     t.transform.position = pos;
-                    make_naihu();
-
-                    //SE 
-                    ThrowAudioSource.Play();
+                    t.AddComponent<HeroGan>();
+                    //SE
+                    tamaAudioSource.Play();
 
                     //アニメーション 通常
-                    animator.Play("StopThief");
-                    knifeflag = true;
+                    animator.Play("Magic");
 
                 }
             }
-            else
+            else if (isActive == false)
             {
                 //プレイヤーとの距離を求める
                 float dist = Vector2.Distance(transform.position, player.transform.position);
                 if (dist < reactionDistance)
                 {
+                    Debug.Log("アクティブ");
                     isActive = true; //アクティブにする
                 }
+            }
+            else
+            {
+                rb.Sleep();//停止
             }
         }
         else if (isActive)
         {
             isActive = false;
         }
-
 
 
         if (inDamage)
@@ -137,7 +130,7 @@ public class Throw : MonoBehaviour
             }
             return;//ダメージ中は操作による移動はさせない
         }
-       
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -147,8 +140,8 @@ public class Throw : MonoBehaviour
         if (other.gameObject.tag == "rushWall")
         {
             //ダメージ
-            T_Hp -= rushdamage;
-            Debug.Log(T_Hp);
+            C_Hp -= rushdamage;
+            Debug.Log(C_Hp);
             inDamage = true;
             //SE
             GetComponent<AudioSource>().Play();
@@ -156,10 +149,10 @@ public class Throw : MonoBehaviour
         if (other.gameObject.tag == "Fireball")
         {
             //ダメージ
-            T_Hp -= buresball;
-            Debug.Log(T_Hp);
+            C_Hp -= buresball;
+            Debug.Log(C_Hp);
+            Destroy(other.gameObject);
             inDamage = true;
-            Destroy(other.gameObject);//当たったブレスを消す
             //SE
             GetComponent<AudioSource>().Play();
         }
@@ -169,7 +162,7 @@ public class Throw : MonoBehaviour
     void EnemyDamage()
     {
         Invoke("DamageEnd", 0.25f);
-        if (T_Hp <= 0)
+        if (C_Hp <= 0)
         {
             Debug.Log("敵が倒れている");
             Destroy(gameObject, 0.2f);//0.2かけて敵を消す
@@ -181,11 +174,5 @@ public class Throw : MonoBehaviour
         inDamage = false;
         //スプライト元に戻す
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
-    }
-
-    void make_naihu()
-    {
-        Enemygan.Naihu = true;
-
     }
 }
