@@ -18117,6 +18117,7 @@ MonoBehaviour:
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
   clearAnime: PlayerClear
+  downAnime: PlayerDown
   flameAudioSource: {fileID: 1729734937}
   sceneName: Gameover
   fadeColor: {r: 0, g: 0, b: 0, a: 1}

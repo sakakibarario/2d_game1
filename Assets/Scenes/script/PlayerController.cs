@@ -100,11 +100,13 @@ public class PlayerController : MonoBehaviour
     public string jumpAnime  = "PlayerJump";
     public string rushAnime  = "PlayerRush";
     public string clearAnime = "PlayerClear";
+    public string downAnime = "PlayerDown";
     string nowAnime = "";
     string oldAnime = "";
 
     //ゲームステータス管理フラグ
     static public bool pose = false;
+    bool GameOver_Move = false;
 
     //SE用
     [SerializeField]
@@ -119,7 +121,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         stop = true;
-
+        Global.Clear = false;
         //Rigidbody2Dを持ってくる
         rb = GetComponent<Rigidbody2D>();
 
@@ -282,10 +284,14 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(ClearMove());
             }
+            else if(GameOver_Move)
+            {
+
+            }
             else
             {
-                animator.Play(stopAnime);
-                nowAnime = stopAnime;
+               animator.Play(stopAnime);
+               nowAnime = stopAnime;
             }
         }
         
@@ -308,6 +314,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+           
             if (inDamage)
             {
                 //ダメージ中点滅させる
@@ -503,7 +510,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Global.Clear)
             {
-               // StartCoroutine(ClearMove());
+                
+               StartCoroutine(ClearMove());
+            }
+            else if (GameOver_Move)
+            {
+
             }
             else
             {
@@ -789,30 +801,32 @@ public class PlayerController : MonoBehaviour
         Debug.Log("ゲームオーバー");
         gameState = "gameover";
         stop = false;
+
+        GameOver_Move = true;
         rb.velocity = Vector2.zero;
         StartCoroutine(GameOverT());
     }
     IEnumerator GameOverT()
     {
-        
+        animator.Play(downAnime);
+        transform.localScale = new Vector2(5, 5);
         new Vector3(transform.position.x, 0, 0);
         bx.enabled = false;
-        
-        transform.localRotation = new Quaternion(0, 0, 90,90);
         
         rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
 
 
         yield return new WaitForSeconds(2.0f);
         Initiate.Fade(sceneName, fadeColor, fadeSpeed);
-        //SceneManager.LoadScene("Gameover");
+        SceneManager.LoadScene("Gameover");
     }
     IEnumerator ClearMove()
     {
         bx.enabled = false;
         rb.isKinematic = true;
         rb.velocity = Vector2.zero;
-        if(camera1.tag == ("MainCamera"))
+        
+        if (camera1.tag == ("MainCamera"))
         {
             this.transform.position = new Vector3(transform.position.x, -2.2f, 0);
             animator.Play(clearAnime);
@@ -827,7 +841,7 @@ public class PlayerController : MonoBehaviour
             this.transform.position = new Vector3(transform.position.x, 0.6f, 0);
             animator.Play(clearAnime);
         }
-
+       
         yield break;
     }
 }
