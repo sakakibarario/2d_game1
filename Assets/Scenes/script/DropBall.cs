@@ -269,7 +269,7 @@ public class DropBall : MonoBehaviour
             {
                 yield return new WaitForSeconds(3.0f);
                 Destroy(gameObject);
-                //yield return new WaitForSeconds(5.5f);
+               
                 Initiate.Fade(sceneName, fadeColor, fadeSpeed);
                 yield break;
             }
