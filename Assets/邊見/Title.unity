@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca57e85e1480a754fb6edc03ff549f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Tutorial
+  sceneName: AniTutorial
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeSpeed: 3
 --- !u!114 &818813906

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: "Assets/\u908A\u898B/Title.unity"
     guid: 2d20fc0510643ba4dacf247583d5fa80
   - enabled: 1
+    path: "Assets/\u68EE\u672C/AniTutorial.unity"
+    guid: 5d11cbc039c53224ab2e07a08e075bb7
+  - enabled: 1
     path: Assets/Scenes/map.unity
     guid: 437d64c29ae822f479a5726d4c8ef780
   - enabled: 1
@@ -20,15 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\u68EE\u672C/GameClear.unity"
     guid: ffff440e587a0e5418f9e1ef49979256
-  - enabled: 1
-    path: "Assets/\u908A\u898B/Pause.unity"
-    guid: 5f483baf4428235438a871bf34cef3b8
-  - enabled: 1
-    path: "Assets/\u68EE\u672C/Status.unity"
-    guid: d651cea2fe4e2e14da9cc20f635aa552
-  - enabled: 1
-    path: "Assets/\u68EE\u672C/Tutorial.unity"
-    guid: e612d29614bb7e24db319b169702b0cd
   - enabled: 1
     path: Assets/Scenes/map2V.unity
     guid: 77c19e5d52e08344b890c487f7e28092
