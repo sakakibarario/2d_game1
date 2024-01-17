@@ -30,29 +30,29 @@ public class SougenDra : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(AniTutorialc.cnt == 4)
+        if(AniTutorialc.cnt == 5)//‘Œ´‚Ì”wŒi‚ğo‚·
         {
             SIRO.SetActive(true);
             KURO.SetActive(true);
             KUSA.SetActive(true);
         }
-        if(AniTutorialc.cnt == 5)
+        if(AniTutorialc.cnt == 6)
         {
             ToHome = true;
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-           if(OsaDra.SougenD && AniTutorialc.cnt == 4)
+           if(OsaDra.SougenD && AniTutorialc.cnt == 5)//‘Œ´‚Ìƒhƒ‰ƒSƒ“‚ª¶‚©‚ç“oê
            {
                 animator.Play("SougenDra");
-                AniTutorialc.cnt = 5;
+                AniTutorialc.cnt = 6;
 
                 Ara2.SetActive(false);
                 Ara3.SetActive(true);
 
            }
-           else if(ToHome && AniTutorialc.cnt == 5)
+           else if(ToHome && AniTutorialc.cnt == 6)//Home‚ÉƒV[ƒ“‚ğØ‚è‘Ö‚¦‚é
             {
                 Initiate.Fade(sceneName, fadeColor, fadeSpeed);
             }

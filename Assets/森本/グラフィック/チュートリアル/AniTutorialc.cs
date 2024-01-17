@@ -28,7 +28,7 @@ public class AniTutorialc : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (cnt == 0)
+            if (cnt == 0)//ƒq[ƒ[‚½‚¿‚ª“oê
             {
                 animator.Play("Heroani");
                 cnt = 1;
