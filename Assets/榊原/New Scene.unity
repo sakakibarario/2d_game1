@@ -1775,13 +1775,17 @@ MonoBehaviour:
     m_Bits: 256
   slider: {fileID: 859801544}
   tama: {fileID: 3733789932348006754, guid: 3e24a7811e8bf5b43937a3e60e5405bf, type: 3}
+  bx: {fileID: 0}
+  camera1: {fileID: 0}
+  camera2: {fileID: 0}
+  camera3: {fileID: 0}
   speed: 3
   jump: 5
   rush: 15
   D_HP: 0
+  CJump: 0
   isCountDown: 1
   AnimeCount: 1
-  isTimeOver: 0
   animeOver: 0
   displayTime: 0
   Animetime: 0
@@ -1792,7 +1796,12 @@ MonoBehaviour:
   moveAnime: PlayerMove
   jumpAnime: PlayerJump
   rushAnime: PlayerRush
+  clearAnime: PlayerClear
+  downAnime: PlayerDown
   flameAudioSource: {fileID: 2032077371}
+  sceneName: 
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  fadeSpeed: 0
 --- !u!95 &2032077366
 Animator:
   serializedVersion: 5
@@ -2149,7 +2158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058669579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.62, y: -3.95, z: 0}
+  m_LocalPosition: {x: 16.97, y: -2.98, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2184,6 +2193,10 @@ MonoBehaviour:
   stopAnime: StopMove
   attack: attack
   attackT: attackT
+  HeroDown: EnemyHeroDown
+  sceneName: 
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  fadeSpeed: 0
 --- !u!61 &2058669583
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -558,9 +558,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("接触");
                 if (gorush == false)
                 {
-                    D_HP -= Suraimu;    //HPを減らす
-                    slider.value = (float)D_HP / (float)S_D_HP; ;
-                    Debug.Log("slider.value : " + slider.value);
+                    D_HP -= Suraimu;    //HPを減らす                   
                     GetDamage(collision.gameObject);
                 }
             }
@@ -570,163 +568,109 @@ public class PlayerController : MonoBehaviour
                 if (gorush == false)
                 {
                     D_HP -= Goburin;    //HPを減らす（ゴブリンの攻撃）
-                    GetDamage(collision.gameObject);
-                    slider.value = (float)D_HP / (float)S_D_HP; ;
-                    Debug.Log("slider.value : " + slider.value);
-                    GetDamage(collision.gameObject);
+                    GetDamage(collision.gameObject);                 
                 }
             }
             if (collision.CompareTag("tama"))
             {
                 D_HP -= touzokugan;     //HPを減らす（盗賊の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);              
             }
             if (collision.CompareTag("TLeaf"))
             {
                 D_HP -= TLeaf;     //HPを減らす（盗賊の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("artillery"))
             {
                 D_HP -= artillery;     //HPを減らす（大砲の攻撃）
-                GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                GetDamage(collision.gameObject);               
+                Destroy(collision.gameObject);              
             }
             if (collision.CompareTag("bird"))
             {
                 D_HP -= bird;       //HPを減らす（村長の鳥）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.gameObject.tag == "cane")
             {
                 D_HP -= cane;       //HPを減らす（村長の杖）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("stone"))
             {
                 D_HP -= stone;       //HPを減らす（村長の杖）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("stone"))
             {
                 D_HP -= stone;       //HPを減らす（石の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("arrow"))
             {
                 D_HP -= arrow;       //HPを減らす（弓使いの攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);                
             }
             if (collision.CompareTag("famer"))
             {
                 D_HP -= famer;       //HPを減らす（村長の杖）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("mercenary"))
             {
                 D_HP -= mercenary;       //HPを減らす（傭兵の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("knight"))
             {
                 D_HP -= knight;       //HPを減らす（騎士の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("Explosion"))
             {
                 D_HP -= Explosion;       //HPを減らす（特攻兵の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);            
             }
             if (collision.CompareTag("caliver"))
             {
                 D_HP -= caliver;       //HPを減らす（騎兵の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);               
             }
             if (collision.CompareTag("witch"))
             {
                 D_HP -= witch;       //HPを減らす（魔女の攻撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);                
             }
             if (collision.gameObject.tag == ("upper"))
             {
                 D_HP -= toge;       //HPを減らす（魔女の攻撃）
-                GetDamage(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                GetDamage(collision.gameObject);             
             }
             if (collision.CompareTag("heroattack"))
             {
                 D_HP -= heroattack;       //HPを減らす（勇者の斬撃）
                 GetDamage(collision.gameObject);
-                Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);              
             }
             if (collision.CompareTag("thunder"))
             {
                 D_HP -= thunder;       //HPを減らす（勇者の魔法雷）
                 GetDamage(collision.gameObject);
                 Destroy(collision.gameObject);
-                slider.value = (float)D_HP / (float)S_D_HP; ;
-                Debug.Log("slider.value : " + slider.value);
-                GetDamage(collision.gameObject);
             }
             if (collision.gameObject.tag == "meat")//Hpを回復
             {
@@ -743,6 +687,8 @@ public class PlayerController : MonoBehaviour
                     GetRecovery();
                 } 
             }
+            slider.value = (float)D_HP / (float)S_D_HP; ;
+            Debug.Log("slider.value : " + slider.value);
         }
         if (collision.gameObject.tag == "dead")
         {
