@@ -22,20 +22,20 @@ public class OsaDra : MonoBehaviour
     {
         if(AniTutorialc.cnt == 5)
         {
-            SougenD = true;
+            SougenD = true;//SougenDra.cs ‚Ì SougenD ‚ð true ‚É‚·‚é
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (OyaDra.OsaF && AniTutorialc.cnt == 3)
+            if (OyaDra.OsaF && AniTutorialc.cnt == 3)//‚R”Ô–Ú
             {
-                animator.Play("OsaDoraani");
-                OsamF = true;
+                animator.Play("OsaDoraani");//ƒhƒ‰ƒSƒ“‚ª‹t‚ðŒü‚­
+                OsamF = true;//ƒhƒ‰ƒSƒ“‚ª“¦‚°‚éƒtƒ‰ƒO OsamF ‚ð true ‚É‚·‚é
                 AniTutorialc.cnt = 4;
             }
-            else if (OsamF && AniTutorialc.cnt == 4)
+            else if (OsamF && AniTutorialc.cnt == 4)//‚S”Ô–Ú
             {
-                animator.Play("OsaDraMove");
+                animator.Play("OsaDraMove");//—c‚¢ƒhƒ‰ƒSƒ“‚ª“¦‚°‚é
                 AniTutorialc.cnt = 5;
             }
         }

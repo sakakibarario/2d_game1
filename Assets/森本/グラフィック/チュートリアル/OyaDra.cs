@@ -23,30 +23,30 @@ public class OyaDra : MonoBehaviour
     {
         if(AniTutorialc.cnt == 2)
         {
-            OsaDs = true;
+            OsaDs = true; //‚Q”Ô–Ú‚É—¬‚ê‚é DesDra ‚Ìƒtƒ‰ƒO OsaDs ‚ğ true ‚É‚·‚é
         }
 
         if (AniTutorialc.cnt == 3)
         {
-            OsaF = true;
+            OsaF = true;//OsaDra.cs ‚Ì OsaF ‚ğ true ‚É‚·‚é
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (AniTutorialc.OyaF )//e‚Ìƒhƒ‰ƒSƒ“‚ª“oê
+            if (AniTutorialc.OyaF )//e‚Ìƒhƒ‰ƒSƒ“‚ª“oê ‚P”Ô–Ú
             {
                 animator.Play("Dragonani");        
-                AniTutorialc.OyaF = false;
+                AniTutorialc.OyaF = false;//‚Q‰ñ–Ú‚ª—¬‚ê‚È‚¢‚æ‚¤‚Éfalse‚É‚·‚é
                 
                 AniTutorialc.cnt = 2;
                 
             }
-            else if(OsaDs && AniTutorialc.cnt == 2)
+            else if(OsaDs && AniTutorialc.cnt == 2)//‚Q”Ô–Ú
             {
-                Ara1.SetActive(false);
-                Ara2.SetActive(true);
+                Ara1.SetActive(false);//‚ ‚ç‚·‚¶1‚ªÁ‚¦‚é
+                Ara2.SetActive(true); //‚ ‚ç‚·‚¶2‚ªoŒ»
 
-                animator.Play("DesDra");
+                animator.Play("DesDra");//e‚Ìƒhƒ‰ƒSƒ“‚ªÁ‚¦‚é
                 AniTutorialc.cnt = 3;
 
             }

@@ -23,12 +23,12 @@ public class AniTutorialc : MonoBehaviour
     {
         if (cnt == 1)
         {
-            OyaF = true;
+            OyaF = true;//OyaDra.cs ‚Ì OyaF
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (cnt == 0)//ƒq[ƒ[‚½‚¿‚ª“oê
+            if (cnt == 0)//ƒq[ƒ[‚½‚¿‚ª“oê@@‚O”Ô–Ú
             {
                 animator.Play("Heroani");
                 cnt = 1;
