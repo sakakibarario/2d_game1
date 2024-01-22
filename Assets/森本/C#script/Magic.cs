@@ -72,6 +72,7 @@ public class Magic : MonoBehaviour
                 if (currentTime > (targetTime - kamaetime))
                 {
                     animator.Play("kamaeMagic");
+                    Debug.Log("構え");
                 }
 
                 if (targetTime < currentTime)
@@ -89,6 +90,7 @@ public class Magic : MonoBehaviour
 
                     //アニメーション 通常
                     animator.Play("Magic");
+                    Debug.Log("通常");
 
                 }
             }
