@@ -7,9 +7,9 @@ public class Camera : MonoBehaviour
     public BoxCollider2D bx;
     GameObject player;
     //âÊñ êßå‰óp
-    private int   CPosleftx = -3;
+    private float   CPosleftx = -2.79f;
     private float CPosright = 131.5f;
-    private int   PPosleftx = -3;
+    private float   PPosleftx = -2.79f;
     private float CScrollx = 0.1f;
 
     // Start is called before the first frame update
