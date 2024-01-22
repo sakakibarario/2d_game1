@@ -30,31 +30,29 @@ public class SougenDra : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(AniTutorialc.cnt == 5)//草原の背景を出す
-        {
-            SIRO.SetActive(true);
-            KURO.SetActive(true);
-            KUSA.SetActive(true);
-        }
         if(AniTutorialc.cnt == 6)
         {
-            ToHome = true;
+            ToHome = true;//Homeシーンにフェードさせるためのフラグをtrueにする
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-           if(OsaDra.SougenD && AniTutorialc.cnt == 5)//草原のドラゴンが左から登場
+           if(OsaDra.SougenD && AniTutorialc.cnt == 5)//５番目
            {
-                animator.Play("SougenDra");
+                animator.Play("SougenDra");//草原のドラゴンが左から登場 
                 AniTutorialc.cnt = 6;
 
-                Ara2.SetActive(false);
-                Ara3.SetActive(true);
+                SIRO.SetActive(true);//草原の背景を出す
+                KURO.SetActive(true);
+                KUSA.SetActive(true);
+
+                Ara2.SetActive(false);//あらすじ2を消す
+                Ara3.SetActive(true);//あらすじ3が出現
 
            }
-           else if(ToHome && AniTutorialc.cnt == 6)//Homeにシーンを切り替える
+           else if(ToHome && AniTutorialc.cnt == 6)// ６番目
             {
-                Initiate.Fade(sceneName, fadeColor, fadeSpeed);
+                Initiate.Fade(sceneName, fadeColor, fadeSpeed);//Homeにシーンを切り替える フェードアウト
             }
         }
 
