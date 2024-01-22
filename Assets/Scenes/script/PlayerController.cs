@@ -705,9 +705,11 @@ public class PlayerController : MonoBehaviour
         {
             //移動停止
             rb.velocity = new Vector2(0, 0);
-            //敵キャラの反対側にヒットバックさせる
-            Vector3 v = (this.transform.position - @object.transform.position).normalized;
-            rb.AddForce(new Vector2(v.x * 5, v.y * 5), ForceMode2D.Impulse);
+            
+                //敵キャラの反対側にヒットバックさせる
+                Vector3 v = (this.transform.position - @object.transform.position).normalized;
+                rb.AddForce(new Vector2(v.x * 5, v.y * 5), ForceMode2D.Impulse);
+            
             //ダメージフラグON
             inDamage = true;
             Invoke("DamageEnd", 0.5f);

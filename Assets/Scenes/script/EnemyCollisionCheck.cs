@@ -9,12 +9,13 @@ public class EnemyCollisionCheck : MonoBehaviour
     private string groundTag = "Ground";
     private string enemyTag = "Enemy";
     private string wallTag = "wallObject";
+    //private string PlayerTag = "Player";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isOn == false)
         {
-            if (collision.tag == groundTag || collision.tag == enemyTag || collision.tag == wallTag)
+            if (collision.tag == groundTag || collision.tag == enemyTag || collision.tag == wallTag )
             {
                 isOn = true;
                 Debug.Log("”½“]");
