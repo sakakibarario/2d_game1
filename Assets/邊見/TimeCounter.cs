@@ -75,7 +75,6 @@ public class TimeCounter : MonoBehaviour
                 countdownsecond = 60.0f;
             }
 
-
             //ŽžŠÔ‚ð•\Ž¦‚·‚é
             timeText.text = countdownminute.ToString("00") + ":" + countdownsecond.ToString("f2");
 
