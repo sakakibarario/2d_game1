@@ -151,7 +151,7 @@ public class EnemyHeadman : MonoBehaviour
         yield return new WaitForSeconds(0.2f);//0.2ê√é~
         animator.Play(Stopanime);
         
-        for(int i =0; i<8;i++)
+        for(int i =0; i<10;i++)
         {
             if (HeadmanBird.HeadmanDown)
             {

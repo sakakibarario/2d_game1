@@ -37,18 +37,18 @@ public class PlayerController : MonoBehaviour
     private int touzokugan = 15; //“‘¯‚Ì‰“‹——£UŒ‚‚Ìƒ_ƒ[ƒW
     private int artillery = 25;  //‘å–C‚ÌUŒ‚
     private int bird = 10;       //’¹‚ÌUŒ‚
-    private int cane = 20;       //ñ‚ÌUŒ‚
-    private int stone = 10;      //q‹Ÿ‚ÌÎUŒ‚
-    private int famer = 15;      //”_–¯‚ÌUŒ‚
-    private int mercenary =20;   //—b•º‚ÌUŒ‚
+    private int cane = 15;       //ñ‚ÌUŒ‚
+    private int stone = 5;      //q‹Ÿ‚ÌÎUŒ‚
+    private int famer = 10;      //”_–¯‚ÌUŒ‚
+    private int mercenary =15;   //—b•º‚ÌUŒ‚
     private int arrow = 15;      //‹|g‚¢‚ÌUŒ‚
-    private int knight = 30;     //‹Rm‚ÌUŒ‚
+    private int knight = 15;     //‹Rm‚ÌUŒ‚
     private int Explosion = 40;  //“ÁU•º
     private int witch = 20;      //–‚—‚ÌUŒ‚
-    private int caliver = 30;    //‹R•º‚ÌUŒ‚
+    private int caliver = 25;    //‹R•º‚ÌUŒ‚
     private int toge = 10;     @//j‚ÌUŒ‚
-    private int thunder = 40;    //—‹UŒ‚
-    private int heroattack = 30; //aŒ‚UŒ‚
+    private int thunder = 20;    //—‹UŒ‚
+    private int heroattack = 15; //aŒ‚UŒ‚
     private int TLeaf = 10;      //—t‚Á‚ÏUŒ‚
     private int Tthorn = 5;      //™UŒ‚
     #endregion
@@ -714,10 +714,16 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             
             if(@object.tag == "damage_g")//ƒSƒuƒŠƒ“‚Ìê‡
+            { 
+                   //“GƒLƒƒƒ‰‚Ì”½‘Î‘¤‚ÉƒqƒbƒgƒoƒbƒN‚³‚¹‚é
+                   Vector3 v = (this.transform.position - @object.transform.position).normalized;
+                rb.AddForce(new Vector2(v.x * -5, v.y * 5), ForceMode2D.Impulse);//‹t‚É”ò‚Î‚·
+            }
+            else if(@object.tag == "cane")
             {
                 //“GƒLƒƒƒ‰‚Ì”½‘Î‘¤‚ÉƒqƒbƒgƒoƒbƒN‚³‚¹‚é
                 Vector3 v = (this.transform.position - @object.transform.position).normalized;
-                rb.AddForce(new Vector2(v.x * -5, v.y * 5), ForceMode2D.Impulse);//‹t‚É”ò‚Î‚·
+                rb.AddForce(new Vector2(v.x * 10, v.y * 5), ForceMode2D.Impulse);//‹­ƒmƒbƒNƒoƒbƒN
             }
             else
             {
