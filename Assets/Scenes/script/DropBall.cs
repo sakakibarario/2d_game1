@@ -74,6 +74,7 @@ public class DropBall : MonoBehaviour
     Animator animator; //アニメーター
     public string stopAnime = "EnemyTrentoStop";
     public string downAnime = "EnemyTrentoDown";
+    public string blueAnime = "EnemyTrentoblue";
 
     // Start is called before the first frame update
     void Start()
@@ -159,25 +160,6 @@ public class DropBall : MonoBehaviour
                 }
                 return;//ダメージ中は操作による移動はさせない
             }
-
-            if(isLeafAttack)
-            {
-                gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 3, 255);//赤色に点滅
-                //回復中点滅させる
-                float val = Mathf.Sin(Time.time * 10);
-                Debug.Log(val);
-                if (val > 0)
-                {
-                    //スプライトを表示
-                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                }
-                else
-                {
-                    //スプライトを非表示
-                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                }
-            }
-
             if (random)//リストの配列作成
             {
                 for (int i = start; i <= end; i++)
@@ -188,10 +170,6 @@ public class DropBall : MonoBehaviour
             }
         }
     }
-
-
-
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("OntriggerEnter2D:" + other.gameObject.name);
@@ -279,26 +257,23 @@ public class DropBall : MonoBehaviour
 
        
     }
-
-    void make_naihu()
-    {
-        EnemyBossGan.Naihu = true;
-    }
     IEnumerator LeafAttack()
     {
         currentTime = 0;
         //isLeafAttack = true;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 10, 3, 255);//赤色に点滅
+        //gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 10, 3, 255);//赤色に点滅
+        animator.Play(blueAnime);
 
         yield return new WaitForSeconds(0.4f);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        //gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        animator.Play(stopAnime);
 
         //フラグおろす
         //isLeafAttack = false;
 
         //スプライトをもとに戻す
         //gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        
+
         yield return new WaitForSeconds(0.2f);
 
 
