@@ -11413,6 +11413,10 @@ PrefabInstance:
       value: "\u7279\u653B\u968A"
       objectReference: {fileID: 0}
     - target: {fileID: 1992331231205682141, guid: 6b5fe4ed0d3c75444b8816beca5b55d2, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 216599306}
+    - target: {fileID: 1992331231205682141, guid: 6b5fe4ed0d3c75444b8816beca5b55d2, type: 3}
       propertyPath: explosionAudioSource
       value: 
       objectReference: {fileID: 1868769665}
@@ -19131,6 +19135,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5594b5c911d702d489460b536b9fc143, type: 2}
+    - target: {fileID: 1992331231205682141, guid: 6b5fe4ed0d3c75444b8816beca5b55d2, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 216599306}
     - target: {fileID: 1992331231205682143, guid: 6b5fe4ed0d3c75444b8816beca5b55d2, type: 3}
       propertyPath: m_RootOrder
       value: 7
