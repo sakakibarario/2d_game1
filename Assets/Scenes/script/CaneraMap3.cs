@@ -53,7 +53,7 @@ public class CaneraMap3 : MonoBehaviour
             else
             {
                 transform.position = new Vector3
-                (transform.position.x, 0, transform.position.z);//‰æ–Ê‚ðŒÅ’è
+                (transform.position.x, 0.095f, transform.position.z);//‰æ–Ê‚ðŒÅ’è
 
             }
 
