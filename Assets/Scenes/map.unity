@@ -23080,7 +23080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
       propertyPath: hp
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3769257701249294656, guid: 3ef945afca10098438810e73252671f8, type: 3}
       propertyPath: Point1

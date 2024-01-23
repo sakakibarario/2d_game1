@@ -32,24 +32,25 @@ public class PlayerController : MonoBehaviour
     static public bool stop = false;
 
     #region//“G‚ÌUŒ‚
-    private int Suraimu = 5;    //ƒXƒ‰ƒCƒ€‚Ìƒ_ƒ[ƒW
-    private int Goburin = 5;    //ƒSƒuƒŠƒ“‚Ìƒ_ƒ[ƒW
-    private int touzokugan = 15;//“‘¯‚Ì‰“‹——£UŒ‚‚Ìƒ_ƒ[ƒW
-    private int artillery = 25; //‘å–C‚ÌUŒ‚
-    private int bird = 5;       // ’¹‚ÌUŒ‚
-    private int cane = 20;      // ñ‚ÌUŒ‚
-    private int stone = 10;     //q‹Ÿ‚ÌÎUŒ‚
-    private int famer = 15;     //”_–¯‚ÌUŒ‚
-    private int mercenary =20;  //—b•º‚ÌUŒ‚
-    private int arrow = 15;     //‹|g‚¢‚ÌUŒ‚
+    private int Suraimu = 5;     //ƒXƒ‰ƒCƒ€‚Ìƒ_ƒ[ƒW
+    private int Goburin = 5;     //ƒSƒuƒŠƒ“‚Ìƒ_ƒ[ƒW
+    private int touzokugan = 15; //“‘¯‚Ì‰“‹——£UŒ‚‚Ìƒ_ƒ[ƒW
+    private int artillery = 25;  //‘å–C‚ÌUŒ‚
+    private int bird = 10;       //’¹‚ÌUŒ‚
+    private int cane = 20;       //ñ‚ÌUŒ‚
+    private int stone = 10;      //q‹Ÿ‚ÌÎUŒ‚
+    private int famer = 15;      //”_–¯‚ÌUŒ‚
+    private int mercenary =20;   //—b•º‚ÌUŒ‚
+    private int arrow = 15;      //‹|g‚¢‚ÌUŒ‚
     private int knight = 30;     //‹Rm‚ÌUŒ‚
     private int Explosion = 40;  //“ÁU•º
     private int witch = 20;      //–‚—‚ÌUŒ‚
     private int caliver = 30;    //‹R•º‚ÌUŒ‚
-    private int toge = 10;@@@@//j‚ÌUŒ‚
-    private int thunder = 40;     //—‹UŒ‚
+    private int toge = 10;     @//j‚ÌUŒ‚
+    private int thunder = 40;    //—‹UŒ‚
     private int heroattack = 30; //aŒ‚UŒ‚
     private int TLeaf = 10;      //—t‚Á‚ÏUŒ‚
+    private int Tthorn = 5;      //™UŒ‚
     #endregion
 
     #region//ålŒö‚Ì“®‚«ŠÖŒWƒtƒ‰ƒO
@@ -579,7 +580,7 @@ public class PlayerController : MonoBehaviour
             }
             if (collision.CompareTag("TLeaf"))
             {
-                D_HP -= TLeaf;     //HP‚ğŒ¸‚ç‚·i“‘¯‚ÌUŒ‚j
+                D_HP -= TLeaf;     //HP‚ğŒ¸‚ç‚·iƒgƒŒƒ“ƒgj
                 GetDamage(collision.gameObject);
                 Destroy(collision.gameObject);               
             }
@@ -669,6 +670,12 @@ public class PlayerController : MonoBehaviour
             if (collision.CompareTag("thunder"))
             {
                 D_HP -= thunder;       //HP‚ğŒ¸‚ç‚·i—EÒ‚Ì–‚–@—‹j
+                GetDamage(collision.gameObject);
+                Destroy(collision.gameObject);
+            }
+            if (collision.CompareTag("Tthorn"))
+            {
+                D_HP -= Tthorn;       //HP‚ğŒ¸‚ç‚·iƒgƒŒƒ“ƒg™j
                 GetDamage(collision.gameObject);
                 Destroy(collision.gameObject);
             }

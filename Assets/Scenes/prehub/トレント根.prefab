@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4430674871359027893}
   m_Layer: 0
   m_Name: "\u30C8\u30EC\u30F3\u30C8\u6839"
-  m_TagString: tama
+  m_TagString: Tthorn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -34,6 +34,7 @@ TagManager:
   - TLeaf
   - Main Camera2v
   - Main Camera3c
+  - Tthorn
   layers:
   - Default
   - TransparentFX
