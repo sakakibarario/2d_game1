@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class TimeCounter : MonoBehaviour
 {
     //秒カウントダウン
-    private float countdownsecond = 0;
+    public float countdownsecond = 0;
 
     //分カウントダウン
-    public int countdownminute = 1;
+    public int countdownminute = 3;
 
 
     //時間を表示するText型の変数
@@ -78,6 +78,11 @@ public class TimeCounter : MonoBehaviour
 
             //時間を表示する
             timeText.text = countdownminute.ToString("00") + ":" + countdownsecond.ToString("f2");
+
+        if(countdownsecond <10)
+        {
+            timeText.text = countdownminute.ToString("00") + ":0" + countdownsecond.ToString("f2");
+        }
         
 
         //countdownが0以下になったとき
