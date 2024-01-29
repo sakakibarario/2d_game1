@@ -62,23 +62,25 @@ public class Explosion : MonoBehaviour
                 rb.velocity = direction * speed;
                 //  Debug.Log("特攻兵ムーブ");
 
-                //反転
-                if (transform.position.x < player.transform.position.x)
+                //Playerより+-10のy範囲内にいるかどうか
+                if (player.transform.position.y < this.gameObject.transform.position.y + 5.0f  &&
+                   player.transform.position.y > this.gameObject.transform.position.y - 5.0f)
                 {
-                    transform.localScale = new Vector3(-4, 4, 1);
+                    //反転
+                    if (transform.position.x < player.transform.position.x)
+                    {
+                        transform.localScale = new Vector3(-4, 4, 1);
+                    }
+                    else if (transform.position.x == player.transform.position.x)
+                    {
+                        transform.localScale = transform.localScale;
+
+                    }
+                    else if (transform.position.x > player.transform.position.x)
+                    {
+                        transform.localScale = new Vector3(4, 4, 1);
+                    }
                 }
-                else if (transform.position.x == player.transform.position.x)
-                {
-                    transform.localScale = transform.localScale;
-
-                }
-                else if (transform.position.x > player.transform.position.x)
-                {
-                    transform.localScale = new Vector3(4, 4, 1);
-
-                }
-
-
             }
             else if(!stop)
             {
@@ -86,14 +88,23 @@ public class Explosion : MonoBehaviour
                 rb.velocity = Vector2.zero;//動きを静止
                 Debug.Log("stop");
             }
+            else if (isActive == false)
+            {
+                //Playerより+-10のy範囲内にいるかどうか
+                if (player.transform.position.y < this.gameObject.transform.position.y + 5.0f &&
+                   player.transform.position.y > this.gameObject.transform.position.y - 5.0f)
+                {
+                    //プレイヤーとの距離を求める
+                    float dist = Vector2.Distance(transform.position, player.transform.position);
+                    if (dist < reactionDistance)
+                    {
+                        isActive = true; //アクティブにする
+                    }
+                }
+            }
             else
             {
-                //プレイヤーとの距離を求める
-                float dist = Vector2.Distance(transform.position, player.transform.position);
-                if (dist < reactionDistance)
-                {
-                    isActive = true; //アクティブにする
-                }
+                rb.Sleep();
             }
         }
         else if (isActive)
