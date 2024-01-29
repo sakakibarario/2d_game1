@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ranking : MonoBehaviour
 {
+    //それぞれのステージの最速タイムの記憶用変数
     public int Sfastminute=0; 
     public float SfastSecond=0;
 
@@ -12,6 +14,10 @@ public class Ranking : MonoBehaviour
 
     public int Cfastminute=0;
     public float CfastSecond=0;
+
+    public Text timeSText;
+    public Text timeVText;
+    public Text timeCText;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,15 +37,6 @@ public class Ranking : MonoBehaviour
                 {
                     Sfastminute = Global.Sminute;
                 }
-            }
-            //時間を表示する
-            if (Global.Ssecond < 10)
-            {
-                Debug.Log(Sfastminute.ToString("00") + ":0" + SfastSecond.ToString("f2"));
-            }
-            else
-            {
-                Debug.Log(Sfastminute.ToString("00") + ":" + SfastSecond.ToString("f2"));
             }
         }
         else if (Global.Vplaying)//村ステージ
@@ -66,7 +63,33 @@ public class Ranking : MonoBehaviour
                 }
             }
         }
-        
+
+        if (SfastSecond < 10)
+        {
+            timeSText.text = Sfastminute.ToString("00") + ":0" + SfastSecond.ToString("f2");
+        }
+        else
+        {
+            timeSText.text = Sfastminute.ToString("00") + ":" + SfastSecond.ToString("f2");
+        }
+
+        if (VfastSecond < 10)
+        {
+            timeVText.text = Vfastminute.ToString("00") + ":0" + VfastSecond.ToString("f2");
+        }
+        else
+        {
+            timeVText.text = Vfastminute.ToString("00") + ":" + VfastSecond.ToString("f2");
+        }
+
+        if (CfastSecond < 10)
+        {
+            timeCText.text = Cfastminute.ToString("00") + ":0" + CfastSecond.ToString("f2");
+        }
+        else
+        {
+            timeCText.text = Cfastminute.ToString("00") + ":" + CfastSecond.ToString("f2");
+        }
+
     }
-    
 }
