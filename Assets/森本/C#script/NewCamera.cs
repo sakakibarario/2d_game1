@@ -18,6 +18,13 @@ public class NewCamera : MonoBehaviour
         this.player = GameObject.Find("ålŒö");
         bx = GetComponent<BoxCollider2D>();
         bx.enabled = false;
+
+        //game playƒtƒ‰ƒO
+        {
+            Global.Splaying = true;
+            Global.Vplaying = false;
+            Global.Cplaying = false;
+        }
     }
 
     // Update is called once per frame

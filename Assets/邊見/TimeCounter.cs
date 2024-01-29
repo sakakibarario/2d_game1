@@ -52,6 +52,21 @@ public class TimeCounter : MonoBehaviour
         }
         else
         {
+            if(Global.Splaying)
+            {
+                Global.Sminute = countdownminute;
+                Global.Ssecond = countdownsecond;
+            }
+            else if(Global.Vplaying)
+            {
+                Global.Vminute = countdownminute;
+                Global.Vsecond = countdownsecond;
+            }
+            else if(Global.Cplaying)
+            {
+                Global.Cminute = countdownminute;
+                Global.Csecond = countdownsecond;
+            }
             return;
         }
 
@@ -76,13 +91,14 @@ public class TimeCounter : MonoBehaviour
             }
 
             //ŽžŠÔ‚ð•\Ž¦‚·‚é
-            timeText.text = countdownminute.ToString("00") + ":" + countdownsecond.ToString("f2");
-
         if(countdownsecond <10)
         {
             timeText.text = countdownminute.ToString("00") + ":0" + countdownsecond.ToString("f2");
         }
-        
+        else
+        {
+            timeText.text = countdownminute.ToString("00") + ":" + countdownsecond.ToString("f2");
+        }
 
         //countdown‚ª0ˆÈ‰º‚É‚È‚Á‚½‚Æ‚«
         if (countdownsecond<=0 && countdownminute <= 0)

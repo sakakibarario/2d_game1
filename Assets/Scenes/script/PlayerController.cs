@@ -185,7 +185,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       if(Global.Splaying)
+        {
+            //時間を表示する
+            if (Global.Ssecond < 10)
+            {
+                Debug.Log(Global.Sminute.ToString("00") + ":0" + Global.Ssecond.ToString("f2"));
+            }
+            else
+            {
+                Debug.Log(Global.Sminute.ToString("00") + ":" + Global.Ssecond.ToString("f2"));
+            }
+        }
+       else if(Global.Vplaying)
+        {
+            Debug.Log("村");
+        }
+       else if(Global.Cplaying)
+        {
+            Debug.Log("城");
+        }
       
         //ゲーム中以外とダメージ中は何もしない
         if (stop)

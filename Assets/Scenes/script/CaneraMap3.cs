@@ -21,6 +21,13 @@ public class CaneraMap3 : MonoBehaviour
         bxleft.enabled = false;
         bxup = GetComponent<BoxCollider2D>();
         bxup.enabled = false;
+
+        //game playƒtƒ‰ƒO
+        {
+            Global.Splaying = false;
+            Global.Vplaying = false;
+            Global.Cplaying = true;
+        }
     }
 
     // Update is called once per frame
