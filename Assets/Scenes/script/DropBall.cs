@@ -43,7 +43,7 @@ public class DropBall : MonoBehaviour
 
     private bool inDamage = false;
     private bool isActive = false;
-    private bool isLeafAttack = false;
+    //private bool isLeafAttack = false;
 
     //SE—p
     [SerializeField]
