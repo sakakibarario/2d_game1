@@ -7,6 +7,9 @@ public class SpawnButton : MonoBehaviour
     public GameObject SpawnButtonv;
     public GameObject SpawnButtonc;
 
+    public GameObject MuraHukidasi;
+    public GameObject SiroHukidasi;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +24,14 @@ public class SpawnButton : MonoBehaviour
             //村ボタン
             SpawnButtonv.gameObject.SetActive(true);
 
+            MuraHukidasi.gameObject.SetActive(true);
+
             if (PlayerController.VillageBoss)
             {
                 //城ボタン
                 SpawnButtonc.gameObject.SetActive(true);
+
+                SiroHukidasi.gameObject.SetActive(true);
             }
 
         }
