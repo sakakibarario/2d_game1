@@ -2258,8 +2258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -5.15}
+  m_SizeDelta: {x: 0, y: 10.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &315598063
 MonoBehaviour:
@@ -10564,6 +10564,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5025548636864495955, guid: 226c2258e11e5bb4db6182bd340edc49, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1431410701}
+    - target: {fileID: 5025548636864495955, guid: 226c2258e11e5bb4db6182bd340edc49, type: 3}
       propertyPath: fadeSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -11242,8 +11246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -89.65, y: -14.5}
-  m_SizeDelta: {x: 179.3, y: 29}
+  m_AnchoredPosition: {x: -80, y: -10}
+  m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1431410701
 MonoBehaviour:

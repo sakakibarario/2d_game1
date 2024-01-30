@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EnemyHeadman : MonoBehaviour
 {
@@ -60,6 +61,8 @@ public class EnemyHeadman : MonoBehaviour
     //Ç‰Ç¡Ç≠ÇËÇØÇ∑
     private byte transparent_count;
 
+    public Slider slider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +71,8 @@ public class EnemyHeadman : MonoBehaviour
         Headman_HP = HP;//ç≈ëÂHPÇê›íË
         OnAttack = true;
         transparent_count = 255;
+
+        slider.value = 1;
     }
 
     // Update is called once per frame
@@ -212,6 +217,8 @@ public class EnemyHeadman : MonoBehaviour
             inDamage = true;
             //SE
             GetComponent<AudioSource>().Play();
+
+            slider.value = (float)Headman_HP / (float)HP;
         }
         if (collider.gameObject.tag =="Fireball")
         {
@@ -222,6 +229,7 @@ public class EnemyHeadman : MonoBehaviour
             inDamage = true;
             //SE
             GetComponent<AudioSource>().Play();
+            slider.value = (float)Headman_HP / (float)HP;
         }
         EnemyDamage();//ì|ÇÍÇƒÇ¢ÇÈÇ©í≤Ç◊ÇÈ
     }
