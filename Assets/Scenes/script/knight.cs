@@ -94,11 +94,16 @@ public class knight: MonoBehaviour
             }
             else
             {
-                //プレイヤーとの距離を求める
-                float dist = Vector2.Distance(transform.position, player.transform.position);
-                if (dist < reactionDistance)
+                //Playerより+-10のy範囲内にいるかどうか
+                if (player.transform.position.y < this.gameObject.transform.position.y + 5.0f &&
+                   player.transform.position.y > this.gameObject.transform.position.y - 5.0f)
                 {
-                    isActive = true; //アクティブにする
+                    //プレイヤーとの距離を求める
+                    float dist = Vector2.Distance(transform.position, player.transform.position);
+                    if (dist < reactionDistance)
+                    {
+                        isActive = true; //アクティブにする
+                    }
                 }
             }
         }
