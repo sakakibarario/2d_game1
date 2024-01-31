@@ -142,7 +142,7 @@ public class DropBall : MonoBehaviour
                     if (dist < reactionDistance)
                     {
                         isActive = true; //アクティブにする
-                        Object.gameObject.SetActive(true);
+                        Object.gameObject.SetActive(true);//HPバーをアクティブにする
                     }
                 }
             }

@@ -1850,6 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af12178280e82745b8443f5e0023a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Object: {fileID: 1053490141}
   Point1: {fileID: 1814727706}
   Point2: {fileID: 1674780948}
   Point3: {fileID: 1225813480}
@@ -13324,7 +13325,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1959788112}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0

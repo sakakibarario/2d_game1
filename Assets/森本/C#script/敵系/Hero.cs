@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
+    public GameObject Object;
     public GameObject Point1;
     public GameObject Point2;
     public GameObject Point3;
@@ -75,6 +76,7 @@ public class Hero : MonoBehaviour
 
     private void Start()
     {
+        Object.gameObject.SetActive(false);
         //Rigidbody2D をとる
         rb = GetComponent<Rigidbody2D>();
         Hero_Hp = hp;
@@ -132,6 +134,7 @@ public class Hero : MonoBehaviour
                     if (dist < reactionDistance)
                     {
                         isActive = true; //アクティブにする
+                        Object.gameObject.SetActive(true);//HPバーをアクティブにする
                     }
                 }
             }
