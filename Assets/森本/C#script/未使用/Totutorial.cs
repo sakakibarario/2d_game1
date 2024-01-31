@@ -13,22 +13,23 @@ public class Totutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (tut)
-        {
-            homebutton.SetActive(false);
-        }
-        else if (tut == false)
-        {
-            tutorialbutton.SetActive(false);
-            homebutton.SetActive(true);
-        }
-        tut = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if (tut || ResetButton.Tutflag)//tutorialシーンへ
+        //{
+        //    homebutton.SetActive(false);
+        //    tut = false;
+        //    ResetButton.Tutflag = false;
+        //}
+        //else if (tut == false)//Homeシーンへ
+        //{
+        //    tutorialbutton.SetActive(false);
+        //    homebutton.SetActive(true);
+        //}
 
     }
 }

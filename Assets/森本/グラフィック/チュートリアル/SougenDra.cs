@@ -14,7 +14,7 @@ public class SougenDra : MonoBehaviour
     public GameObject Ara2;
     public GameObject Ara3;
 
-    bool ToHome = false;
+    static public bool ToHome = false;
 
     [SerializeField] private string sceneName;
     [SerializeField] private Color fadeColor;
