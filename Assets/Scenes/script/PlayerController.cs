@@ -350,130 +350,133 @@ public class PlayerController : MonoBehaviour
                     gameObject.GetComponent<SpriteRenderer>().enabled = false;
                 }
             }
-            if (ongrond || axisH != 0 || gorush == true)
-            {
-                //地上or速度が０ではないor攻撃中ではない
-                //速度を更新
-                rb.velocity = new Vector2(axisH * speed, rb.velocity.y);
-            }
-            if (ongrond && gojump)
-            {
-                //地上かつジャンプキーが押されたとき
-                //ジャンプする
-                Debug.Log("ジャンプ");
-                Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
-                rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
-                gojump = false; //ジャンプフラグをおろす
-            }
-            if (VillageBoss && gojump)
-            {
-                Debug.Log("ジャンプ");
-                Vector2 jumpPw2 = new Vector2(0, jump);      //ジャンプさせるベクトル
-                rb.AddForce(jumpPw2, ForceMode2D.Impulse);   //瞬間的な力を加える
-                gojump = false; //ジャンプフラグをおろす
-            }
-
-            if (gorush && horizon == true)
-            {
-                //地上かつ左クリックが押されたときかつ右向き
-                //突進する
-                Debug.Log("突進");
-
-                //SE　突進
-                GetComponent<AudioSource>().Play();
-
-                Vector2 rushPw = new Vector2(rush, 0);
-                rb.AddForce(rushPw, ForceMode2D.Impulse);
-
-                if (animeOver == false)//時間経過
+            
+            
+                if (ongrond || axisH != 0 || gorush == true)
                 {
-                    Anitimes += Time.deltaTime;//経過時間を加算
-                    if (AnimeCount)
+                    //地上or速度が０ではないor攻撃中ではない
+                    //速度を更新
+                    rb.velocity = new Vector2(axisH * speed, rb.velocity.y);
+                }
+                if (ongrond && gojump)
+                {
+                    //地上かつジャンプキーが押されたとき
+                    //ジャンプする
+                    Debug.Log("ジャンプ");
+                    Vector2 jumpPw = new Vector2(0, jump);      //ジャンプさせるベクトル
+                    rb.AddForce(jumpPw, ForceMode2D.Impulse);   //瞬間的な力を加える
+                    gojump = false; //ジャンプフラグをおろす
+                }
+                if (VillageBoss && gojump)
+                {
+                    Debug.Log("ジャンプ");
+                    Vector2 jumpPw2 = new Vector2(0, jump);      //ジャンプさせるベクトル
+                    rb.AddForce(jumpPw2, ForceMode2D.Impulse);   //瞬間的な力を加える
+                    gojump = false; //ジャンプフラグをおろす
+                }
+
+                if (gorush && horizon == true)
+                {
+                    //地上かつ左クリックが押されたときかつ右向き
+                    //突進する
+                    Debug.Log("突進");
+
+                    //SE　突進
+                    GetComponent<AudioSource>().Play();
+
+                    Vector2 rushPw = new Vector2(rush, 0);
+                    rb.AddForce(rushPw, ForceMode2D.Impulse);
+
+                    if (animeOver == false)//時間経過
                     {
-                        //カウントダウン
-                        Animetime = animerushtime - Anitimes;
-                        if (Animetime <= 0.0f)
+                        Anitimes += Time.deltaTime;//経過時間を加算
+                        if (AnimeCount)
                         {
-                            Animetime = 0.0f;
-                            animeOver = true;  //フラグをおろす
-                            gorush = false; //攻撃フラグをおろす
-                            displayTime = rush_time;
-                            Animetime = animerushtime;
-                            isTimeOver = false;
-                            Anitimes = 0;
-                            times = 0;
-                            rb.velocity = Vector2.zero;//追加
+                            //カウントダウン
+                            Animetime = animerushtime - Anitimes;
+                            if (Animetime <= 0.0f)
+                            {
+                                Animetime = 0.0f;
+                                animeOver = true;  //フラグをおろす
+                                gorush = false; //攻撃フラグをおろす
+                                displayTime = rush_time;
+                                Animetime = animerushtime;
+                                isTimeOver = false;
+                                Anitimes = 0;
+                                times = 0;
+                                rb.velocity = Vector2.zero;//追加
+                            }
+
                         }
-
+                        //   Debug.Log("TIMES:" + Animetime);
                     }
-                    //   Debug.Log("TIMES:" + Animetime);
                 }
-            }
-            else if (gorush && horizon == false)
-            {
-                //地上かつ左クリックが押されたときかつ左向き
-                //突進する
-                Debug.Log("突進");
-
-                //SE 突進
-                GetComponent<AudioSource>().Play();
-
-                Vector2 rushPw = new Vector2(-rush, 0);
-                rb.AddForce(rushPw, ForceMode2D.Impulse);
-
-                if (animeOver == false)//時間経過
+                else if (gorush && horizon == false)
                 {
-                    Anitimes += Time.deltaTime;//経過時間を加算
-                    if (AnimeCount)
+                    //地上かつ左クリックが押されたときかつ左向き
+                    //突進する
+                    Debug.Log("突進");
+
+                    //SE 突進
+                    GetComponent<AudioSource>().Play();
+
+                    Vector2 rushPw = new Vector2(-rush, 0);
+                    rb.AddForce(rushPw, ForceMode2D.Impulse);
+
+                    if (animeOver == false)//時間経過
                     {
-                        //カウントダウン
-                        Animetime = animerushtime - Anitimes;
-                        if (Animetime <= 0.0f)
+                        Anitimes += Time.deltaTime;//経過時間を加算
+                        if (AnimeCount)
                         {
-                            Animetime = 0.0f;
-                            animeOver = true;  //フラグをおろす
-                            gorush = false; //攻撃フラグをおろす
-                            displayTime = rush_time;
-                            Animetime = animerushtime;
-                            isTimeOver = false;
-                            Anitimes = 0;
-                            times = 0;
-                            rb.velocity = Vector2.zero;//追加
+                            //カウントダウン
+                            Animetime = animerushtime - Anitimes;
+                            if (Animetime <= 0.0f)
+                            {
+                                Animetime = 0.0f;
+                                animeOver = true;  //フラグをおろす
+                                gorush = false; //攻撃フラグをおろす
+                                displayTime = rush_time;
+                                Animetime = animerushtime;
+                                isTimeOver = false;
+                                Anitimes = 0;
+                                times = 0;
+                                rb.velocity = Vector2.zero;//追加
+                            }
+
                         }
-
+                        Debug.Log("TIMES:" + Animetime);
                     }
-                    Debug.Log("TIMES:" + Animetime);
                 }
-            }
-            if (Fireball_F)
-            {
-                //主人公の座標を変数posに保存
-                var posR = this.gameObject.transform.position + (transform.up * 1.5f) + transform.right * 1.2f;
-                var posL = this.gameObject.transform.position + (transform.up * 1.5f) - transform.right * 1.2f;
-                //弾のプレハブを作成
-                var t = Instantiate(tama) as GameObject;
-                //弾のプレハブの位置を位置にする
-
-                if (horizon)
+                if (Fireball_F)
                 {
-                    t.transform.position = posR;
-                    t.AddComponent<Playerboll>();
-                }
-                else
-                {
-                    t.transform.position = posL;
-                    t.AddComponent<Playerboll2>();
-                }
-                flameAudioSource.Play();
-                Debug.Log("火球");
-                buresutime = Onbures;   //カウントダウン時間のリセット
-                K_timesnow = 0;         //表示時間のリセット
-                K_isTimeOver = false;   //フラグをあげる
-                Fireball_F = false;     //フラグをおろす
-                                        //SE　火球
-                GetComponent<AudioSource>().Play();
+                    //主人公の座標を変数posに保存
+                    var posR = this.gameObject.transform.position + (transform.up * 1.5f) + transform.right * 1.2f;
+                    var posL = this.gameObject.transform.position + (transform.up * 1.5f) - transform.right * 1.2f;
+                    //弾のプレハブを作成
+                    var t = Instantiate(tama) as GameObject;
+                    //弾のプレハブの位置を位置にする
 
-            }
+                    if (horizon)
+                    {
+                        t.transform.position = posR;
+                        t.AddComponent<Playerboll>();
+                    }
+                    else
+                    {
+                        t.transform.position = posL;
+                        t.AddComponent<Playerboll2>();
+                    }
+                    flameAudioSource.Play();
+                    Debug.Log("火球");
+                    buresutime = Onbures;   //カウントダウン時間のリセット
+                    K_timesnow = 0;         //表示時間のリセット
+                    K_isTimeOver = false;   //フラグをあげる
+                    Fireball_F = false;     //フラグをおろす
+                                            //SE　火球
+                    GetComponent<AudioSource>().Play();
+
+                }
+            
             //アニメーション
             if (ongrond)
             {

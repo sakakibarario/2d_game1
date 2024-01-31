@@ -167,7 +167,7 @@ public class EnemyHeadman : MonoBehaviour
                 yield break;
             }
             //Debug.Log("鳥生成");
-            float vecX = Random.Range(128f, 147f);//ランダムを（）範囲で設定
+            float vecX = Random.Range(128f, 150f);//ランダムを（）範囲で設定
             var t = Instantiate(bird) as GameObject;//オブジェクトを作成
 
             //弾のプレハブの位置を敵の位置にする
