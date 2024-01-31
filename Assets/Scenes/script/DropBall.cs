@@ -10,6 +10,8 @@ public class DropBall : MonoBehaviour
     //弾のプレハブオブジェクト
     public GameObject tama;
 
+    public GameObject Object;
+
     //root攻撃の座標取得オブジェクト
     public GameObject Point1;
     public GameObject Point2;
@@ -29,7 +31,7 @@ public class DropBall : MonoBehaviour
     public GameObject DangerArea4;
 
     private float count = 5.0f;     //root作成カウント用
-    public int hp = 50;             //ＭＡＸｈｐ
+    public int hp = 60;             //ＭＡＸｈｐ
     public float reactionDistance = 8.0f;//反応距離
     private float targetTime = 5.0f;
     private float currentTime = 0;
@@ -76,14 +78,19 @@ public class DropBall : MonoBehaviour
     public string downAnime = "EnemyTrentoDown";
     public string blueAnime = "EnemyTrentoblue";
 
+    public Slider slider;
+
     // Start is called before the first frame update
     void Start()
     {
+        Object.gameObject.SetActive(false);
         Torent_Hp = hp;
         stop = true;
         DamageT = true;
         count = 2.0f;
         transparent_count = 255;
+        slider.value = 1;
+
 
         //Animator をとってくる
         animator = GetComponent<Animator>();
@@ -135,6 +142,7 @@ public class DropBall : MonoBehaviour
                     if (dist < reactionDistance)
                     {
                         isActive = true; //アクティブにする
+                        Object.gameObject.SetActive(true);
                     }
                 }
             }
@@ -194,6 +202,8 @@ public class DropBall : MonoBehaviour
             //SE
             GetComponent<AudioSource>().Play();
         }
+        slider.value = (float)Torent_Hp / (float)hp;
+        Debug.Log("slider.value : " + slider.value);
         EnemyDamage();//倒れているか調べる
     }
     
