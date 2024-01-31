@@ -23,7 +23,6 @@ public class IwaCrash : MonoBehaviour
 
     static public bool Iwakieflag = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         //Animator ‚ð‚Æ‚Á‚Ä‚­‚é
@@ -42,7 +41,7 @@ public class IwaCrash : MonoBehaviour
             }
             if (targetTime < currentTime)//2.0f
             {
-                StartCoroutine("Resporn");
+                Iwa.gameObject.SetActive(false);
             }
         }
     }
@@ -55,13 +54,4 @@ public class IwaCrash : MonoBehaviour
             //Debug.Log("Player“–‚½‚Á‚½");
         }
     }
-    private IEnumerator Resporn()
-    {
-        Destroy(Iwa.gameObject);
-
-        yield return new WaitForSeconds(1.0f);
-
-        Instantiate(Iwa.gameObject);
-    }
-
 }

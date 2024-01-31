@@ -21,20 +21,20 @@ public class DesIwa : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IwaCrash.Iwakieflag)
-        {
-            Debug.Log("岩フラグtrue");
-            currentTime += Time.deltaTime;
-            Iwa.gameObject.SetActive(false);
+        //if(IwaCrash.Iwakieflag)
+        //{
+        //    Debug.Log("岩フラグtrue");
+        //    currentTime += Time.deltaTime;
+        //    Iwa.gameObject.SetActive(false);
 
-            if (targetTime < currentTime)//2.0f
-            {
-                Iwa.gameObject.SetActive(true);
-                Debug.Log("復活");
-                IwaCrash.Iwakieflag = false;
-                IwaCrash.Iwaflag = false;
-                currentTime = 0.0f;
-            }
-        }
+        //    if (targetTime < currentTime)//2.0f
+        //    {
+        //        Iwa.gameObject.SetActive(true);
+        //        Debug.Log("復活");
+        //        IwaCrash.Iwakieflag = false;
+        //        IwaCrash.Iwaflag = false;
+        //        currentTime = 0.0f;
+        //    }
+        //}
     }
 }
