@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
@@ -69,6 +70,9 @@ public class Hero : MonoBehaviour
     [SerializeField] private Color fadeColor;
     [SerializeField] private float fadeSpeed;
 
+    //HPバーのシェイダー
+    public Slider slider;
+
     private void Start()
     {
         //Rigidbody2D をとる
@@ -83,6 +87,8 @@ public class Hero : MonoBehaviour
         {
             numbers.Add(i);
         }
+
+        slider.value = 1;//HPを満タンにする
     }
 
     // Update is called once per frame
@@ -172,6 +178,7 @@ public class Hero : MonoBehaviour
             Hero_Hp -= rushdamage;
             Debug.Log(Hero_Hp);
             inDamage = true;
+            slider.value = (float)Hero_Hp / (float)hp;
         }
         if (other.gameObject.tag == "Fireball" && DamageT)
         {
@@ -180,6 +187,7 @@ public class Hero : MonoBehaviour
             Debug.Log(Hero_Hp);
             Destroy(other.gameObject);
             inDamage = true;
+            slider.value = (float)Hero_Hp / (float)hp;
         }
         EnemyDamage();//倒れているか調べる
     }

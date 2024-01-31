@@ -61,6 +61,7 @@ public class EnemyHeadman : MonoBehaviour
     //ゆっくりけす
     private byte transparent_count;
 
+    //HPバーのシェイダー
     public Slider slider;
 
     // Start is called before the first frame update

@@ -1870,6 +1870,7 @@ MonoBehaviour:
   sceneName: End
   fadeColor: {r: 1, g: 1, b: 1, a: 1}
   fadeSpeed: 3
+  slider: {fileID: 1053490143}
 --- !u!212 &121718853
 SpriteRenderer:
   m_ObjectHideFlags: 0
