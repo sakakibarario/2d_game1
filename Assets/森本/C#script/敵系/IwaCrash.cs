@@ -41,7 +41,7 @@ public class IwaCrash : MonoBehaviour
             }
             if (targetTime < currentTime)//2.0f
             {
-                Iwa.gameObject.SetActive(false);
+               Iwa.gameObject.SetActive(false);
             }
         }
     }
