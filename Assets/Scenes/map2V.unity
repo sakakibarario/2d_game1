@@ -2324,7 +2324,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 57492129}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
@@ -10729,6 +10729,10 @@ PrefabInstance:
       propertyPath: HP
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5025548636864495955, guid: 226c2258e11e5bb4db6182bd340edc49, type: 3}
+      propertyPath: Object
+      value: 
+      objectReference: {fileID: 298175463}
     - target: {fileID: 5025548636864495955, guid: 226c2258e11e5bb4db6182bd340edc49, type: 3}
       propertyPath: slider
       value: 

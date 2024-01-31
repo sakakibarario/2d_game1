@@ -1003,7 +1003,6 @@ GameObject:
   m_Component:
   - component: {fileID: 114037604}
   - component: {fileID: 114037605}
-  - component: {fileID: 114037606}
   m_Layer: 5
   m_Name: "\u30C8\u30EC\u30F3\u30C8HP\u30D0\u30FC"
   m_TagString: Untagged
@@ -1084,18 +1083,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &114037606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114037603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 414cb622e06b19c488d4dcfde3b4cd34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &114436579
 GameObject:
   m_ObjectHideFlags: 0

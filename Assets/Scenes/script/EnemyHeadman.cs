@@ -9,6 +9,7 @@ public class EnemyHeadman : MonoBehaviour
     public GameObject bird;//birdを取得
     public GameObject cane;//caneを取得
     public GameObject player;//playerを取得
+    public GameObject Object;//HPber用
 
     private bool stop = false;//動き制御
 
@@ -21,7 +22,7 @@ public class EnemyHeadman : MonoBehaviour
 
 
     private bool inDamage = false;  //ダメージ判定
-    private float reactionDistance = 10.0f;//反応距離
+    private float reactionDistance = 15.0f;//反応距離
 
     bool isActive = false;//動き出しフラグ
     private bool OnAttack = false;
@@ -67,6 +68,7 @@ public class EnemyHeadman : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Object.gameObject.SetActive(false);
         stop = true;
         animator = GetComponent<Animator>();
         Headman_HP = HP;//最大HPを設定
@@ -115,6 +117,7 @@ public class EnemyHeadman : MonoBehaviour
                     if (dist < reactionDistance)
                     {
                         isActive = true; //アクティブにする
+                        Object.gameObject.SetActive(true);//HPバーをアクティブにする
                     }
                 }
             }
