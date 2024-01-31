@@ -6,11 +6,11 @@ public class DesIwa : MonoBehaviour
 {
     public GameObject Iwa;
 
-    //ブロックが消えるまでの時間
-    private float targetTime = 2.0f;
+    ////ブロックが消えるまでの時間
+    //private float targetTime = 2.0f;
 
-    //カウントしている時間を入れる変数
-    private float currentTime = 0;
+    ////カウントしている時間を入れる変数
+    //private float currentTime = 0;
 
     // Start is called before the first frame update
     void Start()
