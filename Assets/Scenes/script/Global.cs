@@ -20,12 +20,12 @@ public class Global : MonoBehaviour
     public static bool Cplaying = false;
 
     //clearŠÔ‹L‰¯—p
-    public static int Sminute =0;
-    public static float Ssecond = 0;
+    public static int Sminute ;
+    public static float Ssecond ;
 
-    public static int Vminute = 0;
-    public static float Vsecond = 0;
+    public static int Vminute ;
+    public static float Vsecond ;
 
-    public static int Cminute = 0;
-    public static float Csecond = 0;
+    public static int Cminute ;
+    public static float Csecond;
 }

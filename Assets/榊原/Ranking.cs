@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class Ranking : MonoBehaviour
 {
     //それぞれのステージの最速タイムの記憶用変数
-    public int Sfastminute=0; 
-    public float SfastSecond=0;
+    static public int Sfastminute; 
+    static public float SfastSecond;
 
-    public int Vfastminute=0;
-    public float VfastSecond=0;
+    static public int Vfastminute;
+    static public float VfastSecond;
 
-    public int Cfastminute=0;
-    public float CfastSecond=0;
+    static public int Cfastminute;
+    static public float CfastSecond;
 
     public Text timeSText;
     public Text timeVText;
