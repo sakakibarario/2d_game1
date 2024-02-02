@@ -22,6 +22,8 @@ public class ResetButton : MonoBehaviour
         OyaDra.OsaF = false;
         OyaDra.OsaDs = false;
         SougenDra.ToHome = false;
+        SpawnText.ones = true;
+        SpawnText.onev = true;
         Initiate.Fade(sceneName, fadeColor, fadeSpeed);
     }
 }
